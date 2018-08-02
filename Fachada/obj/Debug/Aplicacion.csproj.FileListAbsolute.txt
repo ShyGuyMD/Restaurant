@@ -1,0 +1,4 @@
+C:\Users\alumnoFI\Desktop\Restaurant\Fachada\bin\Debug\Aplicacion.dll
+C:\Users\alumnoFI\Desktop\Restaurant\Fachada\bin\Debug\Aplicacion.pdb
+C:\Users\alumnoFI\Desktop\Restaurant\Fachada\obj\Debug\Aplicacion.dll
+C:\Users\alumnoFI\Desktop\Restaurant\Fachada\obj\Debug\Aplicacion.pdb

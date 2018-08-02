@@ -1,0 +1,4 @@
+C:\Users\alumnoFI\Desktop\Restaurant\Helpers\bin\Debug\Helpers.dll
+C:\Users\alumnoFI\Desktop\Restaurant\Helpers\bin\Debug\Helpers.pdb
+C:\Users\alumnoFI\Desktop\Restaurant\Helpers\obj\Debug\Helpers.dll
+C:\Users\alumnoFI\Desktop\Restaurant\Helpers\obj\Debug\Helpers.pdb
