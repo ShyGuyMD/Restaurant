@@ -2,3 +2,9 @@ C:\Users\alumnoFI\Desktop\Restaurant\Helpers\bin\Debug\Helpers.dll
 C:\Users\alumnoFI\Desktop\Restaurant\Helpers\bin\Debug\Helpers.pdb
 C:\Users\alumnoFI\Desktop\Restaurant\Helpers\obj\Debug\Helpers.dll
 C:\Users\alumnoFI\Desktop\Restaurant\Helpers\obj\Debug\Helpers.pdb
+C:\Users\franc\source\repos\Restaurant\Helpers\bin\Debug\Helpers.dll
+C:\Users\franc\source\repos\Restaurant\Helpers\bin\Debug\Helpers.pdb
+C:\Users\franc\source\repos\Restaurant\Helpers\obj\Debug\Helpers.csprojResolveAssemblyReference.cache
+C:\Users\franc\source\repos\Restaurant\Helpers\obj\Debug\Helpers.csproj.CoreCompileInputs.cache
+C:\Users\franc\source\repos\Restaurant\Helpers\obj\Debug\Helpers.dll
+C:\Users\franc\source\repos\Restaurant\Helpers\obj\Debug\Helpers.pdb

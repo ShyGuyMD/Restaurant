@@ -37,7 +37,8 @@ namespace Dominio.Controladoras
         }
         public bool Login(string pUsername, string pPassword)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return true;
         }
     }
 }

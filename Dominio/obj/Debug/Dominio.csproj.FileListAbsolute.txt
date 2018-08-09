@@ -2,3 +2,8 @@ C:\Users\alumnoFI\Desktop\Restaurant\Dominio\bin\Debug\Dominio.dll
 C:\Users\alumnoFI\Desktop\Restaurant\Dominio\bin\Debug\Dominio.pdb
 C:\Users\alumnoFI\Desktop\Restaurant\Dominio\obj\Debug\Dominio.dll
 C:\Users\alumnoFI\Desktop\Restaurant\Dominio\obj\Debug\Dominio.pdb
+C:\Users\franc\source\repos\Restaurant\Dominio\bin\Debug\Dominio.dll
+C:\Users\franc\source\repos\Restaurant\Dominio\bin\Debug\Dominio.pdb
+C:\Users\franc\source\repos\Restaurant\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\franc\source\repos\Restaurant\Dominio\obj\Debug\Dominio.dll
+C:\Users\franc\source\repos\Restaurant\Dominio\obj\Debug\Dominio.pdb

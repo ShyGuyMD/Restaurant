@@ -1,0 +1,40 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Master.Master.cs" Inherits="Restaurante.Admin" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:Menu ID="MenuGenerico" runat="server">
+                <Items>
+                     <asp:MenuItem NavigateUrl ="~/RealizarReserva.aspx" Text="RealizarReserva" Value="Principal"></asp:MenuItem>
+                     <asp:MenuItem NavigateUrl ="~/CancelarReserva.aspx" Text="CancelarReserva" Value="Menues"></asp:MenuItem>
+                    
+            </asp:Menu>
+            <asp:Menu ID="MenuAdmin" runat="server">
+                <Items>
+                     <asp:MenuItem NavigateUrl ="~/AdminMain.aspx" Text="Página Principal" Value="Principal"></asp:MenuItem>
+                     <asp:MenuItem NavigateUrl ="~/AdminMenuPrecio.aspx" Text="Menúes y Precios" Value="Menues"></asp:MenuItem>
+                     <asp:MenuItem NavigateUrl ="~/AdminMenuIngrediente.aspx" Text="Menúes por Ingrediente" Value="Menues"></asp:MenuItem>
+                     <asp:MenuItem NavigateUrl ="~/AdminReservas.aspx" Text="Reservas por Fecha" Value="Reservas"></asp:MenuItem>
+                     <asp:MenuItem NavigateUrl ="~/AdminReservas.aspx" Text="Reservas por Fecha" Value="Reservas"></asp:MenuItem>
+                </Items>
+            </asp:Menu>
+            <asp:Menu ID="MenuChef" runat="server">
+                <Items>
+                     <asp:MenuItem NavigateUrl ="~/ChefMail.aspx" Text="Página Principal" Value="Principal"></asp:MenuItem>
+                     <asp:MenuItem NavigateUrl ="~/ChefIngredientes.aspx" Text="Ingredientes" Value="Ingredientes"></asp:MenuItem>
+                </Items>
+            </asp:Menu>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>

@@ -77,6 +77,15 @@ namespace Aplicacion
         {
             return CUsuario.Get.Login(pUsername, pPassword);
         }
+
+        public int BuscarUsuario(string pLogin)
+        {
+            return 0;
+        }
+        public int BuscarRol(int a)
+        {
+            return 0;
+        }
         #endregion
 
         #region Reserva

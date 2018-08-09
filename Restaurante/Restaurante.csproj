@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -66,7 +67,21 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdminMenuIngrediente.aspx" />
+    <Content Include="AdminMenuPrecio.aspx" />
+    <Content Include="AdminReservas.aspx" />
+    <Content Include="bin\Aplicacion.dll" />
+    <Content Include="AdminNav.aspx" />
+    <Content Include="CancelarReserva.aspx" />
+    <Content Include="ChefIngredientes.aspx" />
+    <Content Include="Login.aspx" />
+    <Content Include="AdminMain.aspx" />
+    <Content Include="ChefMain.aspx" />
+    <Content Include="obj\Debug\Restaurante.csproj.FileListAbsolute.txt" />
     <Content Include="packages.config" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Debug\Restaurante.csprojResolveAssemblyReference.cache" />
+    <Content Include="Master.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -76,19 +91,103 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="RealizarReserva.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminNav.aspx.cs">
+      <DependentUpon>AdminNav.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminNav.aspx.designer.cs">
+      <DependentUpon>AdminNav.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CancelarReserva.aspx.cs">
+      <DependentUpon>CancelarReserva.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CancelarReserva.aspx.designer.cs">
+      <DependentUpon>CancelarReserva.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Master.Master.cs">
+      <DependentUpon>Master.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master.Master.designer.cs">
+      <DependentUpon>Master.Master</DependentUpon>
+    </Compile>
+    <Compile Include="AdminMenuIngrediente.aspx.cs">
+      <DependentUpon>AdminMenuIngrediente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminMenuIngrediente.aspx.designer.cs">
+      <DependentUpon>AdminMenuIngrediente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminMenuPrecio.aspx.cs">
+      <DependentUpon>AdminMenuPrecio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminMenuPrecio.aspx.designer.cs">
+      <DependentUpon>AdminMenuPrecio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminReservas.aspx.cs">
+      <DependentUpon>AdminReservas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminReservas.aspx.designer.cs">
+      <DependentUpon>AdminReservas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ChefIngredientes.aspx.cs">
+      <DependentUpon>ChefIngredientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChefIngredientes.aspx.designer.cs">
+      <DependentUpon>ChefIngredientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminMain.aspx.cs">
+      <DependentUpon>AdminMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminMain.aspx.designer.cs">
+      <DependentUpon>AdminMain.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ChefMain.aspx.cs">
+      <DependentUpon>ChefMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChefMain.aspx.designer.cs">
+      <DependentUpon>ChefMain.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RealizarReserva.aspx.cs">
+      <DependentUpon>RealizarReserva.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RealizarReserva.aspx.designer.cs">
+      <DependentUpon>RealizarReserva.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fachada\Aplicacion.csproj">
       <Project>{9a999ca4-6999-4438-919c-f4229267bbcc}</Project>
       <Name>Aplicacion</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
