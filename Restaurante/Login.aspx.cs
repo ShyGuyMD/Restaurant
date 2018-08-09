@@ -21,27 +21,18 @@ namespace Restaurante
 
             //hacer en fachada las funciones que faltan. Deben devolver strings.
 
+            Session["Usuario"] = null;
+            Session["Rol"] = null;
+
             //si el usuario existe
             if (Fachada.Get.BuscarUsuario(Login1.UserName) != null)
             {
                 if (Fachada.Get.Login(Login1.UserName, Login1.Password))
                 {
                     Session["Usuario"] = Fachada.Get.BuscarUsuario(Login1.UserName);
+                    Session["Rol"] = Fachada.Get.BuscarRol((int)Session["Usuario"]);
                     e.Authenticated = true;
 
-                    switch (Fachada.Get.BuscarRol((int)Session["Usuario"]))
-                    {
-                        case 0:
-                            Response.Redirect("AdminMain.aspx");
-                            break;
-
-                        case 1:
-                            Response.Redirect("ChefMain.aspx");
-                            break;
-
-                        default:
-                            break;
-                    }
                 }
                 else
                 {
