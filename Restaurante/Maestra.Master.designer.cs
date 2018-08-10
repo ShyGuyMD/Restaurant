@@ -10,7 +10,7 @@
 namespace Restaurante {
     
     
-    public partial class Admin {
+    public partial class Maestra {
         
         /// <summary>
         /// head control.
