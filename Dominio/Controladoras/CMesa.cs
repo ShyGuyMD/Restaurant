@@ -31,9 +31,77 @@ namespace Dominio.Controladoras
         #endregion
         public List<Mesa> _Mesas { get; set; }
 
-        public bool AltaMesa(int pNumero, int pCapacidad, string pUbicacion)
+        public bool Alta(int pNumero, int pCapacidad, string pUbicacion)
         {
-            throw new NotImplementedException();
+            bool ret = false;
+
+            if (ValidarData(pNumero, pCapacidad, pUbicacion))
+            {
+                Mesa m = Buscar(pNumero);
+                if (m != null)
+                {
+                    m = new Mesa()
+                    {
+                        Numero = pNumero,
+                        Capacidad = pCapacidad,
+                        Ubicacion = pUbicacion
+                    };
+                    _Mesas.Add(m);
+                    ret = true;
+                }
+            }
+
+            return ret;
+        }
+        /*
+        public bool Baja(int pNumero)
+        {
+            bool ret = false;
+            Mesa m = Buscar(pNumero);
+
+            if (m != null)
+            {
+                m.Activo = false;
+                ret = true;
+            }
+
+            return ret;
+        }
+
+        public Mesa Modificar(int pNumero, int pCapacidad, string pUbicacion)
+        {
+            Mesa m = null;
+            if (ValidarData(pNumero, pCapacidad, pUbicacion))
+            {
+                m = Buscar(pNumero);
+                if (m != null)
+                {
+                    m.Capacidad = pCapacidad;
+                    m.Ubicacion = pUbicacion;
+                }
+            }
+
+            return m;
+        }
+        */
+        public Mesa Buscar(int pNumero)
+        {
+            Mesa m = null;
+            int contador = 0;
+            while (m == null && contador < _Mesas.Count)
+            {
+                if (_Mesas[contador].Numero == pNumero && _Mesas[contador].Activo)
+                    m = _Mesas[contador];
+
+                contador++;
+            }
+
+            return m;
+        }
+
+        public bool ValidarData(int pNumero, int pCapacidad, string pUbicacion)
+        {
+            return (pNumero > 0 && pCapacidad > 0 && pUbicacion != "");
         }
     }
 }

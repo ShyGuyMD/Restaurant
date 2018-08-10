@@ -10,8 +10,8 @@ namespace Dominio.Clases
     {
         public enum Rol { Administrador, Chef };
 
-        public string sUsername { get; set; }
-        public string sPassword { get; set; }
-        public Rol oRol { get; set; } 
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public Rol Rol { get; set; } 
     }
 }

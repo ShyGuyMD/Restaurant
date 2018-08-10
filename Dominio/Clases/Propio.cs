@@ -8,9 +8,9 @@ namespace Dominio.Clases
 {
     public class Propio : Menu
     {
-        public List<IngredientesPorMenu> lIngredientes { get; set; }
-        public Chef oChef { get; set; }
-        public decimal nGanancia { get; set; }
+        public List<IngredientesPorMenu> Ingredientes { get; set; }
+        public Chef Chef { get; set; }
+        public decimal Ganancia { get; set; }
 
         public override decimal CalcularPrecioVenta()
         {

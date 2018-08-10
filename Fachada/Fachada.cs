@@ -91,12 +91,12 @@ namespace Aplicacion
         #region Reserva
         public bool AltaReserva(string pNombrePersona, int pCantPersonas, DateTime pFechaReserva, List<int> pIdMenues, int pNumeroMesa)
         {
-            return CReserva.Get.AltaReserva(pNombrePersona, pCantPersonas, pFechaReserva, pIdMenues, pNumeroMesa);
+            return CReserva.Get.Alta(pNombrePersona, pCantPersonas, pFechaReserva, pIdMenues, pNumeroMesa);
         }
 
         public bool BajaReserva(string pNombre, DateTime pFechaReserva, int pIdMesa)
         {
-            return CReserva.Get.BajaReserva(pNombre, pFechaReserva, pIdMesa);
+            return CReserva.Get.Baja(pNombre, pFechaReserva, pIdMesa);
         }
 
         public List<Reserva> ListadoReservasPorFecha(DateTime pFechaReserva)
@@ -108,7 +108,7 @@ namespace Aplicacion
         #region Mesa
         public bool AltaMesa(int pNumero, int pCapacidad, string pUbicacion)
         {
-            return CMesa.Get.AltaMesa(pNumero, pCapacidad, pUbicacion);
+            return CMesa.Get.Alta(pNumero, pCapacidad, pUbicacion);
         }
         #endregion
 

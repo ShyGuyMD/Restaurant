@@ -8,8 +8,9 @@ namespace Dominio.Clases
 {
     public class Ingrediente
     {
-        public string sCodigo { get; set; }
-        public string sDescripcion { get; set; }
-        public decimal nCosto { get; set; }
+        public string Codigo { get; set; }
+        public string Descripcion { get; set; }
+        public decimal Costo { get; set; }
+        public bool Activo { get; set; }
     }
 }

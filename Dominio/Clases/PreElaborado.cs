@@ -8,9 +8,9 @@ namespace Dominio.Clases
 {
     public class PreElaborado : Menu
     {
-        public string sProveedor { get; set; }
-        public decimal nCosto { get; set; }
-        public static double nGanancia { get; set; } //porcentaje
+        public string Proveedor { get; set; }
+        public decimal Costo { get; set; }
+        public static double Ganancia { get; set; } //porcentaje
         public override decimal CalcularPrecioVenta()
         {
             throw new NotImplementedException();

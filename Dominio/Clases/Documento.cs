@@ -9,7 +9,7 @@ namespace Dominio.Clases
     public class Documento
     {
         public enum TipoDocumento { Cedula, Pasaporte, Otros };
-        public string sNumero { get; set; }
-        public TipoDocumento oTipoDocumento { get; set; }
+        public string Numero { get; set; }
+        public TipoDocumento TipoDocumento { get; set; }
     }
 }

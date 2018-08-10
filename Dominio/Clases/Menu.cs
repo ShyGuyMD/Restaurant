@@ -8,11 +8,12 @@ namespace Dominio.Clases
 {
     public abstract class Menu
     {
-        public int nId { get; set; }
-        public string sDescripcion { get; set; }
-        public decimal nPrecio { get; set; }
-        public decimal nPrecioVenta { get; set; }
-        public static int nUltimoId { get; set; }
+        public int Id { get; set; }
+        public string Descripcion { get; set; }
+        public decimal Precio { get; set; }
+        public decimal PrecioVenta { get; set; }
+        public static int UltimoId { get; set; }
+        public bool Activo { get; set; }
 
         public abstract decimal CalcularPrecioVenta();
     }
