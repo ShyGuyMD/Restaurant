@@ -8,7 +8,7 @@ namespace Dominio.Clases
 {
     public class IngredientesPorMenu
     {
-        public Ingrediente oIngrediente { get; set; }
-        public int nCantidad { get; set; }
+        public Ingrediente Ingrediente { get; set; }
+        public int Cantidad { get; set; }
     }
 }
