@@ -173,6 +173,10 @@
       <Project>{9a999ca4-6999-4438-919c-f4229267bbcc}</Project>
       <Name>Aplicacion</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Helpers\Helpers.csproj">
+      <Project>{8bc9d745-2e23-4455-be56-fe6d7c364004}</Project>
+      <Name>Helpers</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
