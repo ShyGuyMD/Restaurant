@@ -12,5 +12,10 @@ namespace Dominio.Clases
         public int Capacidad { get; set; }
         public string Ubicacion { get; set; }
         public bool Activo { get; set; }
+
+        public Mesa()
+        {
+            Activo = true;
+        }
     }
 }

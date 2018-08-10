@@ -55,6 +55,7 @@
     <Compile Include="Controladoras\CMesa.cs" />
     <Compile Include="Controladoras\CReserva.cs" />
     <Compile Include="Controladoras\CUsuario.cs" />
+    <Compile Include="Controladoras\CDocumento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

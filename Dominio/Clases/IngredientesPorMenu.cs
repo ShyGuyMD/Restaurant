@@ -10,5 +10,7 @@ namespace Dominio.Clases
     {
         public Ingrediente Ingrediente { get; set; }
         public int Cantidad { get; set; }
+
+        public IngredientesPorMenu() { }
     }
 }

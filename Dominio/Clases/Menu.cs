@@ -10,7 +10,6 @@ namespace Dominio.Clases
     {
         public int Id { get; set; }
         public string Descripcion { get; set; }
-        public decimal Precio { get; set; }
         public decimal PrecioVenta { get; set; }
         public static int UltimoId { get; set; }
         public bool Activo { get; set; }

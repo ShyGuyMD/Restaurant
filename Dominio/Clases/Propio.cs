@@ -10,7 +10,12 @@ namespace Dominio.Clases
     {
         public List<IngredientesPorMenu> Ingredientes { get; set; }
         public Chef Chef { get; set; }
-        public decimal Ganancia { get; set; }
+        public double Ganancia { get; set; } //porcentaje
+
+        public Propio()
+        {
+            Activo = true;
+        }
 
         public override decimal CalcularPrecioVenta()
         {

@@ -12,6 +12,8 @@ namespace Dominio.Clases
 
         public string Username { get; set; }
         public string Password { get; set; }
-        public Rol Rol { get; set; } 
+        public Rol UserRole { get; set; } 
+
+        public Usuario() { }
     }
 }

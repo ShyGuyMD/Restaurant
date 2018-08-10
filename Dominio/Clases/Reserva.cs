@@ -14,5 +14,10 @@ namespace Dominio.Clases
         public List<Menu> Menues { get; set; }
         public Mesa Mesa { get; set; }
         public bool Activo { get; set; }
+
+        public Reserva()
+        {
+            Activo = true;
+        }
     }
 }

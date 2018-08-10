@@ -12,5 +12,10 @@ namespace Dominio.Clases
         public string Descripcion { get; set; }
         public decimal Costo { get; set; }
         public bool Activo { get; set; }
+
+        public Ingrediente()
+        {
+            Activo = true;
+        }
     }
 }
