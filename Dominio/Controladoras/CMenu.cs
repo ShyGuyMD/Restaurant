@@ -34,12 +34,62 @@ namespace Dominio.Controladoras
 
         public bool AltaMenuPreelaborado(string pProveedor, decimal pCosto, string pDesc)
         {
-            throw new NotImplementedException();
+            bool ret = false;
+
+            if (ValidarData(pProveedor, pCosto, pDesc))
+            {
+                PreElaborado p = new PreElaborado()
+                {
+                    Id = Menu.UltimoId + 1,
+                    Proveedor = pProveedor,
+                    Costo = pCosto,
+                    Descripcion = pDesc
+                };
+                p.PrecioVenta = p.CalcularPrecioVenta();
+                Menu.UltimoId = p.Id;
+
+                _Menues.Add(p);
+                ret = true;
+            }
+
+            return ret;
         }
 
-        public bool AltaMenuPropio(int pIdChef, Dictionary<int, int> pIngredientes, double pGanancia, string pDesc)
+        public bool AltaMenuPropio(Chef pChef, List<IngredientesPorMenu> pIngredientes, double pGanancia, string pDesc)
         {
-            throw new NotImplementedException();
+            bool ret = false;
+
+            if (ValidarData(pChef, pIngredientes, pGanancia, pDesc))
+            {
+                Propio p = new Propio()
+                {
+                    Id = Menu.UltimoId + 1,
+                    Chef = pChef,
+                    Ingredientes = pIngredientes,
+                    Ganancia = pGanancia,
+                    Descripcion = pDesc
+                };
+                p.PrecioVenta = p.CalcularPrecioVenta();
+                Menu.UltimoId = p.Id;
+                _Menues.Add(p);
+                ret = true;
+            }
+
+            return ret;
+        }
+
+        public Menu Buscar(int idMenu)
+        {
+            bool encontrado = false;
+            int contador = 0;
+            while (!encontrado && contador < _Menues.Count)
+            {
+                if (_Menues[contador].Id == idMenu)
+                    return _Menues[contador];               // REVISAR ESTO CON LILIANA
+
+                contador++;
+            }
+            return null;
         }
 
         public List<Menu> ListarMenues()
@@ -55,10 +105,23 @@ namespace Dominio.Controladoras
         {
             throw new NotImplementedException();
         }
-
         public void CargarGananciaMenuPreelaborado(double ganancia)
         {
-            PreElaborado.nGanancia = ganancia;
+            PreElaborado.Ganancia = ganancia;
+        }
+
+        public bool ValidarData(string pProveedor, decimal pCosto, string pDescripcion)
+        {
+            return (pProveedor != "" && pCosto > 0 && pDescripcion != "");
+        }
+
+        public bool ValidarData(Chef pChef, List<IngredientesPorMenu> pIngredientes, double pGanancia, string pDesc)
+        {
+            return (pChef != null && 
+                        pIngredientes != null && 
+                            pIngredientes.Count > 0 && 
+                                pGanancia > 0 && 
+                                    pDesc != "");
         }
     }
 }

@@ -30,14 +30,61 @@ namespace Dominio.Controladoras
         }
         #endregion
         public List<Usuario> _Usuarios { get; set; }
+        public List<Chef> _Chef { get; set; }
 
-        public bool AltaChef(string pUsername, string pPassword, int pRol, string sNumDoc, int pTipoDoc, string pNombre, string pApellido, decimal pSueldo)
+        public bool AltaChef(string pUsername, string pPassword, int pRol, Documento pDocumento, string pNombre, string pApellido, decimal pSueldo)
         {
             throw new NotImplementedException();
         }
         public bool Login(string pUsername, string pPassword)
         {
-            throw new NotImplementedException();
+            bool ret = false;
+
+            if (ValidarData(pUsername, pPassword))
+            {
+                Usuario u = ValidarUsuario(pUsername, pPassword);
+
+                if (u != null)
+                    ret = true;
+            }
+
+            return ret;
+        }
+
+        public Usuario ValidarUsuario(string pUsername, string pPassword)
+        {
+            Usuario u = null;
+            int contador = 0;
+
+            while(u == null && contador < _Usuarios.Count)
+            {
+                if (_Usuarios[contador].Username == pUsername && _Usuarios[contador].Password == pPassword)
+                    u = _Usuarios[contador];
+
+                contador++;
+            }
+
+            return u;
+        }
+
+        public Chef Buscar(Documento pDocumento)
+        {
+            Chef c = null;
+            int contador = 0;
+
+            while(c == null && contador < _Chef.Count)
+            {
+                if (_Chef[contador].Documento == pDocumento)
+                {
+
+                }
+            }
+
+        }
+
+        public bool ValidarData(string pUsername, string pPassword)
+        {
+            return (pUsername != "" && pPassword != "");
         }
     }
 }

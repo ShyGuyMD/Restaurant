@@ -13,11 +13,11 @@ namespace Restaurante
         protected void Application_Start(object sender, EventArgs e)
         {
             // Primero revisar si hay datos serializados.
-            if (!Fachada.Get.HayDatos())
-            {
-                Fachada.Get.CargarIngredientesDeArchivo(HttpRuntime.AppDomainAppPath + @"Ingredientes.txt");
-                Fachada.Get.CargarDatosDePrueba();
-            }
+            //if (!Fachada.Get.HayDatos())
+            //{
+            //    Fachada.Get.CargarIngredientesDeArchivo(HttpRuntime.AppDomainAppPath + @"Ingredientes.txt");
+            //    Fachada.Get.CargarDatosDePrueba();
+            //}
         }
 
         protected void Application_End(object sender, EventArgs e)

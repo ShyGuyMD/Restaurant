@@ -10,24 +10,24 @@
 namespace Restaurante {
     
     
-    public partial class Login {
+    public partial class AdminMenuPrecio {
         
         /// <summary>
-        /// form1 control.
+        /// PanelMenus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.Panel PanelMenus;
         
         /// <summary>
-        /// Login1 control.
+        /// GrillaMenus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Login Login1;
+        protected global::System.Web.UI.WebControls.GridView GrillaMenus;
     }
 }

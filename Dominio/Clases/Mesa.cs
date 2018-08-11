@@ -8,8 +8,14 @@ namespace Dominio.Clases
 {
     public class Mesa
     {
-        public int nNumero { get; set; }
-        public int nCapacidad { get; set; }
-        public string sUbicacion { get; set; }
+        public int Numero { get; set; }
+        public int Capacidad { get; set; }
+        public string Ubicacion { get; set; }
+        public bool Activo { get; set; }
+
+        public Mesa()
+        {
+            Activo = true;
+        }
     }
 }

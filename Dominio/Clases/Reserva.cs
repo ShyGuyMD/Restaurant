@@ -8,10 +8,16 @@ namespace Dominio.Clases
 {
     public class Reserva
     {
-        public string sNombre { get; set; }
-        public int nCantPersonas { get; set; }
-        public DateTime dFechaReserva { get; set; }
-        public List<Menu> lMenues { get; set; }
-        public Mesa oMesa { get; set; }
+        public string Nombre { get; set; }
+        public int CantPersonas { get; set; }
+        public DateTime FechaReserva { get; set; }
+        public List<Menu> Menues { get; set; }
+        public Mesa Mesa { get; set; }
+        public bool Activo { get; set; }
+
+        public Reserva()
+        {
+            Activo = true;
+        }
     }
 }

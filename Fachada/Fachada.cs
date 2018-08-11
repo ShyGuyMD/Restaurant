@@ -39,7 +39,13 @@ namespace Aplicacion
         // Ver alternativas al diccionario.
         public bool AltaMenuPropio(int pIdChef, Dictionary<int, int> pIngredientes, double pGanancia, string pDesc)
         {
-            return CMenu.Get.AltaMenuPropio(pIdChef, pIngredientes, pGanancia, pDesc);
+            Chef c = CUsuario.Get.Buscar(pIdChef);
+            foreach (int key in pIngredientes.Keys)
+            {
+
+            }
+
+            return CMenu.Get.AltaMenuPropio(c, pIngredientes, pGanancia, pDesc);
         }
 
         public List<Menu> ListadoMenuesConPrecio()
@@ -69,25 +75,55 @@ namespace Aplicacion
         #endregion
 
         #region Chef / Usuario
-        public bool AltaChef(string pUsername, string pPassword, int pRol, string pNumDoc, int pTipoDoc, string pNombre, string pApellido, decimal pSueldo)
+        public bool AltaChef(string pUsername, string pPassword, int pRol, string pNumDoc, string pTipoDoc, string pNombre, string pApellido, decimal pSueldo)
         {
-            return CUsuario.Get.AltaChef(pUsername, pPassword, pRol, pNumDoc, pTipoDoc, pNombre, pApellido, pSueldo);
+            //Documento d = CDocumento.Get.ArmarDocumento(pNumDoc, pTipoDoc);
+            
+            //return CUsuario.Get.AltaChef(pUsername, pPassword, pRol, pNumDoc, pTipoDoc, pNombre, pApellido, pSueldo);
         }
         public bool Login(string pUsername, string pPassword)
         {
             return CUsuario.Get.Login(pUsername, pPassword);
+        }
+
+        public int BuscarUsuario(string pLogin)
+        {
+            return 0;
+        }
+        public int BuscarRol(int a)
+        {
+            return 0;
         }
         #endregion
 
         #region Reserva
         public bool AltaReserva(string pNombrePersona, int pCantPersonas, DateTime pFechaReserva, List<int> pIdMenues, int pNumeroMesa)
         {
-            return CReserva.Get.AltaReserva(pNombrePersona, pCantPersonas, pFechaReserva, pIdMenues, pNumeroMesa);
+            bool ret = false, existenTodos = true;
+            int contador = 0;
+            List<Menu> listaMenues = new List<Menu>();
+            
+            while (existenTodos && contador < pIdMenues.Count)
+            {
+                Menu m = CMenu.Get.Buscar(pIdMenues[contador]);
+                if (m != null)
+                    listaMenues.Add(m);
+                else
+                    existenTodos = false;
+
+                contador++;
+            }
+            Mesa mesa = CMesa.Get.Buscar(pNumeroMesa);
+
+            if (listaMenues.Count > 0 && existenTodos && mesa != null)
+                ret = CReserva.Get.Alta(pNombrePersona, pCantPersonas, pFechaReserva, listaMenues, mesa);
+
+            return ret;
         }
 
         public bool BajaReserva(string pNombre, DateTime pFechaReserva, int pIdMesa)
         {
-            return CReserva.Get.BajaReserva(pNombre, pFechaReserva, pIdMesa);
+            return CReserva.Get.Baja(pNombre, pFechaReserva, pIdMesa);
         }
 
         public List<Reserva> ListadoReservasPorFecha(DateTime pFechaReserva)
@@ -99,7 +135,7 @@ namespace Aplicacion
         #region Mesa
         public bool AltaMesa(int pNumero, int pCapacidad, string pUbicacion)
         {
-            return CMesa.Get.AltaMesa(pNumero, pCapacidad, pUbicacion);
+            return CMesa.Get.Alta(pNumero, pCapacidad, pUbicacion);
         }
         #endregion
 
