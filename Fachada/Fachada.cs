@@ -80,12 +80,36 @@ namespace Aplicacion
         
         public bool ModificarMenu(int pIdMenu, List<string> pIngredientes, List<int> pCantidades)
         {
-            return CMenu.Get.ModificarMenu(new Propio(), new List<IngredientesPorMenu>());
+            bool ret = false;
+            List<IngredientesPorMenu> ingredientes = new List<IngredientesPorMenu>();
+            Propio p = (Propio)CMenu.Get.Buscar(pIdMenu);
+
+            if (p != null)
+            {
+                int contador = 0;
+                while (contador < pIngredientes.Count)
+                {
+                    Ingrediente i = CIngrediente.Get.Buscar(pIngredientes[contador]);
+                    IngredientesPorMenu ing = CIngrediente.Get.ArmarObjetoIngrediente(i, pCantidades[contador]);
+
+                    ingredientes.Add(ing);
+                    contador++;
+                }
+                ret = CMenu.Get.ModificarMenu(p, ingredientes);
+            }
+
+            return ret;
         }
 
-        public List<Menu> ListadoMenuesConIngrediente(int pIdIngrediente)
+        public List<Menu> ListadoMenuesConIngrediente(string pCodigo)
         {
-            return CMenu.Get.ListadoMenuesConIngrediente(pIdIngrediente);
+            List<Menu> ret = null;
+            Ingrediente i = CIngrediente.Get.BuscarActivo(pCodigo);
+
+            if (i != null)
+                ret = CMenu.Get.ListadoMenuesConIngrediente(i);
+
+            return ret;
         }
         #endregion
 
