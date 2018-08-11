@@ -101,10 +101,11 @@ namespace Dominio.Controladoras
         {
             throw new NotImplementedException();
         }
-        public List<Menu> ListadoMenuesConIngrediente(int pIdIngrediente)
+        public List<Menu> ListadoMenuesConIngrediente(Ingrediente i)
         {
             throw new NotImplementedException();
         }
+
         public void CargarGananciaMenuPreelaborado(double ganancia)
         {
             PreElaborado.Ganancia = ganancia;

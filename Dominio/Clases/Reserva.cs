@@ -8,6 +8,7 @@ namespace Dominio.Clases
 {
     public class Reserva
     {
+        public string CodigoReserva { get; set; }
         public string Nombre { get; set; }
         public int CantPersonas { get; set; }
         public DateTime FechaReserva { get; set; }
