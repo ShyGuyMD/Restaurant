@@ -96,8 +96,8 @@ namespace Dominio.Controladoras
         {
             throw new NotImplementedException();
         }
-        // Usar Diccionario en caso de querer hacer las cosas bien.
-        public bool ModificarMenu(int pIdMenu, int pIdIngrediente, int pCantidad)
+
+        public bool ModificarMenu(Menu pMenu, List<IngredientesPorMenu> pIngredientes)
         {
             throw new NotImplementedException();
         }

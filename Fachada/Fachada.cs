@@ -36,27 +36,54 @@ namespace Aplicacion
         {
             return CMenu.Get.AltaMenuPreelaborado(pProveedor, pCosto, pDesc);
         }
+        
         // Ver alternativas al diccionario.
-        public bool AltaMenuPropio(int pIdChef, Dictionary<int, int> pIngredientes, double pGanancia, string pDesc)
+        //public bool AltaMenuPropio(int pIdChef, Dictionary<int, int> pIngredientes, double pGanancia, string pDesc)
+        //pIngredientes y pCantidades deberían tener igual tamaño, y corresponderse en sus posiciones entre sí.
+        public bool AltaMenuPropio(string pChefDoc, string pChefTipoDoc, List<string> pIngredientes, List<int> pCantidades, double pGanancia, string pDesc)
         {
-            Chef c = CUsuario.Get.Buscar(pIdChef);
-            foreach (int key in pIngredientes.Keys)
-            {
+            bool ret = false;
 
+            if (pIngredientes.Count == pCantidades.Count)
+            {
+                Documento d = CDocumento.Get.ArmarDocumento(pChefDoc, pChefTipoDoc);
+                Chef c = CUsuario.Get.Buscar(d);
+
+                List<IngredientesPorMenu> ingredientes = new List<IngredientesPorMenu>();
+                int contador = 0;
+                bool hayError = false;
+
+                while (contador < pIngredientes.Count && !hayError)
+                {
+                    Ingrediente i = CIngrediente.Get.Buscar(pIngredientes[contador]);
+                    if (i == null || !i.Activo)
+                        hayError = true;
+                    else
+                    {
+                        IngredientesPorMenu ipm = CIngrediente.Get.ArmarObjetoIngrediente(i, pCantidades[contador]);
+                        ingredientes.Add(ipm);
+                    }
+
+                    contador++;
+                }
+
+                ret = CMenu.Get.AltaMenuPropio(c, ingredientes, pGanancia, pDesc);
             }
 
-            return CMenu.Get.AltaMenuPropio(c, pIngredientes, pGanancia, pDesc);
+            return ret;
         }
 
         public List<Menu> ListadoMenuesConPrecio()
         {
             return CMenu.Get.ListarMenues();
         }
+        
         // Usar Diccionario en caso de querer hacer las cosas bien.
-        public bool ModificarMenu(int pIdMenu, int pIdIngrediente, int pCantidad)
+        public bool ModificarMenu(int pIdMenu, List<string> pIngredientes, List<int> pCantidades)
         {
-            return CMenu.Get.ModificarMenu(pIdMenu, pIdIngrediente, pCantidad);
+            return CMenu.Get.ModificarMenu(new Propio(), new List<IngredientesPorMenu>());
         }
+
         public List<Menu> ListadoMenuesConIngrediente(int pIdIngrediente)
         {
             return CMenu.Get.ListadoMenuesConIngrediente(pIdIngrediente);
@@ -68,18 +95,19 @@ namespace Aplicacion
         {
             return CIngrediente.Get.AltaIngrediente(pCodigo, pDescripcion, pCosto);
         }
-        public bool BajaIngrediente(int pIdIngrediente)
+        public bool BajaIngrediente(string pCodigo)
         {
-            return CIngrediente.Get.BajaIngrediente(pIdIngrediente);
+            return CIngrediente.Get.BajaIngrediente(pCodigo);
         }
         #endregion
 
         #region Chef / Usuario
-        public bool AltaChef(string pUsername, string pPassword, int pRol, string pNumDoc, string pTipoDoc, string pNombre, string pApellido, decimal pSueldo)
+        public bool AltaChef(string pUsername, string pPassword, string pRol, string pNumDoc, string pTipoDoc, string pNombre, string pApellido, decimal pSueldo)
         {
-            //Documento d = CDocumento.Get.ArmarDocumento(pNumDoc, pTipoDoc);
+            Documento documento = CDocumento.Get.ArmarDocumento(pNumDoc, pTipoDoc);
+            Usuario.Rol rolAsociado = CUsuario.Get.RolAsociado(pRol);
             
-            //return CUsuario.Get.AltaChef(pUsername, pPassword, pRol, pNumDoc, pTipoDoc, pNombre, pApellido, pSueldo);
+            return CUsuario.Get.AltaChef(pUsername, pPassword, rolAsociado, documento, pNombre, pApellido, pSueldo);
         }
         public bool Login(string pUsername, string pPassword)
         {

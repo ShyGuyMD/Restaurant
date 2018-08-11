@@ -1,3 +1,0 @@
-C:\Users\alumnoFI\Desktop\Restaurant\Restaurante\obj\Debug\Restaurante.csprojResolveAssemblyReference.cache
-E:\User\Desktop\Franco\Programacion\Restaurant\Restaurante\obj\Debug\Restaurante.csprojAssemblyReference.cache
-E:\User\Desktop\Franco\Programacion\Restaurant\Restaurante\obj\Debug\Restaurante.csproj.CoreCompileInputs.cache
