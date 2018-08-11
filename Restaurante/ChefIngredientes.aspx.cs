@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Aplicacion;
+using Dominio;
 
 namespace Restaurante
 {
@@ -26,21 +28,59 @@ namespace Restaurante
                 ListarMenus();
                 
             }
+
         }
 
         protected void GrillaIngredientes_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            int fila = int.Parse(e.CommandArgument + "");
+            int id = (int)GrillaIngredientes.DataKeys[fila].Value;
 
+            if(e.CommandName == "eliminar")
+            {
+                Fachada.Get.BajaIngrediente(id);
+            }
+            else if(e.CommandName == "modificar"){ }
         }
 
-        protected void GrillaIngredientes_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         protected void btnCargarMenu_Click(object sender, EventArgs e)
         {
+
+            lstMenu.DataSource = Fachada.Get.ListadoMenuesConPrecio();
             GrillaIngredientes.DataBind();
+            int idMenu = int.Parse(lstMenu.SelectedItem.Value);
+            ListarIngredientes(idMenu);
+        }
+
+        protected void ListarMenus()
+        {
+
+            lstMenu.DataTextField = "Datos";
+            lstMenu.DataValueField= "Id";
+            lstMenu.DataSource = Fachada.Get.ListadoMenuesConPrecio();
+            lstMenu.DataBind();
+        }
+
+        protected void ListarIngredientes(int pIdMenu)
+        {
+            
+
+            lstIngredientes.DataTextField = "Datos";
+            lstIngredientes.DataValueField= "Id";
+            lstIngredientes.DataSource = Fachada.Get.IngredientesPorMenu(pIdMenu);
+            lstIngredientes.DataBind();
+        }
+
+        protected void lstMenu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int idMenu = int.Parse(lstMenu.SelectedItem.Value);
+            ListarIngredientes(idMenu);
+        }
+
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
