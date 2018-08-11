@@ -38,7 +38,7 @@ namespace Restaurante
 
             if(e.CommandName == "eliminar")
             {
-                Fachada.Get.BajaIngrediente(id);
+                Fachada.Get.BajaIngrediente(id + "");
             }
             else if(e.CommandName == "modificar"){ }
         }

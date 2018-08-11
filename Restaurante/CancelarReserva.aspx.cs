@@ -13,5 +13,30 @@ namespace Restaurante
         {
 
         }
+
+        protected void GrillaReserva_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+
+        }
+
+        protected void BtnBuscarReserva_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void BtnAceptar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void BtnVolver_Click(object sender, EventArgs e)
+        {
+
+        }
+        protected void Reset()
+        {
+            PanelConfirmar.Visible = false;
+            PanelMostrarReserva.Visible = false;
+        }
     }
 }
