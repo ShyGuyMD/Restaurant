@@ -17,8 +17,9 @@
             </Columns>
         </asp:GridView>
     </asp:Panel>
+    <br/>
     <asp:Panel ID="AltaIngrediente" runat="server">
-        <asp:Label ID="lbl1" runat="server" Text="Modificar o añadir nuevo ingrediente:"></asp:Label>
+        <asp:Label ID="lbl1" runat="server" Text="Modificar o añadir nuevo ingrediente (seleccionar un ingrediente existente modificará la cantidad del menú)."></asp:Label>
         <br/>
         <asp:Label ID="lbl2" runat="server" Text="Seleccionar ingrediente:"></asp:Label>
         
@@ -27,6 +28,7 @@
         <asp:Label ID="Label1" runat="server" Text="Cantidad:"></asp:Label>
 
         <asp:TextBox ID="txtCantidad" runat="server"></asp:TextBox>
+        <br/>
         <asp:Button ID="btnAgregar" runat="server" Text="Añadir al Menu" OnClick="btnAgregar_Click" />
     </asp:Panel>
 

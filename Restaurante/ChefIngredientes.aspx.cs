@@ -68,7 +68,7 @@ namespace Restaurante
 
             lstIngredientes.DataTextField = "Datos";
             lstIngredientes.DataValueField= "Id";
-            lstIngredientes.DataSource = Fachada.Get.IngredientesPorMenu(pIdMenu);
+            lstIngredientes.DataSource = Fachada.Get.ListadoIngredientesPorMenu(pIdMenu); 
             lstIngredientes.DataBind();
         }
 
