@@ -1,4 +1,0 @@
-C:\Users\alumnoFI\Desktop\Restaurant\Dominio\bin\Debug\Dominio.dll
-C:\Users\alumnoFI\Desktop\Restaurant\Dominio\bin\Debug\Dominio.pdb
-C:\Users\alumnoFI\Desktop\Restaurant\Dominio\obj\Debug\Dominio.dll
-C:\Users\alumnoFI\Desktop\Restaurant\Dominio\obj\Debug\Dominio.pdb
