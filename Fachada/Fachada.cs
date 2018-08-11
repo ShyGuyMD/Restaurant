@@ -47,7 +47,7 @@ namespace Aplicacion
             if (pIngredientes.Count == pCantidades.Count)
             {
                 Documento d = CDocumento.Get.ArmarDocumento(pChefDoc, pChefTipoDoc);
-                Chef c = CUsuario.Get.Buscar(d);
+                Chef c = CUsuario.Get.BuscarChef(d);
 
                 List<IngredientesPorMenu> ingredientes = new List<IngredientesPorMenu>();
                 int contador = 0;
@@ -78,7 +78,6 @@ namespace Aplicacion
             return CMenu.Get.ListarMenues();
         }
         
-        // Usar Diccionario en caso de querer hacer las cosas bien.
         public bool ModificarMenu(int pIdMenu, List<string> pIngredientes, List<int> pCantidades)
         {
             return CMenu.Get.ModificarMenu(new Propio(), new List<IngredientesPorMenu>());
