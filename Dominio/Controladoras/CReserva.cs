@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio.Clases;
+using Helpers;
 
 namespace Dominio.Controladoras
 {
@@ -13,7 +14,9 @@ namespace Dominio.Controladoras
         private static CReserva _instancia = null;
         private static readonly object bloqueo = new Object();
 
-        private CReserva() { }
+        private CReserva() {
+            _Reservas = new List<Reserva>();
+        }
 
         public static CReserva Get
         {
@@ -29,15 +32,16 @@ namespace Dominio.Controladoras
             }
         }
         #endregion
+
         public List<Reserva> _Reservas { get; set; }
 
-        public bool Alta(string pNombre, int pCantPersonas, DateTime pFechaReserva, List<Menu> pMenues, Mesa pMesa)
+        public string Alta(string pNombre, int pCantPersonas, DateTime pFechaReserva, List<Menu> pMenues, Mesa pMesa)
         {
-            bool ret = false;
+            string ret = "";
 
             if (ValidarData(pNombre, pCantPersonas, pFechaReserva, pMesa))
             {
-                Reserva r = Buscar(pNombre, pFechaReserva, pMesa);
+                Reserva r = BuscarActivo(pNombre, pFechaReserva, pMesa);
                 if (r == null)
                 {
                     r = new Reserva()
@@ -47,34 +51,66 @@ namespace Dominio.Controladoras
                         FechaReserva = pFechaReserva,
                         Mesa = pMesa
                     };
+                    r.CodigoReserva = Utils.Get.GenerarCodigo(6);
                     if (pMenues != null && pMenues.Count > 0)
                         r.Menues = pMenues;
 
                     _Reservas.Add(r);
-                    ret = true;
-                    
+                    ret = r.CodigoReserva;   
                 }
             }
 
             return ret;
         }
 
-        public bool Baja(string pNombre, DateTime pFechaReserva, int pIdMesa)
+        public bool Baja(string pCodReserva)
         {
-            throw new NotImplementedException();
+            bool ret = false;
+            Reserva r = BuscarActivo(pCodReserva);
+
+            if (r != null)
+            {
+                r.Activo = false;
+                ret = true;
+            }
+
+            return ret;
         }
 
-        public Reserva Buscar(string pNombre, DateTime pFechaReserva, Mesa pMesa)
+        public Reserva BuscarActivo(string pNombre, DateTime pFechaReserva, Mesa pMesa)
+        {
+            Reserva r = null;
+            int contador = 0;
+
+            while (r == null && contador < _Reservas.Count)
+            {
+                Reserva aux = _Reservas[contador];
+                if (aux.Nombre == pNombre && aux.FechaReserva == pFechaReserva && aux.Mesa == pMesa && aux.Activo)
+                    r = aux;
+
+                contador++;
+            }
+
+            return r;
+        }
+
+        public Reserva BuscarActivo(string pCodReserva)
+        {
+            Reserva r = BuscarPorCodigo(pCodReserva);
+            if (r != null && !r.Activo)
+                r = null;
+
+            return r;
+        }
+
+        public Reserva BuscarPorCodigo(string pCodReserva)
         {
             Reserva r = null;
             int contador = 0;
             while (r == null && contador < _Reservas.Count)
             {
-                Reserva aux = _Reservas[contador];
-                if (aux.Nombre == pNombre &&
-                        aux.FechaReserva == pFechaReserva &&
-                            aux.Mesa == pMesa)
-                    r = aux;
+                if (_Reservas[contador].CodigoReserva == pCodReserva)
+                    r = _Reservas[contador];
 
                 contador++;
             }
@@ -84,7 +120,13 @@ namespace Dominio.Controladoras
 
         public List<Reserva> ListadoReservasPorFecha(DateTime pFechaReserva)
         {
-            throw new NotImplementedException();
+            List<Reserva> ret = new List<Reserva>();
+
+            foreach (Reserva r in _Reservas)
+                if (r.FechaReserva == pFechaReserva && r.Activo)
+                    ret.Add(r);
+
+            return ret;
         }
 
         public bool ValidarData(string pNombre, int pCantPersonas, DateTime pFechaReserva, Mesa pMesa)

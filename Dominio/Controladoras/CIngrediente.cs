@@ -13,7 +13,9 @@ namespace Dominio.Controladoras
         private static CIngrediente _instancia = null;
         private static readonly object bloqueo = new Object();
 
-        private CIngrediente() { }
+        private CIngrediente() {
+            _Ingredientes = new List<Ingrediente>();
+        }
 
         public static CIngrediente Get
         {
@@ -29,6 +31,7 @@ namespace Dominio.Controladoras
             }
         }
         #endregion
+
         public List<Ingrediente> _Ingredientes { get; set; }
 
         public bool AltaIngrediente(string pCodigo, string pDescripcion, decimal pCosto)

@@ -13,7 +13,10 @@ namespace Dominio.Controladoras
         private static CUsuario _instancia = null;
         private static readonly object bloqueo = new Object();
 
-        private CUsuario() { }
+        private CUsuario() {
+            _Usuarios = new List<Usuario>();
+            _Chef = new List<Chef>();
+        }
 
         public static CUsuario Get
         {
@@ -29,8 +32,29 @@ namespace Dominio.Controladoras
             }
         }
         #endregion
+
         public List<Usuario> _Usuarios { get; set; }
         public List<Chef> _Chef { get; set; }
+
+        public bool AltaAdmin(string pUsername, string pPassword, Usuario.Rol pRol)
+        {
+            bool ret = false;
+            Usuario u = BuscarUsuario(pUsername);
+
+            if (u == null)
+            {
+                Usuario user = new Usuario()
+                {
+                    Username = pUsername,
+                    Password = pPassword,
+                    UserRole = pRol
+                };
+                _Usuarios.Add(user);
+                ret = true;
+            }
+
+            return ret;
+        }
 
         public bool AltaChef(string pUsername, string pPassword, Usuario.Rol pRol, Documento pDocumento, string pNombre, string pApellido, decimal pSueldo)
         {

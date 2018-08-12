@@ -37,8 +37,6 @@ namespace Aplicacion
             return CMenu.Get.AltaMenuPreelaborado(pProveedor, pCosto, pDesc);
         }
         
-        // Ver alternativas al diccionario.
-        //public bool AltaMenuPropio(int pIdChef, Dictionary<int, int> pIngredientes, double pGanancia, string pDesc)
         //pIngredientes y pCantidades deberían tener igual tamaño, y corresponderse en sus posiciones entre sí.
         public bool AltaMenuPropio(string pChefDoc, string pChefTipoDoc, List<string> pIngredientes, List<int> pCantidades, double pGanancia, string pDesc)
         {
@@ -75,10 +73,11 @@ namespace Aplicacion
 
         public List<Menu> ListadoMenuesConPrecio()
         {
-            return CMenu.Get.ListarMenues();
+            return CMenu.Get.ListarMenuesActivos();
         }
         
-        public bool ModificarMenu(int pIdMenu, List<string> pIngredientes, List<int> pCantidades)
+        // ACA
+        public bool ModificarIngredientesDeMenu(int pIdMenu, List<string> pIngredientes, List<int> pCantidades)
         {
             bool ret = false;
             List<IngredientesPorMenu> ingredientes = new List<IngredientesPorMenu>();
@@ -95,12 +94,13 @@ namespace Aplicacion
                     ingredientes.Add(ing);
                     contador++;
                 }
-                ret = CMenu.Get.ModificarMenu(p, ingredientes);
+                ret = CMenu.Get.ModificarIngredientesDeMenu(p, ingredientes);
             }
 
             return ret;
         }
 
+        // ACA
         public List<Menu> ListadoMenuesConIngrediente(string pCodigo)
         {
             List<Menu> ret = null;
@@ -110,6 +110,11 @@ namespace Aplicacion
                 ret = CMenu.Get.ListadoMenuesConIngrediente(i);
 
             return ret;
+        }
+
+        public List<IngredientesPorMenu> ListadoIngredientesPorMenu(int pIdMenu)
+        {
+            return CMenu.Get.ListadoIngredientesPorMenu(pIdMenu);
         }
         #endregion
 
@@ -125,6 +130,12 @@ namespace Aplicacion
         #endregion
 
         #region Chef / Usuario
+        public bool AltaAdmin(string pUsername, string pPassword, string pRol)
+        {
+            Usuario.Rol rolAsociado = CUsuario.Get.RolAsociado(pRol);
+
+            return CUsuario.Get.AltaAdmin(pUsername, pPassword, rolAsociado);
+        }
         public bool AltaChef(string pUsername, string pPassword, string pRol, string pNumDoc, string pTipoDoc, string pNombre, string pApellido, decimal pSueldo)
         {
             Documento documento = CDocumento.Get.ArmarDocumento(pNumDoc, pTipoDoc);
@@ -137,6 +148,7 @@ namespace Aplicacion
             return CUsuario.Get.Login(pUsername, pPassword);
         }
 
+        // ??????????????????????
         public int BuscarUsuario(string pLogin)
         {
             return 0;
@@ -145,12 +157,14 @@ namespace Aplicacion
         {
             return 0;
         }
+        // ??????????????????????
         #endregion
 
         #region Reserva
-        public bool AltaReserva(string pNombrePersona, int pCantPersonas, DateTime pFechaReserva, List<int> pIdMenues, int pNumeroMesa)
+        public string AltaReserva(string pNombrePersona, int pCantPersonas, DateTime pFechaReserva, List<int> pIdMenues, int pNumeroMesa)
         {
-            bool ret = false, existenTodos = true;
+            bool existenTodos = true;
+            string ret = "";
             int contador = 0;
             List<Menu> listaMenues = new List<Menu>();
             
@@ -172,14 +186,19 @@ namespace Aplicacion
             return ret;
         }
 
-        public bool BajaReserva(string pNombre, DateTime pFechaReserva, int pIdMesa)
+        public bool BajaReserva(string pCodReserva)
         {
-            return CReserva.Get.Baja(pNombre, pFechaReserva, pIdMesa);
+            return CReserva.Get.Baja(pCodReserva);
         }
 
         public List<Reserva> ListadoReservasPorFecha(DateTime pFechaReserva)
         {
             return CReserva.Get.ListadoReservasPorFecha(pFechaReserva);
+        }
+
+        public Reserva BuscarPorCodigo(string pCodReserva)
+        {
+            return CReserva.Get.BuscarActivo(pCodReserva);
         }
         #endregion
 

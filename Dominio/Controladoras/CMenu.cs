@@ -13,7 +13,9 @@ namespace Dominio.Controladoras
         private static CMenu _instancia = null;
         private static readonly object bloqueo = new Object();
 
-        private CMenu() { }
+        private CMenu() {
+            _Menues = new List<Menu>();
+        }
 
         public static CMenu Get
         {
@@ -92,18 +94,35 @@ namespace Dominio.Controladoras
             return null;
         }
 
-        public List<Menu> ListarMenues()
+        public List<Menu> ListarMenuesActivos()
         {
-            throw new NotImplementedException();
+            List<Menu> ret = new List<Menu>();
+            foreach (Menu m in _Menues)
+                if (m.Activo)
+                    ret.Add(m);
+
+            return ret;
         }
 
-        public bool ModificarMenu(Menu pMenu, List<IngredientesPorMenu> pIngredientes)
+        public bool ModificarIngredientesDeMenu(int pIdMenu, List<IngredientesPorMenu> pIngredientes)
         {
-            throw new NotImplementedException();
+            return false;
         }
+
+        public List<IngredientesPorMenu> ListadoIngredientesPorMenu(int pIdMenu)
+        {
+            List<IngredientesPorMenu> ret = new List<IngredientesPorMenu>();
+            Propio p = (Propio)Buscar(pIdMenu);
+
+            if (p != null)
+                ret = p.Ingredientes;
+
+            return ret;
+        }
+
         public List<Menu> ListadoMenuesConIngrediente(Ingrediente i)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         public void CargarGananciaMenuPreelaborado(double ganancia)

@@ -15,5 +15,10 @@ namespace Dominio.Clases
         public Rol UserRole { get; set; } 
 
         public Usuario() { }
+
+        public override string ToString()
+        {
+            return String.Format("Username: {0}\nPassword: {1}\nRol: {2}", Username, Password, UserRole.ToString());
+        }
     }
 }

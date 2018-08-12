@@ -13,7 +13,9 @@ namespace Dominio.Controladoras
         private static CMesa _instancia = null;
         private static readonly object bloqueo = new Object();
 
-        private CMesa() { }
+        private CMesa() {
+            _Mesas = new List<Mesa>();
+        }
 
         public static CMesa Get
         {

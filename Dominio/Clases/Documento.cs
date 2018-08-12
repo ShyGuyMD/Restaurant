@@ -13,5 +13,10 @@ namespace Dominio.Clases
         public TipoDocumento TipoDoc { get; set; }
 
         public Documento() { }
+
+        public override string ToString()
+        {
+            return TipoDoc.ToString() + " " + Numero;
+        }
     }
 }
