@@ -45,7 +45,9 @@ namespace Restaurante
 
         protected void BtnAceptar_Click(object sender, EventArgs e)
         {
-            Fachada.Get.BajaReserva(id);
+            string codigo = txtCodReserva.Text;
+            codigo = codigo.ToUpper();
+            Fachada.Get.BajaReserva(codigo);
             Response.Write("Reserva cancelada con éxito.");
             Reset();
         }
@@ -53,7 +55,6 @@ namespace Restaurante
         protected void BtnVolver_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/CancelarReserva.aspx");
-            "~/AdminMenuIngrediente.aspx"
         }
         protected void Reset()
         {

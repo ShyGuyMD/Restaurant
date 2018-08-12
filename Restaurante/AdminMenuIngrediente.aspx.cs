@@ -22,6 +22,17 @@ namespace Restaurante
                     master.LogOut();
                 }
             }
+            lstIngredientes.DataTextField = "Datos";
+            lstIngredientes.DataValueField = "Id";
+            lstIngredientes.DataSource = Fachada.Get.ListadoMenuesConPrecio();
+            lstIngredientes.DataBind();
+        }
+
+        protected void btnIngrediente_Click(object sender, EventArgs e)
+        {
+            GrillaIngredientes.DataSource = Fachada.Get.ListadoMenuesConIngrediente(lstIngredientes.SelectedValue);
+            GrillaIngredientes.DataBind();
+
         }
     }
 }

@@ -71,7 +71,6 @@
     <Content Include="AdminMenuPrecio.aspx" />
     <Content Include="AdminReservas.aspx" />
     <Content Include="bin\Aplicacion.dll" />
-    <Content Include="AdminNav.aspx" />
     <Content Include="CancelarReserva.aspx" />
     <Content Include="ChefIngredientes.aspx" />
     <Content Include="Login.aspx" />
@@ -93,13 +92,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminNav.aspx.cs">
-      <DependentUpon>AdminNav.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AdminNav.aspx.designer.cs">
-      <DependentUpon>AdminNav.aspx</DependentUpon>
-    </Compile>
     <Compile Include="CancelarReserva.aspx.cs">
       <DependentUpon>CancelarReserva.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

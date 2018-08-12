@@ -46,9 +46,7 @@ namespace Restaurante
 
         protected void BtnCargarMenu_Click(object sender, EventArgs e)
         {
-
-            lstMenu.DataSource = Fachada.Get.ListadoMenuesConPrecio();
-            GrillaIngredientes.DataBind();
+            ListarMenus();
             int idMenu = int.Parse(lstMenu.SelectedItem.Value);
             ListarIngredientes(idMenu);
         }
@@ -68,7 +66,7 @@ namespace Restaurante
 
             lstIngredientes.DataTextField = "Datos";
             lstIngredientes.DataValueField= "Id";
-            //lstIngredientes.DataSource = Fachada.Get.ListadoIngredientesPorMenu(pIdMenu); 
+            lstIngredientes.DataSource = Fachada.Get.ListadoIngredientesPorMenu(pIdMenu);
             lstIngredientes.DataBind();
         }
 
