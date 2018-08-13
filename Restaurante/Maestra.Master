@@ -36,6 +36,13 @@
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
+        <div>
+            <asp:Menu ID="MenuLogin" runat="server">
+                <Items>
+                    <asp:MenuItem NavigateUrl="~/Login.aspx" Text="Ingresar" Value="Login"></asp:MenuItem>
+                </Items>
+            </asp:Menu>
+        </div>
     </form>
 </body>
 </html>
