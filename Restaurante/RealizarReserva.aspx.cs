@@ -16,7 +16,7 @@ namespace Restaurante
             {
                 CargarDatos();
             }
-            List<Menu> lMenuProxy = new List<Menu>();
+            List<int> lMenuProxy = new List<int>();
             Session["menues"] = lMenuProxy;
         }
 
@@ -25,16 +25,16 @@ namespace Restaurante
             string nombre = txtNombre.Text;
             int personas = int.Parse(txtPersonas.Text);
             DateTime fecha = calFecha.SelectedDate;
-            fecha.AddHours(double. Parse(txtHoras.Text));
+            fecha.AddHours(double.Parse(txtHoras.Text));
             fecha.AddHours(double.Parse(txtHoras.Text));
             int mesa = int.Parse(lstMesa.SelectedValue);
-            List<Menu> menues = Session["menues"] as List<Menu>;
-            
-            
+            List<int> menues = Session["menues"] as List<int>;
 
-            if(ValidarDatos(nombre, personas, fecha, mesa))
+
+            if (ValidarDatos(nombre, personas, fecha, mesa))
             {
-                string resultado = Fachada.Get.AltaReserva(nombre, personas, fecha, mesa);
+                string resultado = Fachada.Get.AltaReserva(nombre, personas, fecha, menues, mesa);
+
                 if (resultado != "")
                 {
                     Response.Write("Reserva realizada con éxito. Su código es: " + resultado);
@@ -45,23 +45,18 @@ namespace Restaurante
                 }
             }
         }
-        
+
         protected void CargarDatos()
         {
             lstMesa.DataTextField = "Datos";
             lstMesa.DataValueField = "Id";
-            lstMesa.DataSource = Fachada.Get.ListadoMesas(pIdMenu);
+            lstMesa.DataSource = Fachada.Get.ListadoMesas();
             lstMesa.DataBind();
 
             lstMenu.DataTextField = "Datos";
             lstMenu.DataValueField = "Id";
-            lstMenu.DataSource = Fachada.Get.ListadoMenues(pIdMenu);
+            lstMenu.DataSource = Fachada.Get.ListadoMenues();
             lstMenu.DataBind();
-        }
-
-        CargarMenus(List<Menu> pLista)
-        {
-
         }
 
 
@@ -78,8 +73,13 @@ namespace Restaurante
 
         protected void BtnAgregarMenu_Click(object sender, EventArgs e)
         {
+            ((List<int>)Session["menues"]).Add(int.Parse(lstMenu.SelectedValue));
+        }
 
+        protected bool ValidarDatos(string pNombre, int pPersonas, DateTime pFecha, int pIdMesa)
+        {
+            return (pNombre != "" && pPersonas > 0 && pPersonas > 0 && pFecha > DateTime.Now && pIdMesa > 0);
         }
     }
-    }
+
 }

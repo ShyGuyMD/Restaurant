@@ -22,19 +22,23 @@ namespace Restaurante
                 }
 
             }
-
-            //if (!IsPostBack)
-            //{
-            //    LimpiarTextos();
-            //}
         }
 
         protected void btnFecha_Click(object sender, EventArgs e)
         {
             DateTime fecha = calFecha.SelectedDate;
+            List <Dominio.Clases.Reserva> res = Fachada.Get.ListadoReservasPorFecha(fecha);
 
-            GrillaReservas.DataSource = Fachada.Get.ListadoReservasPorFecha(fecha);
-            GrillaReservas.DataBind();
+            if (res.Count >= 1)
+            {
+                GrillaReservas.DataSource = res;
+                GrillaReservas.DataBind();
+            }
+            else
+            {
+                Response.Write("No se encontraron reservas en la fecha seleccionada.");
+            }
+           
             
         }
         

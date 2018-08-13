@@ -78,7 +78,19 @@ namespace Restaurante
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
+            int cantidad = int.Parse(txtCantidad.Text);
+            int idMenu = int.Parse(lstMenu.SelectedValue);
+            int idIngrediente = int.Parse(lstIngredientes.SelectedValue);
 
+            if (Validar(cantidad))
+            {
+                Fachada.Get.ModificarIngredientesDeMenu(idMenu, idIngrediente, cantidad);
+            }
+        }
+
+        protected bool Validar(int pInput)
+        {
+            return pInput > 0;
         }
     }
 }
