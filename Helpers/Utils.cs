@@ -8,6 +8,16 @@ namespace Helpers
 {
     public class Utils
     {
+        public enum ExitCode
+        {
+            OK = 0,
+            INPUT_DATA_ERROR = 1,
+            NO_INGREDIENT_ERROR = 2,
+            NO_CHEF_ERROR = 3,
+            ERROR_4 = 4,
+            PLACEHOLDER = 99
+        };
+
         public Random Random { get; set; }
 
         #region Singleton

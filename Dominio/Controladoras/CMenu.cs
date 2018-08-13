@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio.Clases;
+using static Helpers.Utils;
 
 namespace Dominio.Controladoras
 {
@@ -34,9 +35,9 @@ namespace Dominio.Controladoras
 
         public List<Menu> _Menues { get; set; }
 
-        public bool AltaMenuPreelaborado(string pProveedor, decimal pCosto, string pDesc)
+        public ExitCode AltaMenuPreelaborado(string pProveedor, decimal pCosto, string pDesc)
         {
-            bool ret = false;
+            ExitCode exit = ExitCode.PLACEHOLDER;
 
             if (ValidarData(pProveedor, pCosto, pDesc))
             {
@@ -51,16 +52,18 @@ namespace Dominio.Controladoras
                 Menu.UltimoId = p.Id;
 
                 _Menues.Add(p);
-                ret = true;
+                exit = ExitCode.OK;
+            }
+            else
+            {
+                exit = ExitCode.INPUT_DATA_ERROR;
             }
 
-            return ret;
+            return exit;
         }
 
-        public bool AltaMenuPropio(Chef pChef, List<IngredientesPorMenu> pIngredientes, double pGanancia, string pDesc)
+        public ExitCode AltaMenuPropio(Chef pChef, List<IngredientesPorMenu> pIngredientes, double pGanancia, string pDesc)
         {
-            bool ret = false;
-
             if (ValidarData(pChef, pIngredientes, pGanancia, pDesc))
             {
                 Propio p = new Propio()
@@ -74,10 +77,11 @@ namespace Dominio.Controladoras
                 p.PrecioVenta = p.CalcularPrecioVenta();
                 Menu.UltimoId = p.Id;
                 _Menues.Add(p);
-                ret = true;
+
+                return ExitCode.OK;
             }
 
-            return ret;
+            return ExitCode.INPUT_DATA_ERROR;
         }
 
         public Menu Buscar(int idMenu)
