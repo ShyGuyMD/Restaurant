@@ -21,8 +21,8 @@
             <asp:Menu ID="MenuAdmin" runat="server">
                 <Items>
                     <asp:MenuItem NavigateUrl="~/AdminMain.aspx" Text="Página Principal" Value="Principal"></asp:MenuItem>
-                    <asp:MenuItem NavigateUrl="~/AdminMenuPrecio.aspx" Text="Menúes y Precios" Value="Menues"></asp:MenuItem>
-                    <asp:MenuItem NavigateUrl="~/AdminMenuIngrediente.aspx" Text="Menúes por Ingrediente" Value="Menues"></asp:MenuItem>
+                    <asp:MenuItem NavigateUrl="~/AdminMenuPrecio.aspx" Text="Ver Menúes y Precios" Value="Menues"></asp:MenuItem>
+                    <asp:MenuItem NavigateUrl="~/AdminMenuIngrediente.aspx" Text=" Listar Menúes por Ingrediente" Value="Menues"></asp:MenuItem>
                     <asp:MenuItem NavigateUrl="~/AdminReservas.aspx" Text="Reservas por Fecha" Value="Reservas"></asp:MenuItem>
                     <asp:MenuItem NavigateUrl="~/AdminReservas.aspx" Text="Reservas por Fecha" Value="Reservas"></asp:MenuItem>
                 </Items>

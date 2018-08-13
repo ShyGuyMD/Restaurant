@@ -73,6 +73,7 @@
     <Content Include="bin\Aplicacion.dll" />
     <Content Include="CancelarReserva.aspx" />
     <Content Include="ChefIngredientes.aspx" />
+    <Content Include="Inicio.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="obj\Debug\Restaurante.csproj.FileListAbsolute.txt" />
     <Content Include="packages.config" />
@@ -98,6 +99,13 @@
     </Compile>
     <Compile Include="CancelarReserva.aspx.designer.cs">
       <DependentUpon>CancelarReserva.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Inicio.aspx.cs">
+      <DependentUpon>Inicio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inicio.aspx.designer.cs">
+      <DependentUpon>Inicio.aspx</DependentUpon>
     </Compile>
     <Compile Include="Maestra.Master.cs">
       <DependentUpon>Maestra.Master</DependentUpon>

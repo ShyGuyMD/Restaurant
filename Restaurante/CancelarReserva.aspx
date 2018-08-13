@@ -6,6 +6,8 @@
     <asp:Panel ID="PanelInputUser" runat="server">
         <asp:Label ID="lblReserva" runat="server" Text="Ingresar código de reserva:"></asp:Label>
         <asp:TextBox ID="txtCodReserva" runat="server"></asp:TextBox>
+        <asp:RequiredFieldValidator ControlToValidate="txtCodReserva" ID="RequiredFieldValidator4" runat="server" ForeColor="Tomato" ErrorMessage="*"></asp:RequiredFieldValidator>
+        <asp:RegularExpressionValidator ID="RegularExpressionValidator6" ControlToValidate="txtCodReserva" runat="server" ErrorMessage="Código Inválido" ValidationExpression="^[a-zA-Z0-9_.-]*$"></asp:RegularExpressionValidator>
         <asp:Button ID="btnBuscarReserva" runat="server" Text="Buscar" OnClick="BtnBuscarReserva_Click" />
     </asp:Panel>
     <br />

@@ -12,11 +12,7 @@
             <SelectedDayStyle BackColor="#333399" ForeColor="White" />
             <TitleStyle BackColor="White" BorderColor="Black" BorderWidth="4px" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" />
             <TodayDayStyle BackColor="#CCCCCC" />
-        </asp:Calendar><
-        <asp:TextBox ID="txtHora" runat="server"  Width="60px"></asp:TextBox>
-        <asp:Label ID="Label1" runat="server" Text=":"></asp:Label>
-        <asp:TextBox ID="txtMinuto" runat="server"  Width="60px"></asp:TextBox>
-        <br/>
+        </asp:Calendar>
         <asp:Button ID="btnFecha" runat="server" Text="Enviar" OnClick="btnFecha_Click" />
     </asp:Panel>
 

@@ -56,7 +56,7 @@ namespace Restaurante
 
             lstMenu.DataTextField = "Datos";
             lstMenu.DataValueField= "Id";
-            lstMenu.DataSource = Fachada.Get.ListadoMenuesConPrecio();
+            lstMenu.DataSource = Fachada.Get.ListadoMenuesPorChef(Session["Usuario"]);
             lstMenu.DataBind();
         }
 

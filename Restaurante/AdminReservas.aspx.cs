@@ -23,27 +23,20 @@ namespace Restaurante
 
             }
 
-            if (!IsPostBack)
-            {
-                LimpiarTextos();
-            }
+            //if (!IsPostBack)
+            //{
+            //    LimpiarTextos();
+            //}
         }
 
         protected void btnFecha_Click(object sender, EventArgs e)
         {
             DateTime fecha = calFecha.SelectedDate;
-            fecha.AddHours (double.Parse(txtHora.Text));
-            fecha.AddMinutes (int.Parse(txtMinuto.Text));
 
             GrillaReservas.DataSource = Fachada.Get.ListadoReservasPorFecha(fecha);
             GrillaReservas.DataBind();
             
         }
-
-        protected void LimpiarTextos()
-        {
-            txtHora.Text = "";
-            txtMinuto.Text = "";
-        }
+        
     }
 }
