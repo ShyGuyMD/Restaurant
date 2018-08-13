@@ -33,7 +33,7 @@ namespace Restaurante
         {
             string codigo = txtCodReserva.Text;
             codigo = codigo.ToUpper();
-            if (Fachada.Get.BuscarReserva(codigo)!= null)
+            if (Fachada.Get.BuscarReservaPorCodigo(codigo) != null)
             {
                 CargarReserva(codigo);
             }
@@ -63,7 +63,7 @@ namespace Restaurante
         }
         protected void CargarReserva(string pCodigo)
         {
-            GrillaReserva.DataSource = Fachada.Get.BuscarReserva(pCodigo);
+            GrillaReserva.DataSource = Fachada.Get.BuscarReservaPorCodigo(pCodigo);
             GrillaReserva.DataBind();
             PanelMostrarReserva.Visible = true;
         }

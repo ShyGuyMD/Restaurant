@@ -15,6 +15,23 @@ namespace Test
         static void Main(string[] args)
         {
             Encryption e = new Encryption();
+            Fachada.Get.AltaChef("chef1", e.EncryptToString("chef"), "Chef", "111111", "Cedula", "Master", "Chef", 10000);
+            Fachada.Get.AltaIngrediente("A001", "Papas", 25);
+
+            List<string> ingredientes = new List<string>() { "A001" };
+            List<int> cantidades = new List<int>() { 8 };
+
+            Fachada.Get.AltaMenuPropio("111111", "Cedula", ingredientes, cantidades, 20, "Menu de Ejemplo");
+
+            Fachada.Get.AltaIngrediente("A002", "Huevo", 30);
+            ingredientes[0] = "A002";
+            cantidades[0] = 3;
+
+            Fachada.Get.ModificarIngredientesDeMenu(1, ingredientes, cantidades);
+            
+            
+            /*
+            Encryption e = new Encryption();
 
             Console.WriteLine("Insertando Administradores...\n");
             Console.ReadKey();
@@ -48,7 +65,7 @@ namespace Test
                 if (c != CUsuario.Get._Chef.Last<Chef>())
                     Console.WriteLine("--------------------------------------------------------");
             }
-
+            */
             Console.ReadKey();
         }
     }

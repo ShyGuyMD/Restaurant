@@ -95,7 +95,7 @@ namespace Dominio.Controladoras
 
             while(c == null && contador < _Chef.Count)
             {
-                if (_Chef[contador].Documento == pDocumento)
+                if (_Chef[contador].Documento.Equals(pDocumento))
                 {
                     c = _Chef[contador];
                 }

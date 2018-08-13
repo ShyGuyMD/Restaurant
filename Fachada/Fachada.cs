@@ -40,7 +40,7 @@ namespace Aplicacion
         }
         
         //pIngredientes y pCantidades deberían tener igual tamaño, y corresponderse en sus posiciones entre sí.
-        public ExitCode AltaMenuPropio(string pChefDoc, string pChefTipoDoc, List<string> pIngredientes, List<int> pCantidades, double pGanancia, string pDesc)
+        public ExitCode AltaMenuPropio(string pChefDoc, string pChefTipoDoc, List<string> pIngredientes, List<int> pCantidades, decimal pGanancia, string pDesc)
         {
             ExitCode ret = ExitCode.PLACEHOLDER;
 
@@ -86,11 +86,11 @@ namespace Aplicacion
             return CMenu.Get.ListarMenuesActivos();
         }
         
-        // ACA
-        public bool ModificarIngredientesDeMenu(int pIdMenu, List<string> pIngredientes, List<int> pCantidades)
+        public ExitCode ModificarIngredientesDeMenu(int pIdMenu, List<string> pIngredientes, List<int> pCantidades)
         {
-            List<IngredientesPorMenu> ingredientes = new List<IngredientesPorMenu>();
+            var exit = ExitCode.PLACEHOLDER;
 
+            List<IngredientesPorMenu> ingredientes = new List<IngredientesPorMenu>();
             int contador = 0;
             while (contador < pIngredientes.Count)
             {
@@ -101,13 +101,16 @@ namespace Aplicacion
                     IngredientesPorMenu ing = CIngrediente.Get.ArmarObjetoIngrediente(i, pCantidades[contador]);
                     ingredientes.Add(ing);
                 }
-                else return false;
+                else
+                    exit = ExitCode.NO_INGREDIENT_ERROR;
 
                 contador++;
             }
 
-            return CMenu.Get.ModificarIngredientesDeMenu(pIdMenu, ingredientes);
-            
+            if (exit != ExitCode.NO_INGREDIENT_ERROR)
+                exit = CMenu.Get.ModificarIngredientesDeMenu(pIdMenu, ingredientes);
+
+            return exit;
         }
 
         // ACA
@@ -206,7 +209,7 @@ namespace Aplicacion
             return CReserva.Get.ListadoReservasPorFecha(pFechaReserva);
         }
 
-        public Reserva BuscarPorCodigo(string pCodReserva)
+        public Reserva BuscarReservaPorCodigo(string pCodReserva)
         {
             return CReserva.Get.BuscarActivo(pCodReserva);
         }
@@ -217,10 +220,15 @@ namespace Aplicacion
         {
             return CMesa.Get.Alta(pNumero, pCapacidad, pUbicacion);
         }
+
+        public bool ListadoMesas()
+        {
+            return false;
+        }
         #endregion
 
         #region Otros
-        public void ActualizarParametros(double pGanancia)
+        public void ActualizarParametros(decimal pGanancia)
         {
             throw new NotImplementedException();
         }
@@ -236,7 +244,7 @@ namespace Aplicacion
                 while ((fileLine = sr.ReadLine()) != null)
                 {
                     string[] data = fileLine.Split(':');
-                    double ganancia = Convert.ToDouble(data[1]);
+                    decimal ganancia = Convert.ToDecimal(data[1]);
 
                     CMenu.Get.CargarGananciaMenuPreelaborado(ganancia);
                 }

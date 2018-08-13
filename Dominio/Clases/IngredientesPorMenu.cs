@@ -12,5 +12,10 @@ namespace Dominio.Clases
         public int Cantidad { get; set; }
 
         public IngredientesPorMenu() { }
+
+        public decimal CalcularCostoIngrediente()
+        {
+            return Ingrediente.Costo * Cantidad;
+        }
     }
 }
