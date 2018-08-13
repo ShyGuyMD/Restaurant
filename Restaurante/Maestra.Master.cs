@@ -12,8 +12,9 @@ namespace Restaurante
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            switch (Session["Rol"])
+            int a = 0;
+            //switch (Session["Rol"])
+            switch (a)
             {
                 case 0:
                     MenuAdmin.Visible = true;

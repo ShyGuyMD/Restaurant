@@ -56,7 +56,7 @@ namespace Restaurante
 
             lstMenu.DataTextField = "Datos";
             lstMenu.DataValueField= "Id";
-            lstMenu.DataSource = Fachada.Get.ListadoMenuesPorChef(Session["Usuario"]);
+            //lstMenu.DataSource = Fachada.Get.ListadoMenuesPorChef(Session["Usuario"]);
             lstMenu.DataBind();
         }
 
@@ -84,7 +84,7 @@ namespace Restaurante
 
             if (Validar(cantidad))
             {
-                Fachada.Get.ModificarIngredientesDeMenu(idMenu, idIngrediente, cantidad);
+                //Fachada.Get.ModificarIngredientesDeMenu(idMenu, idIngrediente, cantidad);
             }
         }
 

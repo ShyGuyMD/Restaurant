@@ -14,7 +14,8 @@ namespace Helpers
             INPUT_DATA_ERROR = 1,
             NO_INGREDIENT_ERROR = 2,
             NO_CHEF_ERROR = 3,
-            ERROR_4 = 4,
+            NO_MENU_ERROR = 4,
+            ERROR_5 = 5,
             PLACEHOLDER = 99
         };
 

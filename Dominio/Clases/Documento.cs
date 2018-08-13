@@ -18,5 +18,11 @@ namespace Dominio.Clases
         {
             return TipoDoc.ToString() + " " + Numero;
         }
+
+        public override bool Equals(object obj)
+        {
+            return (TipoDoc == ((Documento)obj).TipoDoc &&
+                Numero == ((Documento)obj).Numero);
+        }
     }
 }
