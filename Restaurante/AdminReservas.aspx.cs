@@ -16,10 +16,7 @@ namespace Restaurante
             var master = Master as Maestra;
             if (master != null)
             {
-                if (!master.VerificarUsuario((int)Session["Rol"]))
-                {
-                    master.LogOut();
-                }
+                master.VerificarUsuario(0);
 
             }
         }

@@ -12,6 +12,15 @@ namespace Restaurante
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(Session["Usuario"] != null)
+            {
+                MenuLogin.Visible = false;
+                MenuLogout.Visible = true;
+            }
+            else
+            {
+                lblUsername.Text = (string)Session["Usuario"];
+            }
 
             switch (Session["Rol"])
             {
@@ -32,16 +41,27 @@ namespace Restaurante
 
         }
 
-        public bool VerificarUsuario(int pUser)
+        public void VerificarUsuario(int pRol)
         {
-            return (int)Session["Rol"] == pUser;
+            if (Session["Usuario"] == null || Fachada.Get.BuscarRol((int)Session["Usuario"]) != pRol)
+            {
+                LogOut();
+            }
         }
 
         public void LogOut()
         {
             Session["Usuario"] = null;
             Session["Rol"] = null;
+
+            MenuLogin.Visible = true;
+            MenuLogout.Visible = false;
             Response.Redirect("Login.aspx");
+        }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            LogOut();
         }
     }
 }
