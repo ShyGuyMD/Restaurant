@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Dominio.Controladoras;
 using Dominio.Clases;
 using System.IO;
+using Helpers;
+using static Helpers.Utils;
 
 namespace Aplicacion
 {
@@ -32,41 +34,49 @@ namespace Aplicacion
         #endregion
 
         #region Menu
-        public bool AltaMenuPreelaborado(string pProveedor, decimal pCosto, string pDesc)
+        public ExitCode AltaMenuPreelaborado(string pProveedor, decimal pCosto, string pDesc)
         {
             return CMenu.Get.AltaMenuPreelaborado(pProveedor, pCosto, pDesc);
         }
         
         //pIngredientes y pCantidades deberían tener igual tamaño, y corresponderse en sus posiciones entre sí.
-        public bool AltaMenuPropio(string pChefDoc, string pChefTipoDoc, List<string> pIngredientes, List<int> pCantidades, double pGanancia, string pDesc)
+        public ExitCode AltaMenuPropio(string pChefDoc, string pChefTipoDoc, List<string> pIngredientes, List<int> pCantidades, double pGanancia, string pDesc)
         {
-            bool ret = false;
+            ExitCode ret = ExitCode.PLACEHOLDER;
 
             if (pIngredientes.Count == pCantidades.Count)
             {
                 Documento d = CDocumento.Get.ArmarDocumento(pChefDoc, pChefTipoDoc);
                 Chef c = CUsuario.Get.BuscarChef(d);
 
-                List<IngredientesPorMenu> ingredientes = new List<IngredientesPorMenu>();
-                int contador = 0;
-                bool hayError = false;
+                if (c != null) { 
+                    List<IngredientesPorMenu> ingredientes = new List<IngredientesPorMenu>();
+                    int contador = 0;
+                    bool hayError = false;
 
-                while (contador < pIngredientes.Count && !hayError)
-                {
-                    Ingrediente i = CIngrediente.Get.Buscar(pIngredientes[contador]);
-                    if (i == null || !i.Activo)
-                        hayError = true;
-                    else
+                    while (contador < pIngredientes.Count && !hayError)
                     {
-                        IngredientesPorMenu ipm = CIngrediente.Get.ArmarObjetoIngrediente(i, pCantidades[contador]);
-                        ingredientes.Add(ipm);
+                        Ingrediente i = CIngrediente.Get.BuscarActivo(pIngredientes[contador]);
+                        if (i == null)
+                        {
+                            hayError = true;
+                            ret = ExitCode.NO_INGREDIENT_ERROR;
+                        }
+                        else
+                        {
+                            IngredientesPorMenu ipm = CIngrediente.Get.ArmarObjetoIngrediente(i, pCantidades[contador]);
+                            ingredientes.Add(ipm);
+                        }
+
+                        contador++;
                     }
 
-                    contador++;
+                    if (!hayError)
+                        ret = CMenu.Get.AltaMenuPropio(c, ingredientes, pGanancia, pDesc);
                 }
-
-                ret = CMenu.Get.AltaMenuPropio(c, ingredientes, pGanancia, pDesc);
+                else ret = ExitCode.NO_CHEF_ERROR;
             }
+            else ret = ExitCode.INPUT_DATA_ERROR;
 
             return ret;
         }
@@ -79,25 +89,25 @@ namespace Aplicacion
         // ACA
         public bool ModificarIngredientesDeMenu(int pIdMenu, List<string> pIngredientes, List<int> pCantidades)
         {
-            bool ret = false;
             List<IngredientesPorMenu> ingredientes = new List<IngredientesPorMenu>();
-            Propio p = (Propio)CMenu.Get.Buscar(pIdMenu);
 
-            if (p != null)
+            int contador = 0;
+            while (contador < pIngredientes.Count)
             {
-                int contador = 0;
-                while (contador < pIngredientes.Count)
-                {
-                    Ingrediente i = CIngrediente.Get.Buscar(pIngredientes[contador]);
-                    IngredientesPorMenu ing = CIngrediente.Get.ArmarObjetoIngrediente(i, pCantidades[contador]);
+                Ingrediente i = CIngrediente.Get.BuscarActivo(pIngredientes[contador]);
 
+                if (i != null)
+                {
+                    IngredientesPorMenu ing = CIngrediente.Get.ArmarObjetoIngrediente(i, pCantidades[contador]);
                     ingredientes.Add(ing);
-                    contador++;
                 }
-                ret = CMenu.Get.ModificarIngredientesDeMenu(p, ingredientes);
+                else return false;
+
+                contador++;
             }
 
-            return ret;
+            return CMenu.Get.ModificarIngredientesDeMenu(pIdMenu, ingredientes);
+            
         }
 
         // ACA
@@ -180,7 +190,7 @@ namespace Aplicacion
             }
             Mesa mesa = CMesa.Get.Buscar(pNumeroMesa);
 
-            if (listaMenues.Count > 0 && existenTodos && mesa != null)
+            if (listaMenues.Count > 0 && existenTodos && mesa != null) // ACOMODAR ESTO
                 ret = CReserva.Get.Alta(pNombrePersona, pCantPersonas, pFechaReserva, listaMenues, mesa);
 
             return ret;
