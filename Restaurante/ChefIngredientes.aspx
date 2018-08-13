@@ -11,7 +11,7 @@
     <asp:Panel ID="GrillaModificar" runat="server">
         <asp:GridView ID="GrillaIngredientes" runat="server" AutoGenerateColumns="false" OnRowCommand="GrillaIngredientes_RowCommand" DataKeyNames="Id">
             <Columns>
-                <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+                <asp:BoundField DataField="Ingrediente.Descripcion" HeaderText="Descripcion" />
                 <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
                 <asp:ButtonField ButtonType="Button" CommandName="eliminar" Text="Eliminar" />
             </Columns>

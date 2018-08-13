@@ -16,9 +16,10 @@
         <asp:Label ID="lbl2" runat="server" Text="Seleccionar Reserva"></asp:Label>
         <asp:GridView ID="GrillaReserva" runat="server" AutoGenerateColumns="false" OnRowCommand="GrillaReserva_RowCommand" DataKeyNames="Id">
             <Columns>
-                <asp:BoundField DataField="Codigo" HeaderText="Código de Reserva" />
-                <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-                <asp:ButtonField ButtonType="Button" CommandName="cancelar" Text="Cancelar" />
+                <asp:BoundField DataField="Codigo" HeaderText="Código de Reserva"/>
+                <asp:BoundField DataField="Nombre" HeaderText="Nombre"/>
+                <asp:BoundField DataField="FechaReserva" HeaderText="Fecha"/>
+                <asp:ButtonField ButtonType="Button" CommandName="cancelar" Text="Cancelar"/>
             </Columns>
         </asp:GridView>
     </asp:Panel>
