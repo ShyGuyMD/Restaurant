@@ -37,7 +37,7 @@ namespace Dominio.Controladoras
 
         public ExitCode AltaIngrediente(string pCodigo, string pDescripcion, decimal pCosto)
         {
-            var exit = ExitCode.PLACEHOLDER;
+            var exit = ExitCode.EXISTING_INGREDIENT_ERROR;
 
             if (ValidarData(pCodigo, pDescripcion, pCosto))
             {
@@ -62,7 +62,7 @@ namespace Dominio.Controladoras
                 }
             }
             else
-                exit = ExitCode.INGREDIENT_VALIDATION_ERROR;
+                exit = ExitCode.INPUT_DATA_ERROR;
 
             return exit;
         }

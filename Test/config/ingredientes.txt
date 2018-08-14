@@ -1,0 +1,4 @@
+A001@Papa@10
+A002@Huevo@5
+A003@Arroz@20
+A004@Manteca@50

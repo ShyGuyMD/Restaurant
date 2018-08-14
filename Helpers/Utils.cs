@@ -10,16 +10,17 @@ namespace Helpers
     {
         public enum ExitCode
         {
-            OK = 0,
-            INPUT_DATA_ERROR = 1,
-            NO_INGREDIENT_ERROR = 2,
-            NO_CHEF_ERROR = 3,
-            NO_MENU_ERROR = 4,
-            INGREDIENT_VALIDATION_ERROR = 5,
-            EXISTING_USER_ERROR = 6,
-            WRONG_USERNAME_PASSWORD_ERROR = 7,
-            NO_RESERVATION_ERROR = 8,
-            PLACEHOLDER = 99
+            OK                              = 0,
+            INPUT_DATA_ERROR                = 1,
+            NO_INGREDIENT_ERROR             = 2,
+            NO_CHEF_ERROR                   = 3,
+            NO_MENU_ERROR                   = 4,
+            NO_RESERVATION_ERROR            = 5,
+            EXISTING_TABLE_ERROR            = 6,
+            EXISTING_USER_ERROR             = 7,
+            EXISTING_INGREDIENT_ERROR       = 9,
+            WRONG_USERNAME_PASSWORD_ERROR   = 8,
+            PLACEHOLDER                     = 99
         };
 
         public Random Random { get; set; }
