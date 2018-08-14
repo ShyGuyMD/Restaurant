@@ -37,7 +37,7 @@ namespace Dominio.Controladoras
 
         public ExitCode AltaMenuPreelaborado(string pProveedor, decimal pCosto, string pDesc)
         {
-            var exit = ExitCode.PLACEHOLDER;
+            var exit = ExitCode.INPUT_DATA_ERROR;
 
             if (ValidarData(pProveedor, pCosto, pDesc))
             {
@@ -54,15 +54,13 @@ namespace Dominio.Controladoras
                 _Menues.Add(p);
                 exit = ExitCode.OK;
             }
-            else
-                exit = ExitCode.INPUT_DATA_ERROR;
 
             return exit;
         }
 
         public ExitCode AltaMenuPropio(Chef pChef, List<IngredientesPorMenu> pIngredientes, decimal pGanancia, string pDesc)
         {
-            var exit = ExitCode.PLACEHOLDER;
+            var exit = ExitCode.INPUT_DATA_ERROR;
 
             if (ValidarData(pChef, pIngredientes, pGanancia, pDesc))
             {
@@ -80,8 +78,6 @@ namespace Dominio.Controladoras
 
                 exit = ExitCode.OK;
             }
-            else
-                exit = ExitCode.INPUT_DATA_ERROR;
 
             return exit;
         }
@@ -123,7 +119,7 @@ namespace Dominio.Controladoras
 
         public ExitCode ModificarIngredientesDeMenu(int pIdMenu, List<IngredientesPorMenu> pIngredientes)
         {
-            var exit = ExitCode.PLACEHOLDER;
+            var exit = ExitCode.NO_MENU_ERROR;
             Menu m = BuscarActivo(pIdMenu);
 
             if (m != null && m is Propio)
@@ -131,8 +127,6 @@ namespace Dominio.Controladoras
                 ((Propio)m).Ingredientes = pIngredientes;
                 exit = ExitCode.OK;
             }
-            else
-                exit = ExitCode.NO_MENU_ERROR;
 
             return exit;
         }

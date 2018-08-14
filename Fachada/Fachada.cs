@@ -204,21 +204,37 @@ namespace Aplicacion
         #endregion
 
         #region Mesa
-        public bool AltaMesa(int pNumero, int pCapacidad, string pUbicacion)
+        public ExitCode AltaMesa(int pNumero, int pCapacidad, string pUbicacion)
         {
             return CMesa.Get.Alta(pNumero, pCapacidad, pUbicacion);
         }
 
-        public bool ListadoMesas()
+        public List<Mesa> ListadoMesasDisponibles(int pCapacidad)
         {
-            return false;
+            return CMesa.Get.ListarDisponibles(pCapacidad);
         }
         #endregion
 
         #region Otros
-        public void ActualizarParametros(decimal pGanancia)
+        public void ActualizarParametros(string filepath)
         {
-            throw new NotImplementedException();
+            StreamWriter sw = null;
+            FileStream fs = new FileStream(filepath, FileMode.OpenOrCreate);
+
+            try
+            {
+                sw = new StreamWriter(fs);
+                sw.WriteLine("GananciaPreElaborados:" + PreElaborado.Ganancia.ToString());
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                if (sw != null)
+                    sw.Close();
+            }
         }
         public void CargarParametros(string filepath)
         {
@@ -263,7 +279,7 @@ namespace Aplicacion
                     string descripcion = data[1];
                     decimal costo = Convert.ToDecimal(data[2]);
 
-                    Fachada.Get.AltaIngrediente(codigo, descripcion, costo);
+                    AltaIngrediente(codigo, descripcion, costo);
                 }
             }
             catch
