@@ -14,8 +14,7 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            Encryption e = new Encryption();
-            Fachada.Get.AltaChef("chef1", e.EncryptToString("chef"), "Chef", "111111", "Cedula", "Master", "Chef", 10000);
+            Fachada.Get.AltaChef("chef1", new Encryption().EncryptToString("chef"), "Chef", "111111", "Cedula", "Master", "Chef", 10000);
             Fachada.Get.AltaIngrediente("A001", "Papas", 25);
 
             List<string> ingredientes = new List<string>() { "A001" };

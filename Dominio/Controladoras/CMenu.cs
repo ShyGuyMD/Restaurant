@@ -150,7 +150,12 @@ namespace Dominio.Controladoras
 
         public List<Menu> ListadoMenuesConIngrediente(Ingrediente i)
         {
-            return null;
+            List<Menu> ret = new List<Menu>();
+            foreach (Menu m in _Menues)
+                if (m is Propio && ((Propio)m).TieneIngrediente(i))
+                    ret.Add(m);
+
+            return ret;
         }
 
         public void CargarGananciaMenuPreelaborado(decimal ganancia)

@@ -18,6 +18,20 @@ namespace Dominio.Clases
             Activo = true;
         }
 
+        public bool TieneIngrediente(Ingrediente i)
+        {
+            bool encontrado = false;
+            int contador = 0;
+            while (contador < Ingredientes.Count && !encontrado)
+            {
+                if (Ingredientes[contador].Ingrediente == i)
+                    encontrado = true;
+                contador++;
+            }
+
+            return encontrado;
+        }
+
         public override decimal CalcularPrecioVenta()
         {
             decimal precio = 0;

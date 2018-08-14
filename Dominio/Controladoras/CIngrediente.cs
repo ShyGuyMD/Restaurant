@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio.Clases;
+using static Helpers.Utils;
 
 namespace Dominio.Controladoras
 {
@@ -34,9 +35,9 @@ namespace Dominio.Controladoras
 
         public List<Ingrediente> _Ingredientes { get; set; }
 
-        public bool AltaIngrediente(string pCodigo, string pDescripcion, decimal pCosto)
+        public ExitCode AltaIngrediente(string pCodigo, string pDescripcion, decimal pCosto)
         {
-            bool ret = false;
+            var exit = ExitCode.PLACEHOLDER;
 
             if (ValidarData(pCodigo, pDescripcion, pCosto))
             {
@@ -50,18 +51,20 @@ namespace Dominio.Controladoras
                         Costo = pCosto
                     };
                     _Ingredientes.Add(i);
-                    ret = true;
+                    exit = ExitCode.OK;
                 }
                 else if (i != null && !i.Activo)
                 {
                     i.Descripcion = pDescripcion;
                     i.Costo = pCosto;
                     i.Activo = true;
-                    ret = true;
+                    exit = ExitCode.OK;
                 }
             }
+            else
+                exit = ExitCode.INGREDIENT_VALIDATION_ERROR;
 
-            return ret;
+            return exit;
         }
 
         public IngredientesPorMenu ArmarObjetoIngrediente(Ingrediente i, int cantidad)
@@ -75,20 +78,23 @@ namespace Dominio.Controladoras
             return ret;
         }
 
-        public bool BajaIngrediente(string pCodigo)
+        public ExitCode BajaIngrediente(string pCodigo)
         {
-            bool ret = false;
+            var exit = ExitCode.NO_INGREDIENT_ERROR;
+
             if (pCodigo != null)
             {
                 Ingrediente i = Buscar(pCodigo);
                 if (i != null)
                 {
                     i.Activo = false;
-                    ret = true;
+                    exit = ExitCode.OK;
                 }
             }
+            else
+                exit = ExitCode.INPUT_DATA_ERROR;
 
-            return ret;
+            return exit;
         }
 
         public Ingrediente Buscar(string pCodigo)

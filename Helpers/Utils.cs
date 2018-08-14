@@ -15,7 +15,10 @@ namespace Helpers
             NO_INGREDIENT_ERROR = 2,
             NO_CHEF_ERROR = 3,
             NO_MENU_ERROR = 4,
-            ERROR_5 = 5,
+            INGREDIENT_VALIDATION_ERROR = 5,
+            EXISTING_USER_ERROR = 6,
+            WRONG_USERNAME_PASSWORD_ERROR = 7,
+            NO_RESERVATION_ERROR = 8,
             PLACEHOLDER = 99
         };
 

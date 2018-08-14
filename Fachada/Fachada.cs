@@ -113,10 +113,9 @@ namespace Aplicacion
             return exit;
         }
 
-        // ACA
         public List<Menu> ListadoMenuesConIngrediente(string pCodigo)
         {
-            List<Menu> ret = null;
+            List<Menu> ret = new List<Menu>();
             Ingrediente i = CIngrediente.Get.BuscarActivo(pCodigo);
 
             if (i != null)
@@ -132,45 +131,34 @@ namespace Aplicacion
         #endregion
 
         #region Ingrediente
-        public bool AltaIngrediente(string pCodigo, string pDescripcion, decimal pCosto)
+        public ExitCode AltaIngrediente(string pCodigo, string pDescripcion, decimal pCosto)
         {
             return CIngrediente.Get.AltaIngrediente(pCodigo, pDescripcion, pCosto);
         }
-        public bool BajaIngrediente(string pCodigo)
+        public ExitCode BajaIngrediente(string pCodigo)
         {
             return CIngrediente.Get.BajaIngrediente(pCodigo);
         }
         #endregion
 
         #region Chef / Usuario
-        public bool AltaAdmin(string pUsername, string pPassword, string pRol)
+        public ExitCode AltaAdmin(string pUsername, string pPassword, string pRol)
         {
             Usuario.Rol rolAsociado = CUsuario.Get.RolAsociado(pRol);
 
             return CUsuario.Get.AltaAdmin(pUsername, pPassword, rolAsociado);
         }
-        public bool AltaChef(string pUsername, string pPassword, string pRol, string pNumDoc, string pTipoDoc, string pNombre, string pApellido, decimal pSueldo)
+        public ExitCode AltaChef(string pUsername, string pPassword, string pRol, string pNumDoc, string pTipoDoc, string pNombre, string pApellido, decimal pSueldo)
         {
             Documento documento = CDocumento.Get.ArmarDocumento(pNumDoc, pTipoDoc);
             Usuario.Rol rolAsociado = CUsuario.Get.RolAsociado(pRol);
             
             return CUsuario.Get.AltaChef(pUsername, pPassword, rolAsociado, documento, pNombre, pApellido, pSueldo);
         }
-        public bool Login(string pUsername, string pPassword)
+        public ExitCode Login(string pUsername, string pPassword)
         {
             return CUsuario.Get.Login(pUsername, pPassword);
         }
-
-        // ??????????????????????
-        public int BuscarUsuario(string pLogin)
-        {
-            return 0;
-        }
-        public int BuscarRol(int a)
-        {
-            return 0;
-        }
-        // ??????????????????????
         #endregion
 
         #region Reserva
@@ -193,13 +181,13 @@ namespace Aplicacion
             }
             Mesa mesa = CMesa.Get.Buscar(pNumeroMesa);
 
-            if (listaMenues.Count > 0 && existenTodos && mesa != null) // ACOMODAR ESTO
+            if (existenTodos && mesa != null)
                 ret = CReserva.Get.Alta(pNombrePersona, pCantPersonas, pFechaReserva, listaMenues, mesa);
 
             return ret;
         }
 
-        public bool BajaReserva(string pCodReserva)
+        public ExitCode BajaReserva(string pCodReserva)
         {
             return CReserva.Get.Baja(pCodReserva);
         }
