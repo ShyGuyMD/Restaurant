@@ -14,6 +14,41 @@ namespace Test
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Cargando Ingredientes...");
+            Fachada.Get.CargarIngredientesDeArchivo("C:\\Users\\alumnoFI\\Desktop\\Nueva carpeta\\Restaurant\\Test\\config\\ingredientes.txt");
+            Console.WriteLine();
+            Console.ReadKey();
+            foreach(Ingrediente i in CIngrediente.Get._Ingredientes)
+            {
+                Console.WriteLine(i.ToString());
+                if (i != CIngrediente.Get._Ingredientes.Last())
+                    Console.WriteLine("#################################");
+            }
+            Console.WriteLine();
+            Console.WriteLine("Cargando Ganancia Pre-Elaborados...");
+            Console.WriteLine();
+            Console.ReadKey();
+            Fachada.Get.CargarParametros("C:\\Users\\alumnoFI\\Desktop\\Nueva carpeta\\Restaurant\\Test\\config\\parametros.txt");
+            Console.WriteLine("Ganancia: " + PreElaborado.Ganancia);
+
+
+            /*
+            Fachada.Get.AltaChef("chef1", new Encryption().EncryptToString("chef"), "Chef", "111111", "Cedula", "Master", "Chef", 10000);
+            Fachada.Get.AltaIngrediente("A001", "Papas", 25);
+
+            List<string> ingredientes = new List<string>() { "A001" };
+            List<int> cantidades = new List<int>() { 8 };
+
+            Fachada.Get.AltaMenuPropio("111111", "Cedula", ingredientes, cantidades, 20, "Menu de Ejemplo");
+
+            Fachada.Get.AltaIngrediente("A002", "Huevo", 30);
+            ingredientes[0] = "A002";
+            cantidades[0] = 3;
+
+            Fachada.Get.ModificarIngredientesDeMenu(1, ingredientes, cantidades);
+            
+            
+            
             Encryption e = new Encryption();
 
             Console.WriteLine("Insertando Administradores...\n");
@@ -48,7 +83,7 @@ namespace Test
                 if (c != CUsuario.Get._Chef.Last<Chef>())
                     Console.WriteLine("--------------------------------------------------------");
             }
-
+            */
             Console.ReadKey();
         }
     }

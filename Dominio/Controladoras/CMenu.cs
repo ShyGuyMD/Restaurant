@@ -37,7 +37,7 @@ namespace Dominio.Controladoras
 
         public ExitCode AltaMenuPreelaborado(string pProveedor, decimal pCosto, string pDesc)
         {
-            ExitCode exit = ExitCode.PLACEHOLDER;
+            var exit = ExitCode.INPUT_DATA_ERROR;
 
             if (ValidarData(pProveedor, pCosto, pDesc))
             {
@@ -54,16 +54,14 @@ namespace Dominio.Controladoras
                 _Menues.Add(p);
                 exit = ExitCode.OK;
             }
-            else
-            {
-                exit = ExitCode.INPUT_DATA_ERROR;
-            }
 
             return exit;
         }
 
-        public ExitCode AltaMenuPropio(Chef pChef, List<IngredientesPorMenu> pIngredientes, double pGanancia, string pDesc)
+        public ExitCode AltaMenuPropio(Chef pChef, List<IngredientesPorMenu> pIngredientes, decimal pGanancia, string pDesc)
         {
+            var exit = ExitCode.INPUT_DATA_ERROR;
+
             if (ValidarData(pChef, pIngredientes, pGanancia, pDesc))
             {
                 Propio p = new Propio()
@@ -78,24 +76,35 @@ namespace Dominio.Controladoras
                 Menu.UltimoId = p.Id;
                 _Menues.Add(p);
 
-                return ExitCode.OK;
+                exit = ExitCode.OK;
             }
 
-            return ExitCode.INPUT_DATA_ERROR;
+            return exit;
         }
 
-        public Menu Buscar(int idMenu)
+        public Menu Buscar(int pIdMenu)
         {
+            Menu m = null;
             bool encontrado = false;
             int contador = 0;
             while (!encontrado && contador < _Menues.Count)
             {
-                if (_Menues[contador].Id == idMenu)
-                    return _Menues[contador];               // REVISAR ESTO CON LILIANA
+                if (_Menues[contador].Id == pIdMenu)
+                    m = _Menues[contador];
 
                 contador++;
             }
-            return null;
+
+            return m;
+        }
+
+        public Menu BuscarActivo(int pIdMenu)
+        {
+            Menu m = Buscar(pIdMenu);
+            if (!m.Activo)
+                m = null;
+
+            return m;
         }
 
         public List<Menu> ListarMenuesActivos()
@@ -108,9 +117,18 @@ namespace Dominio.Controladoras
             return ret;
         }
 
-        public bool ModificarIngredientesDeMenu(int pIdMenu, List<IngredientesPorMenu> pIngredientes)
+        public ExitCode ModificarIngredientesDeMenu(int pIdMenu, List<IngredientesPorMenu> pIngredientes)
         {
-            return false;
+            var exit = ExitCode.NO_MENU_ERROR;
+            Menu m = BuscarActivo(pIdMenu);
+
+            if (m != null && m is Propio)
+            {
+                ((Propio)m).Ingredientes = pIngredientes;
+                exit = ExitCode.OK;
+            }
+
+            return exit;
         }
 
         public List<IngredientesPorMenu> ListadoIngredientesPorMenu(int pIdMenu)
@@ -126,10 +144,15 @@ namespace Dominio.Controladoras
 
         public List<Menu> ListadoMenuesConIngrediente(Ingrediente i)
         {
-            return null;
+            List<Menu> ret = new List<Menu>();
+            foreach (Menu m in _Menues)
+                if (m is Propio && ((Propio)m).TieneIngrediente(i))
+                    ret.Add(m);
+
+            return ret;
         }
 
-        public void CargarGananciaMenuPreelaborado(double ganancia)
+        public void CargarGananciaMenuPreelaborado(decimal ganancia)
         {
             PreElaborado.Ganancia = ganancia;
         }
@@ -139,7 +162,7 @@ namespace Dominio.Controladoras
             return (pProveedor != "" && pCosto > 0 && pDescripcion != "");
         }
 
-        public bool ValidarData(Chef pChef, List<IngredientesPorMenu> pIngredientes, double pGanancia, string pDesc)
+        public bool ValidarData(Chef pChef, List<IngredientesPorMenu> pIngredientes, decimal pGanancia, string pDesc)
         {
             return (pChef != null && 
                         pIngredientes != null && 

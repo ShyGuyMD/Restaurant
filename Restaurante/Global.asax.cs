@@ -23,6 +23,9 @@ namespace Restaurante
         protected void Application_End(object sender, EventArgs e)
         {
             // Serializar todo
+            string rutaSerializacion = HttpRuntime.AppDomainAppPath + @"Config\serial.bin";\
+            Repositorio rep = new Repositorio(rutaSerializacion);
+            rep.Serializable();
         }
     }
 }

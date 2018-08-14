@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio.Clases;
+using static Helpers.Utils;
 
 namespace Dominio.Controladoras
 {
@@ -33,9 +34,9 @@ namespace Dominio.Controladoras
         #endregion
         public List<Mesa> _Mesas { get; set; }
 
-        public bool Alta(int pNumero, int pCapacidad, string pUbicacion)
+        public ExitCode Alta(int pNumero, int pCapacidad, string pUbicacion)
         {
-            bool ret = false;
+            var exit = ExitCode.EXISTING_TABLE_ERROR;
 
             if (ValidarData(pNumero, pCapacidad, pUbicacion))
             {
@@ -49,43 +50,14 @@ namespace Dominio.Controladoras
                         Ubicacion = pUbicacion
                     };
                     _Mesas.Add(m);
-                    ret = true;
+                    exit = ExitCode.OK;
                 }
             }
+            else
+                exit = ExitCode.INPUT_DATA_ERROR;
 
-            return ret;
+            return exit;
         }
-        /*
-        public bool Baja(int pNumero)
-        {
-            bool ret = false;
-            Mesa m = Buscar(pNumero);
-
-            if (m != null)
-            {
-                m.Activo = false;
-                ret = true;
-            }
-
-            return ret;
-        }
-
-        public Mesa Modificar(int pNumero, int pCapacidad, string pUbicacion)
-        {
-            Mesa m = null;
-            if (ValidarData(pNumero, pCapacidad, pUbicacion))
-            {
-                m = Buscar(pNumero);
-                if (m != null)
-                {
-                    m.Capacidad = pCapacidad;
-                    m.Ubicacion = pUbicacion;
-                }
-            }
-
-            return m;
-        }
-        */
         public Mesa Buscar(int pNumero)
         {
             Mesa m = null;
@@ -99,6 +71,17 @@ namespace Dominio.Controladoras
             }
 
             return m;
+        }
+
+        public List<Mesa> ListarDisponibles(int pCapacidad)
+        {
+            List<Mesa> ret = new List<Mesa>();
+
+            foreach (Mesa m in _Mesas)
+                if (m.Activo && m.Capacidad >= pCapacidad)
+                    ret.Add(m);
+
+            return ret;
         }
 
         public bool ValidarData(int pNumero, int pCapacidad, string pUbicacion)

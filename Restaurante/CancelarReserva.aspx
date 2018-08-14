@@ -8,17 +8,18 @@
         <asp:TextBox ID="txtCodReserva" runat="server"></asp:TextBox>
         <asp:RequiredFieldValidator ControlToValidate="txtCodReserva" ID="RequiredFieldValidator4" runat="server" ForeColor="Tomato" ErrorMessage="*"></asp:RequiredFieldValidator>
         <asp:RegularExpressionValidator ID="RegularExpressionValidator6" ControlToValidate="txtCodReserva" runat="server" ErrorMessage="Código Inválido" ValidationExpression="^[a-zA-Z0-9_.-]*$"></asp:RegularExpressionValidator>
+        <br/>
         <asp:Button ID="btnBuscarReserva" runat="server" Text="Buscar" OnClick="BtnBuscarReserva_Click" />
     </asp:Panel>
     <br />
     <asp:Panel ID="PanelMostrarReserva" runat="server" Visible="false">
         <asp:Label ID="lbl2" runat="server" Text="Seleccionar Reserva"></asp:Label>
-        <asp:Label ID="lblError" runat="server" Text="" Visible="false"></asp:Label>
         <asp:GridView ID="GrillaReserva" runat="server" AutoGenerateColumns="false" OnRowCommand="GrillaReserva_RowCommand" DataKeyNames="Id">
             <Columns>
-                <asp:BoundField DataField="Codigo" HeaderText="Código de Reserva" />
-                <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-                <asp:ButtonField ButtonType="Button" CommandName="cancelar" Text="Cancelar" />
+                <asp:BoundField DataField="Codigo" HeaderText="Código de Reserva"/>
+                <asp:BoundField DataField="Nombre" HeaderText="Nombre"/>
+                <asp:BoundField DataField="FechaReserva" HeaderText="Fecha"/>
+                <asp:ButtonField ButtonType="Button" CommandName="cancelar" Text="Cancelar"/>
             </Columns>
         </asp:GridView>
     </asp:Panel>

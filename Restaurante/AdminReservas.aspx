@@ -20,8 +20,8 @@
         <asp:GridView ID="GrillaReservas" runat="server" AutoGenerateColumns="false" DataKeyNames="Id">
             <Columns>
                 <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-                <asp:BoundField DataField="Fecha" HeaderText="FechaReserva" />
-                <asp:BoundField DataField="Cantidad de Personas" HeaderText="CantPersonas" />
+                <asp:BoundField DataField="FechaReserva" HeaderText="Fecha" />
+                <asp:BoundField DataField="CantPersonas" HeaderText="Cantidad de Personas" />
             </Columns>
         </asp:GridView>
     </asp:Panel>

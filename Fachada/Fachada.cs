@@ -40,7 +40,7 @@ namespace Aplicacion
         }
         
         //pIngredientes y pCantidades deberían tener igual tamaño, y corresponderse en sus posiciones entre sí.
-        public ExitCode AltaMenuPropio(string pChefDoc, string pChefTipoDoc, List<string> pIngredientes, List<int> pCantidades, double pGanancia, string pDesc)
+        public ExitCode AltaMenuPropio(string pChefDoc, string pChefTipoDoc, List<string> pIngredientes, List<int> pCantidades, decimal pGanancia, string pDesc)
         {
             ExitCode ret = ExitCode.PLACEHOLDER;
 
@@ -86,11 +86,11 @@ namespace Aplicacion
             return CMenu.Get.ListarMenuesActivos();
         }
         
-        // ACA
-        public bool ModificarIngredientesDeMenu(int pIdMenu, List<string> pIngredientes, List<int> pCantidades)
+        public ExitCode ModificarIngredientesDeMenu(int pIdMenu, List<string> pIngredientes, List<int> pCantidades)
         {
-            List<IngredientesPorMenu> ingredientes = new List<IngredientesPorMenu>();
+            var exit = ExitCode.PLACEHOLDER;
 
+            List<IngredientesPorMenu> ingredientes = new List<IngredientesPorMenu>();
             int contador = 0;
             while (contador < pIngredientes.Count)
             {
@@ -101,19 +101,21 @@ namespace Aplicacion
                     IngredientesPorMenu ing = CIngrediente.Get.ArmarObjetoIngrediente(i, pCantidades[contador]);
                     ingredientes.Add(ing);
                 }
-                else return false;
+                else
+                    exit = ExitCode.NO_INGREDIENT_ERROR;
 
                 contador++;
             }
 
-            return CMenu.Get.ModificarIngredientesDeMenu(pIdMenu, ingredientes);
-            
+            if (exit != ExitCode.NO_INGREDIENT_ERROR)
+                exit = CMenu.Get.ModificarIngredientesDeMenu(pIdMenu, ingredientes);
+
+            return exit;
         }
 
-        // ACA
         public List<Menu> ListadoMenuesConIngrediente(string pCodigo)
         {
-            List<Menu> ret = null;
+            List<Menu> ret = new List<Menu>();
             Ingrediente i = CIngrediente.Get.BuscarActivo(pCodigo);
 
             if (i != null)
@@ -129,45 +131,34 @@ namespace Aplicacion
         #endregion
 
         #region Ingrediente
-        public bool AltaIngrediente(string pCodigo, string pDescripcion, decimal pCosto)
+        public ExitCode AltaIngrediente(string pCodigo, string pDescripcion, decimal pCosto)
         {
             return CIngrediente.Get.AltaIngrediente(pCodigo, pDescripcion, pCosto);
         }
-        public bool BajaIngrediente(string pCodigo)
+        public ExitCode BajaIngrediente(string pCodigo)
         {
             return CIngrediente.Get.BajaIngrediente(pCodigo);
         }
         #endregion
 
         #region Chef / Usuario
-        public bool AltaAdmin(string pUsername, string pPassword, string pRol)
+        public ExitCode AltaAdmin(string pUsername, string pPassword, string pRol)
         {
             Usuario.Rol rolAsociado = CUsuario.Get.RolAsociado(pRol);
 
             return CUsuario.Get.AltaAdmin(pUsername, pPassword, rolAsociado);
         }
-        public bool AltaChef(string pUsername, string pPassword, string pRol, string pNumDoc, string pTipoDoc, string pNombre, string pApellido, decimal pSueldo)
+        public ExitCode AltaChef(string pUsername, string pPassword, string pRol, string pNumDoc, string pTipoDoc, string pNombre, string pApellido, decimal pSueldo)
         {
             Documento documento = CDocumento.Get.ArmarDocumento(pNumDoc, pTipoDoc);
             Usuario.Rol rolAsociado = CUsuario.Get.RolAsociado(pRol);
             
             return CUsuario.Get.AltaChef(pUsername, pPassword, rolAsociado, documento, pNombre, pApellido, pSueldo);
         }
-        public bool Login(string pUsername, string pPassword)
+        public ExitCode Login(string pUsername, string pPassword)
         {
             return CUsuario.Get.Login(pUsername, pPassword);
         }
-
-        // ??????????????????????
-        public int BuscarUsuario(string pLogin)
-        {
-            return 0;
-        }
-        public int BuscarRol(int a)
-        {
-            return 0;
-        }
-        // ??????????????????????
         #endregion
 
         #region Reserva
@@ -190,13 +181,13 @@ namespace Aplicacion
             }
             Mesa mesa = CMesa.Get.Buscar(pNumeroMesa);
 
-            if (listaMenues.Count > 0 && existenTodos && mesa != null) // ACOMODAR ESTO
+            if (existenTodos && mesa != null)
                 ret = CReserva.Get.Alta(pNombrePersona, pCantPersonas, pFechaReserva, listaMenues, mesa);
 
             return ret;
         }
 
-        public bool BajaReserva(string pCodReserva)
+        public ExitCode BajaReserva(string pCodReserva)
         {
             return CReserva.Get.Baja(pCodReserva);
         }
@@ -206,23 +197,44 @@ namespace Aplicacion
             return CReserva.Get.ListadoReservasPorFecha(pFechaReserva);
         }
 
-        public Reserva BuscarPorCodigo(string pCodReserva)
+        public Reserva BuscarReservaPorCodigo(string pCodReserva)
         {
             return CReserva.Get.BuscarActivo(pCodReserva);
         }
         #endregion
 
         #region Mesa
-        public bool AltaMesa(int pNumero, int pCapacidad, string pUbicacion)
+        public ExitCode AltaMesa(int pNumero, int pCapacidad, string pUbicacion)
         {
             return CMesa.Get.Alta(pNumero, pCapacidad, pUbicacion);
+        }
+
+        public List<Mesa> ListadoMesasDisponibles(int pCapacidad)
+        {
+            return CMesa.Get.ListarDisponibles(pCapacidad);
         }
         #endregion
 
         #region Otros
-        public void ActualizarParametros(double pGanancia)
+        public void ActualizarParametros(string filepath)
         {
-            throw new NotImplementedException();
+            StreamWriter sw = null;
+            FileStream fs = new FileStream(filepath, FileMode.OpenOrCreate);
+
+            try
+            {
+                sw = new StreamWriter(fs);
+                sw.WriteLine("GananciaPreElaborados:" + PreElaborado.Ganancia.ToString());
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                if (sw != null)
+                    sw.Close();
+            }
         }
         public void CargarParametros(string filepath)
         {
@@ -236,7 +248,7 @@ namespace Aplicacion
                 while ((fileLine = sr.ReadLine()) != null)
                 {
                     string[] data = fileLine.Split(':');
-                    double ganancia = Convert.ToDouble(data[1]);
+                    decimal ganancia = Convert.ToDecimal(data[1]);
 
                     CMenu.Get.CargarGananciaMenuPreelaborado(ganancia);
                 }
@@ -267,7 +279,7 @@ namespace Aplicacion
                     string descripcion = data[1];
                     decimal costo = Convert.ToDecimal(data[2]);
 
-                    Fachada.Get.AltaIngrediente(codigo, descripcion, costo);
+                    AltaIngrediente(codigo, descripcion, costo);
                 }
             }
             catch
@@ -282,7 +294,47 @@ namespace Aplicacion
         }
         public void CargarDatosDePrueba()
         {
-
+            Encryption e = new Encryption();
+            
+            //AltaAdmin(string pUsername, string pPassword, string pRol)
+            AltaAdmin("admin", e.EncryptToString("admin"), "Administrador");
+            
+            //AltaChef(string pUsername, string pPassword, string pRol, string pNumDoc, string pTipoDoc, string pNombre, string pApellido, decimal pSueldo)
+            AltaChef("angel@mail.com", e.EncryptToString("angel"), "Chef", "1.111.111-1", "Cedula", "Warren", "Worthington", 30000);
+            AltaChef("beast@mail.com", e.EncryptToString("beast"), "Chef", "2.222.222-2", "Pasaporte", "Hank", "McCoy", 25000);
+            AltaChef("cyclops@mail.com", e.EncryptToString("cyclops"), "Chef", "3.333.333-3", "Otro", "Scott", "Summers", 10000);
+            AltaChef("iceman@mail.com", e.EncryptToString("iceman"), "Chef", "4.444.444-4", "Cedula", "Bobby", "Drake", 40000);
+            AltaChef("marvelgirl@mail.com", e.EncryptToString("marvelgirl"), "Chef", "5.555.555-5", "Pasaporte", "Jean", "Grey", 50000);
+            AltaChef("professorx@mail.com", e.EncryptToString("professorx"), "Chef", "6.666.666-6", "Otro", "Charles", "Xavier", 35000);
+            AltaChef("magneto@mail.com", e.EncryptToString("magneto"), "Chef", "7.777.777-7", "Cedula", "Max", "Eisenhardt", 15000);
+            AltaChef("storm@mail.com", e.EncryptToString("storm"), "Chef", "8.888.888-8", "Pasaporte", "Ororo", "Munroe", 35000);
+            AltaChef("colossus@mail.com", e.EncryptToString("colossus"), "Chef", "9.999.999-9", "Otro", "Piotr", "Rasputin", 45000);
+            
+            //AltaMesa(int pNumero, int pCapacidad, string pUbicacion)
+            AltaMesa(1, 2, "Pareja - Ala Norte");
+            AltaMesa(2, 5, "Familiar - Ala Norte");
+            AltaMesa(3, 12, "Reunion - Ala Norte");
+            AltaMesa(4, 2, "Pareja - Ala Este");
+            AltaMesa(5, 5, "Familiar - Ala Este");
+            AltaMesa(6, 12, "Reunion - Ala Este");
+            AltaMesa(7, 2, "Pareja - Ala Sur");
+            AltaMesa(8, 5, "Familiar - Ala Sur");
+            AltaMesa(9, 12, "Reunion - Ala Sur");
+            AltaMesa(10, 2, "Pareja - Ala Oeste");
+            AltaMesa(11, 5, "Familiar - Ala Oeste");
+            AltaMesa(12, 12, "Reunion - Ala Oeste");
+            
+            //AltaMenuPreelaborado(string pProveedor, decimal pCosto, string pDesc)
+            AltaMenuPreelaborado("Mc Dudels", 120, "Hamburguesa con queso");
+            AltaMenuPreelaborado("Mc Dudels", 220, "Hamburguesa doble con queso");
+            AltaMenuPreelaborado("Pizza Queen", 300, "Pizzeta familiar");
+            AltaMenuPreelaborado("Pizza Queen", 400, "Pizzeta familiar con gustos");
+            AltaMenuPreelaborado("Mc Dudels", 85, "Papas fritas");
+            
+            // Los Ingredientes de Código A01 hasta A10 se cargan desde el archivo de texto ingredientes.txt
+            //AltaMenuPropio(string pChefDoc, string pChefTipoDoc, List<string> pIngredientes, List<int> pCantidades, decimal pGanancia, string pDesc)
+            
+            
         }
         public bool HayDatos()
         {

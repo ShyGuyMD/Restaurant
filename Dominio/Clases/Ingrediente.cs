@@ -17,5 +17,10 @@ namespace Dominio.Clases
         {
             Activo = true;
         }
+
+        public override string ToString()
+        {
+            return String.Format("Codigo: {0}\nDescripcion: {1}\nCosto {2}\nActivo: {3}", Codigo, Descripcion, Costo, Activo);
+        }
     }
 }

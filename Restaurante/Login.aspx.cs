@@ -9,14 +9,14 @@ using Helpers;
 
 namespace Restaurante
 {
-    public partial class Login : System.Web.UI.Page
+    public partial class Inicio : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 
-        protected void Login1_Authenticate(object sender, AuthenticateEventArgs e)
+        protected void LoginRestaurant_Authenticate(object sender, AuthenticateEventArgs e)
         {
             // Buscar en lista de usuarios.
 
@@ -28,11 +28,11 @@ namespace Restaurante
             //si el usuario existe
 
             Encryption enc = new Encryption();
-
-            if (Fachada.Get.Login(Login1.UserName, enc.EncryptToString(Login1.Password)))
+            
+            if (Fachada.Get.Login(LoginRestaurant.UserName, enc.EncryptToString(LoginRestaurant.Password)) != Utils.ExitCode.OK)
             {
-                Session["Usuario"] = Fachada.Get.BuscarUsuario(Login1.UserName);
-                Session["Rol"] = Fachada.Get.BuscarRol((int)Session["Usuario"]);
+                //Session["Usuario"] = Fachada.Get.BuscarUsuario(LoginRestaurant.UserName);
+                //Session["Rol"] = Fachada.Get.BuscarRol((int)Session["Usuario"]);
                 e.Authenticated = true;
 
             }
@@ -40,10 +40,8 @@ namespace Restaurante
             {
                 Session["Usuario"] = null;
                 e.Authenticated = false;
-                //TO DO: Tirar enum de errores.
-                Response.Write("Contraseña Incorrecta.");
+                Response.Write("Datos Incorrectos");
             }
-
         }
     }
 }

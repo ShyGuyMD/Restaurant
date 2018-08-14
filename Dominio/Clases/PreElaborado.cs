@@ -10,7 +10,7 @@ namespace Dominio.Clases
     {
         public string Proveedor { get; set; }
         public decimal Costo { get; set; }
-        public static double Ganancia { get; set; } //porcentaje
+        public static decimal Ganancia { get; set; } //porcentaje
 
         public PreElaborado() {
             Activo = true;
@@ -18,7 +18,7 @@ namespace Dominio.Clases
 
         public override decimal CalcularPrecioVenta()
         {
-            throw new NotImplementedException();
+            return Costo + (Costo * Ganancia / 100);
         }
     }
 }

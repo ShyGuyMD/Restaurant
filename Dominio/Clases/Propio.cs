@@ -10,16 +10,38 @@ namespace Dominio.Clases
     {
         public List<IngredientesPorMenu> Ingredientes { get; set; }
         public Chef Chef { get; set; }
-        public double Ganancia { get; set; } //porcentaje
+        public int HorasElaboracion { get; set; }
+        public decimal Ganancia { get; set; } //porcentaje
 
         public Propio()
         {
             Activo = true;
         }
 
+        public bool TieneIngrediente(Ingrediente i)
+        {
+            bool encontrado = false;
+            int contador = 0;
+            while (contador < Ingredientes.Count && !encontrado)
+            {
+                if (Ingredientes[contador].Ingrediente == i)
+                    encontrado = true;
+                contador++;
+            }
+
+            return encontrado;
+        }
+
         public override decimal CalcularPrecioVenta()
         {
-            throw new NotImplementedException();
+            decimal precio = 0;
+            foreach(IngredientesPorMenu ipm in Ingredientes)
+                precio += ipm.CalcularCostoIngrediente();
+
+            precio += Chef.CalcularSalarioHora();
+            precio += precio * Ganancia / 100;
+
+            return precio;
         }
     }
 }

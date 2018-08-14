@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio.Clases;
+using static Helpers.Utils;
 
 namespace Dominio.Controladoras
 {
@@ -36,9 +37,9 @@ namespace Dominio.Controladoras
         public List<Usuario> _Usuarios { get; set; }
         public List<Chef> _Chef { get; set; }
 
-        public bool AltaAdmin(string pUsername, string pPassword, Usuario.Rol pRol)
+        public ExitCode AltaAdmin(string pUsername, string pPassword, Usuario.Rol pRol)
         {
-            bool ret = false;
+            var exit = ExitCode.EXISTING_USER_ERROR;
             Usuario u = BuscarUsuario(pUsername);
 
             if (u == null)
@@ -50,20 +51,21 @@ namespace Dominio.Controladoras
                     UserRole = pRol
                 };
                 _Usuarios.Add(user);
-                ret = true;
+                exit = ExitCode.OK;
             }
 
-            return ret;
+            return exit;
         }
 
-        public bool AltaChef(string pUsername, string pPassword, Usuario.Rol pRol, Documento pDocumento, string pNombre, string pApellido, decimal pSueldo)
+        public ExitCode AltaChef(string pUsername, string pPassword, Usuario.Rol pRol, Documento pDocumento, string pNombre, string pApellido, decimal pSueldo)
         {
-            bool ret = false;
+            var exit = ExitCode.EXISTING_USER_ERROR;
 
             if (ValidarData(pUsername, pPassword, pRol, pDocumento, pNombre, pApellido, pSueldo))
             {
                 Chef c = BuscarChef(pDocumento);
-                if (c == null) {
+                if (c == null)
+                {
                     Usuario u = BuscarUsuario(pUsername);
                     if (u == null)
                     {
@@ -80,12 +82,14 @@ namespace Dominio.Controladoras
                         };
                         _Chef.Add(c);
                         _Usuarios.Add(c);
-                        ret = true;
+                        exit = ExitCode.OK;
                     }
                 }
             }
+            else
+                exit = ExitCode.INPUT_DATA_ERROR;
 
-            return ret;
+            return exit;
         }
 
         public Chef BuscarChef(Documento pDocumento)
@@ -95,7 +99,7 @@ namespace Dominio.Controladoras
 
             while(c == null && contador < _Chef.Count)
             {
-                if (_Chef[contador].Documento == pDocumento)
+                if (_Chef[contador].Documento.Equals(pDocumento))
                 {
                     c = _Chef[contador];
                 }
@@ -121,19 +125,21 @@ namespace Dominio.Controladoras
             return u;
         }
 
-        public bool Login(string pUsername, string pPassword)
+        public ExitCode Login(string pUsername, string pPassword)
         {
-            bool ret = false;
+            var exit = ExitCode.WRONG_USERNAME_PASSWORD_ERROR;
 
             if (ValidarData(pUsername, pPassword))
             {
                 Usuario u = ValidarUsuario(pUsername, pPassword);
 
                 if (u != null)
-                    ret = true;
+                    exit = ExitCode.OK;
             }
+            else
+                exit = ExitCode.INPUT_DATA_ERROR;
 
-            return ret;
+            return exit;
         }
 
         public Usuario.Rol RolAsociado(string pRol)

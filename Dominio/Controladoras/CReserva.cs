@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Dominio.Clases;
 using Helpers;
+using static Helpers.Utils;
 
 namespace Dominio.Controladoras
 {
@@ -63,18 +64,23 @@ namespace Dominio.Controladoras
             return ret;
         }
 
-        public bool Baja(string pCodReserva)
+        public ExitCode Baja(string pCodReserva)
         {
-            bool ret = false;
-            Reserva r = BuscarActivo(pCodReserva);
+            var exit = ExitCode.NO_RESERVATION_ERROR;
 
-            if (r != null)
+            if (pCodReserva != "")
             {
-                r.Activo = false;
-                ret = true;
+                Reserva r = BuscarActivo(pCodReserva);
+                if (r != null)
+                {
+                    r.Activo = false;
+                    exit = ExitCode.OK;
+                }
             }
+            else
+                exit = ExitCode.INPUT_DATA_ERROR;
 
-            return ret;
+            return exit;
         }
 
         public Reserva BuscarActivo(string pNombre, DateTime pFechaReserva, Mesa pMesa)
@@ -126,6 +132,7 @@ namespace Dominio.Controladoras
                 if (r.FechaReserva == pFechaReserva && r.Activo)
                     ret.Add(r);
 
+            ret.Sort();
             return ret;
         }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio.Clases
 {
-    public class Reserva
+    public class Reserva : IComparable<Reserva>
     {
         public string CodigoReserva { get; set; }
         public string Nombre { get; set; }
@@ -19,6 +19,11 @@ namespace Dominio.Clases
         public Reserva()
         {
             Activo = true;
+        }
+
+        public int CompareTo(Reserva other)
+        {
+            return CantPersonas.CompareTo(other.CantPersonas);
         }
     }
 }
