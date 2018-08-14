@@ -26,7 +26,7 @@ namespace Restaurante
 
                 default:
                     MenuChef.Visible = false;
-                    MenuChef.Visible = false;
+                    MenuAdmin.Visible = false;
                     break;
             }
             
@@ -43,6 +43,11 @@ namespace Restaurante
             Session["Usuario"] = null;
             Session["Rol"] = null;
             Response.Redirect("Login.aspx");
+        }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
