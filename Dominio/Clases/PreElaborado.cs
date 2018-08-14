@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio.Clases
 {
+    [Serializable]
     public class PreElaborado : Menu
     {
         public string Proveedor { get; set; }

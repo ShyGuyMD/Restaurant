@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dominio.Controladoras
 {
+    [Serializable]
     public class CDocumento
     {
         #region Singleton

@@ -15,17 +15,18 @@ namespace Aplicacion
         private string rutaArchivo;
         private CMenu cMenu;
         private CIngrediente cIngrediente;
-        private CDocumento cDocumento;
         private CMesa cMesa;
         private CReserva cReserva;
         private CUsuario cUsuario;
 
-        public Repositorio()
+        public Repositorio(string pRuta)
         {
-            FileStream fs = new FileStream(rutaArchivo, FileMode.Create);
-            BinaryFormatter bf = new BinaryFormatter();
-            bf.Serialize(fs, this);
-            fs.Close();
+            this.rutaArchivo = pRuta;
+            this.cMenu = CMenu.Get;
+            this.cIngrediente = CIngrediente.Get;
+            this.cMesa = CMesa.Get;
+            this.cReserva = CReserva.Get;
+            this.cUsuario = CUsuario.Get;
         }
         public void Serializable()
         {

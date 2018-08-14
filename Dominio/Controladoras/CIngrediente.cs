@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio.Clases;
@@ -8,7 +9,8 @@ using static Helpers.Utils;
 
 namespace Dominio.Controladoras
 {
-    public class CIngrediente
+    [Serializable]
+    public class CIngrediente:ISerializable
     {
         #region Singleton
         private static CIngrediente _instancia = null;
@@ -127,5 +129,16 @@ namespace Dominio.Controladoras
         {
             return (pCodigo != "" && pDescripcion != "" && pCosto > 0);
         }
+
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("listaingredientes", this._Ingredientes, typeof(List<CIngrediente>));
+        }
+
+        public CIngrediente(SerializationInfo info, StreamingContext context)
+        {
+            this._Ingredientes = info.GetValue("listaIngredientes", typeof(List<Ingrediente>)) as List<Ingrediente>;
+            CIngrediente._instancia = this;
+        } 
     }
 }

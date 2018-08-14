@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio.Clases;
@@ -8,7 +9,8 @@ using static Helpers.Utils;
 
 namespace Dominio.Controladoras
 {
-    public class CMesa
+    [Serializable]
+    public class CMesa : ISerializable
     {
         #region Singleton
         private static CMesa _instancia = null;
@@ -87,6 +89,17 @@ namespace Dominio.Controladoras
         public bool ValidarData(int pNumero, int pCapacidad, string pUbicacion)
         {
             return (pNumero > 0 && pCapacidad > 0 && pUbicacion != "");
+        }
+
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("listaMesas", this._Mesas, typeof(List<Mesa>));
+        }
+
+        public CMesa(SerializationInfo info, StreamingContext context)
+        {
+            this._Mesas = info.GetValue("listaMesas", typeof(List<Mesa>)) as List<Mesa>;
+            CMesa._instancia = this;
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio.Clases
 {
+    [Serializable]
     public class Propio : Menu
     {
         public List<IngredientesPorMenu> Ingredientes { get; set; }

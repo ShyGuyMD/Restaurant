@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio.Clases;
@@ -8,7 +9,8 @@ using static Helpers.Utils;
 
 namespace Dominio.Controladoras
 {
-    public sealed class CMenu
+    [Serializable]
+    public sealed class CMenu : ISerializable
     {
         #region Singleton
         private static CMenu _instancia = null;
@@ -169,6 +171,17 @@ namespace Dominio.Controladoras
                             pIngredientes.Count > 0 && 
                                 pGanancia > 0 && 
                                     pDesc != "");
+        }
+
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("listaMenues", this._Menues, typeof (List<Menu>));
+        }
+
+        public CMenu (SerializationInfo info, StreamingContext context)
+        {
+            this._Menues = info.GetValue("listaMenues", typeof(List<Menu>)) as List<Menu>;
+            CMenu._instancia = this;
         }
     }
 }

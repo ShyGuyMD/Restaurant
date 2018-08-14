@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio.Clases;
@@ -9,7 +10,8 @@ using static Helpers.Utils;
 
 namespace Dominio.Controladoras
 {
-    public class CReserva
+    [Serializable]
+    public class CReserva:ISerializable
     {
         #region Singleton
         private static CReserva _instancia = null;
@@ -142,6 +144,16 @@ namespace Dominio.Controladoras
                         pCantPersonas > 0 && 
                             pFechaReserva > DateTime.Now && 
                                 pMesa != null);
+        }
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("listaReservas", this._Reservas, typeof(List<Reserva>));
+        }
+
+        public CReserva (SerializationInfo info, StreamingContext context)
+        {
+            this._Reservas = info.GetValue("listaReservas", typeof(List<Reserva>)) as List<Reserva>;
+            CReserva._instancia = this;
         }
     }
 }

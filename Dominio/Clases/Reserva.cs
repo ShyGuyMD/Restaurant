@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio.Clases
 {
+    [Serializable]
     public class Reserva : IComparable<Reserva>
     {
         public string CodigoReserva { get; set; }
