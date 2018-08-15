@@ -30,7 +30,7 @@ namespace Restaurante
                 if (File.Exists(rutaSerializacion))
                 {
                     Repositorio rep = new Repositorio(rutaSerializacion);
-                    rep.Deserializable();
+                    rep.Deserialize();
                 }
             }
             catch(NullReferenceException ex)
@@ -49,7 +49,7 @@ namespace Restaurante
             // Serializar todo
             string rutaSerializacion = HttpRuntime.AppDomainAppPath + @"Config\serial.bin";
             Repositorio rep = new Repositorio(rutaSerializacion);
-            rep.Serializable();
+            rep.Serialize();
         }
     }
 }
