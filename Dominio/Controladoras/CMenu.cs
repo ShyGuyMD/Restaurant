@@ -109,6 +109,24 @@ namespace Dominio.Controladoras
             return m;
         }
 
+        public ExitCode BorrarIngredienteDeMenu(int pIdMenu, Ingrediente pIngrediente)
+        {
+            var exit = ExitCode.NO_MENU_ERROR;
+            Menu m = BuscarActivo(pIdMenu);
+
+            if (m != null && m is Propio)
+            {
+                if (((Propio)m).TieneIngrediente(pIngrediente))
+                {
+                    ((Propio)m).ActualizarIngrediente(pIngrediente, 0);
+                    m.PrecioVenta = m.CalcularPrecioVenta();
+                    exit = ExitCode.OK;
+                }
+            }
+
+            return exit;
+        }
+
         public List<Menu> ListarMenuesActivos()
         {
             List<Menu> ret = new List<Menu>();

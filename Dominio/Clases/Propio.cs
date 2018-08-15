@@ -27,7 +27,10 @@ namespace Dominio.Clases
             {
                 if (Ingredientes[contador].Ingrediente == i)
                 {
-                    Ingredientes[contador].Cantidad = cantidad;
+                    if (cantidad > 0)
+                        Ingredientes[contador].Cantidad = cantidad;
+                    else
+                        Ingredientes.Remove(Ingredientes[contador]);
                     encontrado = true;
                 }
                 contador++;

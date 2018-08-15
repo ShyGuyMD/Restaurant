@@ -92,6 +92,17 @@ namespace Aplicacion
 
             return CMenu.Get.ListadoMenuesPorChef((Chef)u);
         }
+
+        public ExitCode BorrarIngredienteDeMenu(int pIdMenu, string pCodIngrediente)
+        {
+            var exit = ExitCode.PLACEHOLDER;
+            Ingrediente ingrediente = CIngrediente.Get.BuscarActivo(pCodIngrediente);
+
+            if (ingrediente != null)
+                exit = CMenu.Get.BorrarIngredienteDeMenu(pIdMenu, ingrediente);
+
+            return exit;
+        }
         
         public ExitCode ModificarIngredientesDeMenu(int pIdMenu, string pCodIngrediente, int pCantIngrediente)
         {
