@@ -13,35 +13,32 @@ namespace Restaurante
     {
         protected void Application_Start(object sender, EventArgs e)
         {
-            // Primero revisar si hay datos serializados.
-            //if (!Fachada.Get.HayDatos())
-            //{
-            //    Fachada.Get.CargarIngredientesDeArchivo(HttpRuntime.AppDomainAppPath + @"Ingredientes.txt");
-            //    Fachada.Get.CargarDatosDePrueba();
-            //}
             try
             {
-                string parametros = HttpRuntime.AppDomainAppPath + @"Configuracion\parametros.txt";
-                string rutaSerializacion = HttpRuntime.AppDomainAppPath + @"Configuracion\serial.txt";
-                if (File.Exists(parametros))
-                {
-                    Fachada.Get.CargarParametros(parametros);
-                }
+                string ingredientes = HttpRuntime.AppDomainAppPath + @"config\ingredientes.txt";
+                string parametros = HttpRuntime.AppDomainAppPath + @"config\parametros.txt";
+                string rutaSerializacion = HttpRuntime.AppDomainAppPath + @"config\serial.txt";
+
                 if (File.Exists(rutaSerializacion))
                 {
                     Repositorio rep = new Repositorio(rutaSerializacion);
                     rep.Deserialize();
                 }
+                else
+                {
+                    Fachada.Get.CargarIngredientesDeArchivo(ingredientes);
+                    Fachada.Get.CargarDatosDePrueba();
+                }
+
+                if (File.Exists(parametros))
+                {
+                    Fachada.Get.CargarParametros(parametros);
+                }
             }
-            catch(NullReferenceException ex)
+            catch
             {
-
+                throw;
             }
-            catch (DirectoryNotFoundException)
-            {
-
-            }
-
         }
 
         protected void Application_End(object sender, EventArgs e)
