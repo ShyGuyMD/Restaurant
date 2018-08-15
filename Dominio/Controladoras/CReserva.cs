@@ -44,23 +44,19 @@ namespace Dominio.Controladoras
 
             if (ValidarData(pNombre, pCantPersonas, pFechaReserva, pMesa))
             {
-                Reserva r = BuscarActivo(pNombre, pFechaReserva, pMesa);
-                if (r == null)
+                Reserva r = new Reserva()
                 {
-                    r = new Reserva()
-                    {
-                        Nombre = pNombre,
-                        CantPersonas = pCantPersonas,
-                        FechaReserva = pFechaReserva,
-                        Mesa = pMesa
-                    };
-                    r.CodigoReserva = Utils.Get.GenerarCodigo(6);
-                    if (pMenues != null && pMenues.Count > 0)
-                        r.Menues = pMenues;
+                    Nombre = pNombre,
+                    CantPersonas = pCantPersonas,
+                    FechaReserva = pFechaReserva,
+                    Mesa = pMesa
+                };
+                r.CodigoReserva = Utils.Get.GenerarCodigo(6);
+                if (pMenues != null && pMenues.Count > 0)
+                    r.Menues = pMenues;
 
-                    _Reservas.Add(r);
-                    ret = r.CodigoReserva;   
-                }
+                _Reservas.Add(r);
+                ret = r.CodigoReserva;   
             }
 
             return ret;
@@ -72,10 +68,10 @@ namespace Dominio.Controladoras
 
             if (pCodReserva != "")
             {
-                Reserva r = BuscarActivo(pCodReserva);
+                Reserva r = BuscarPorCodigo(pCodReserva);
                 if (r != null)
                 {
-                    r.Activo = false;
+                    _Reservas.Remove(r);
                     exit = ExitCode.OK;
                 }
             }
@@ -83,32 +79,6 @@ namespace Dominio.Controladoras
                 exit = ExitCode.INPUT_DATA_ERROR;
 
             return exit;
-        }
-
-        public Reserva BuscarActivo(string pNombre, DateTime pFechaReserva, Mesa pMesa)
-        {
-            Reserva r = null;
-            int contador = 0;
-
-            while (r == null && contador < _Reservas.Count)
-            {
-                Reserva aux = _Reservas[contador];
-                if (aux.Nombre == pNombre && aux.FechaReserva == pFechaReserva && aux.Mesa == pMesa && aux.Activo)
-                    r = aux;
-
-                contador++;
-            }
-
-            return r;
-        }
-
-        public Reserva BuscarActivo(string pCodReserva)
-        {
-            Reserva r = BuscarPorCodigo(pCodReserva);
-            if (r != null && !r.Activo)
-                r = null;
-
-            return r;
         }
 
         public Reserva BuscarPorCodigo(string pCodReserva)
@@ -131,7 +101,7 @@ namespace Dominio.Controladoras
             List<Reserva> ret = new List<Reserva>();
 
             foreach (Reserva r in _Reservas)
-                if (r.FechaReserva == pFechaReserva && r.Activo)
+                if (r.FechaReserva == pFechaReserva)
                     ret.Add(r);
 
             ret.Sort();

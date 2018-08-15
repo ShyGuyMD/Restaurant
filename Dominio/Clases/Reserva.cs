@@ -15,11 +15,9 @@ namespace Dominio.Clases
         public DateTime FechaReserva { get; set; }
         public List<Menu> Menues { get; set; }
         public Mesa Mesa { get; set; }
-        public bool Activo { get; set; }
 
         public Reserva()
         {
-            Activo = true;
         }
 
         public int CompareTo(Reserva other)

@@ -206,7 +206,7 @@ namespace Aplicacion
 
         public Reserva BuscarReservaPorCodigo(string pCodReserva)
         {
-            return CReserva.Get.BuscarActivo(pCodReserva);
+            return CReserva.Get.BuscarPorCodigo(pCodReserva);
         }
         #endregion
 
@@ -214,6 +214,16 @@ namespace Aplicacion
         public ExitCode AltaMesa(int pNumero, int pCapacidad, string pUbicacion)
         {
             return CMesa.Get.Alta(pNumero, pCapacidad, pUbicacion);
+        }
+
+        public Mesa BuscarMesaDisponible(int pCantidadPersonas, DateTime pFechaReserva)
+        {
+            List<Mesa> reservadas = new List<Mesa>();
+            foreach (Reserva r in ListadoReservasPorFecha(pFechaReserva))
+            {
+                reservadas.Add(r.Mesa);
+            }
+            return CMesa.Get.BuscarDisponible(pCantidadPersonas, reservadas);
         }
 
         public List<Mesa> ListadoMesasDisponibles(int pCapacidad)

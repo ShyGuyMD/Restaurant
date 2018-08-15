@@ -60,6 +60,7 @@ namespace Dominio.Controladoras
 
             return exit;
         }
+
         public Mesa Buscar(int pNumero)
         {
             Mesa m = null;
@@ -73,6 +74,26 @@ namespace Dominio.Controladoras
             }
 
             return m;
+        }
+
+        public Mesa BuscarDisponible(int pCantPersonas, List<Mesa> pReservadas)
+        {
+            List<Mesa> aux = _Mesas.Except(pReservadas).ToList();
+            Mesa mesa = null;
+
+            foreach (Mesa m in aux)
+            {
+                if (m.Capacidad >= pCantPersonas)
+                {
+                    if (mesa == null)
+                        mesa = m;
+                    else
+                        if (mesa.Capacidad > m.Capacidad)
+                            mesa = m;
+                }
+            }
+
+            return mesa;
         }
 
         public List<Mesa> ListarDisponibles(int pCapacidad)
