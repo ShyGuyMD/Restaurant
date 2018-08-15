@@ -86,12 +86,11 @@ namespace Aplicacion
             return CMenu.Get.ListarMenuesActivos();
         }
 
-        public List<Menu> ListadoMenuesPorChef(string pChefDoc, string pChefTipoDoc)
+        public List<Menu> ListadoMenuesPorChef(string pUsername)
         {
-            Documento d = CDocumento.Get.ArmarDocumento(pChefDoc, pChefTipoDoc);
-            Chef c = CUsuario.Get.BuscarChef(d);
+            Usuario u = CUsuario.Get.BuscarUsuario(pUsername);
 
-            return CMenu.Get.ListadoMenuesPorChef(c);
+            return CMenu.Get.ListadoMenuesPorChef((Chef)u);
         }
         
         public ExitCode ModificarIngredientesDeMenu(int pIdMenu, string pCodIngrediente, int pCantIngrediente)

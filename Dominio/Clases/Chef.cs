@@ -30,5 +30,10 @@ namespace Dominio.Clases
         {
             return Documento.Equals(((Chef)obj).Documento);
         }
+
+        public override string GetDocumentType()
+        {
+            return Documento.TipoDoc.ToString();
+        }
     }
 }

@@ -21,5 +21,9 @@ namespace Dominio.Clases
         {
             return String.Format("Username: {0}\nPassword: {1}\nRol: {2}", Username, Password, UserRole.ToString());
         }
+
+        public virtual string GetDocumentType() {
+            return "";
+        }
     }
 }
