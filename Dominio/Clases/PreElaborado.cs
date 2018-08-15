@@ -19,7 +19,7 @@ namespace Dominio.Clases
 
         public override decimal CalcularPrecioVenta()
         {
-            return Costo + (Costo * Ganancia / 100);
+            return Costo + (Math.Round((Costo * Ganancia / 100), 2));
         }
     }
 }

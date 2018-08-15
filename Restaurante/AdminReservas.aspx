@@ -13,7 +13,7 @@
             <TitleStyle BackColor="White" BorderColor="Black" BorderWidth="4px" Font-Bold="True" Font-Size="12pt" ForeColor="#333399" />
             <TodayDayStyle BackColor="#CCCCCC" />
         </asp:Calendar>
-        <asp:Button ID="btnFecha" runat="server" Text="Enviar" OnClick="btnFecha_Click" />
+        <asp:Button ID="btnFecha" runat="server" Text="Buscar" OnClick="btnFecha_Click" />
     </asp:Panel>
 
     <asp:Panel ID="PanelGrilla" runat="server">

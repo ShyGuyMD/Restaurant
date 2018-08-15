@@ -59,7 +59,7 @@ namespace Dominio.Clases
 
             precio += Chef.CalcularSalarioHora();
             precio += precio * Ganancia / 100;
-
+            precio = Math.Round(precio, 2);
             return precio;
         }
     }
