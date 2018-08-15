@@ -35,26 +35,31 @@ namespace Restaurante
             fecha = fecha.AddHours(double.Parse(txtHoras.Text));
             int mesa = int.Parse(lblMesaData.Text);
 
-
-            if (ValidarDatos(nombre, personas, fecha, mesa))
+            if(fecha > DateTime.Now)
             {
-                string resultado = Fachada.Get.AltaReserva(nombre, personas, fecha, Session["idMenues"] as List<int>, mesa);
+                if (ValidarDatos(nombre, personas, fecha, mesa))
+                {
+                    string resultado = Fachada.Get.AltaReserva(nombre, personas, fecha, Session["idMenues"] as List<int>, mesa);
 
-                if (resultado != "")
-                {
-                    Response.Write("Reserva realizada con éxito. Su código es: " + resultado + " para la mesa " + mesa);
-                    (Session["idMenues"] as List<int>).Clear();
-                    LimpiarTextos();
-                    Session["idMenues"] = new List<int>();
-                    grillaMenus.DataSource = null;
-                    grillaMenus.DataBind();
-                    lblMesaData.Text = "";
+                    if (resultado != "")
+                    {
+                        Response.Write("Reserva realizada con éxito. Su código es: " + resultado + " para la mesa " + mesa);
+                        (Session["idMenues"] as List<int>).Clear();
+                        LimpiarTextos();
+                        Session["idMenues"] = new List<int>();
+                        grillaMenus.DataSource = null;
+                        grillaMenus.DataBind();
+                        lblMesaData.Text = "";
+                    }
+                    else
+                    {
+                        Response.Write("Reserva fallida. Espere e inténtelo nuevamente.");
+                    }
                 }
-                else
-                {
-                    Response.Write("Reserva fallida. Espere e inténtelo nuevamente.");
-                }
-            }
+                else Response.Write("Reserva fallida. Espere e inténtelo nuevamente.");
+            }else
+            Response.Write("Revise que su fecha sea correcta.");
+
         }
 
         protected void CargarDatos()
