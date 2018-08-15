@@ -17,7 +17,7 @@ namespace Restaurante
             {
                 string ingredientes = HttpRuntime.AppDomainAppPath + @"config\ingredientes.txt";
                 string parametros = HttpRuntime.AppDomainAppPath + @"config\parametros.txt";
-                string rutaSerializacion = HttpRuntime.AppDomainAppPath + @"config\serial.txt";
+                string rutaSerializacion = HttpRuntime.AppDomainAppPath + @"config\serial.bin";
 
                 if (File.Exists(rutaSerializacion))
                 {
@@ -44,7 +44,7 @@ namespace Restaurante
         protected void Application_End(object sender, EventArgs e)
         {
             // Serializar todo
-            string rutaSerializacion = HttpRuntime.AppDomainAppPath + @"Config\serial.bin";
+            string rutaSerializacion = HttpRuntime.AppDomainAppPath + @"config\serial.bin";
             Repositorio rep = new Repositorio(rutaSerializacion);
             rep.Serialize();
         }

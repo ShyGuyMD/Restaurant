@@ -3,21 +3,23 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <br />
     <asp:Panel ID="ListaMenu" runat="server">
-        <asp:DropDownList ID="lstMenu" runat="server" OnSelectedIndexChanged="lstMenu_SelectedIndexChanged"/>
+        <asp:DropDownList ID="lstMenu" runat="server"/>
+        <asp:Button Text="Cargar" runat="server" ID="btnCargarMenu" OnClick="btnCargarMenu_Click"/>
     </asp:Panel>
     <br />
     <asp:Panel ID="GrillaModificar" runat="server">
-        <asp:GridView ID="GrillaIngredientes" runat="server" AutoGenerateColumns="false" OnRowCommand="GrillaIngredientes_RowCommand" DataKeyNames="Id" OnSelectedIndexChanged="GrillaIngredientes_SelectedIndexChanged">
+        <asp:GridView ID="GrillaIngredientes" runat="server" AutoGenerateColumns="false" OnRowCommand="GrillaIngredientes_RowCommand" DataKeyNames="IngredienteCodigo">
             <Columns>
-                <asp:BoundField DataField="Ingrediente.Descripcion" HeaderText="Descripcion" />
+                <asp:BoundField DataField="IngredienteDescripcion" HeaderText="Descripcion" />
                 <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
                 <asp:ButtonField ButtonType="Button" CommandName="eliminar" Text="Eliminar" />
             </Columns>
         </asp:GridView>
     </asp:Panel>
     <br/>
-    <asp:Panel ID="AltaIngrediente" runat="server">
+    <asp:Panel ID="PanelAltaIngrediente" runat="server" Visible="false">
         <asp:Label ID="lbl1" runat="server" Text="Modificar o añadir nuevo ingrediente (seleccionar un ingrediente existente modificará la cantidad del menú)."></asp:Label>
         <br/>
         <asp:Label ID="lbl2" runat="server" Text="Seleccionar ingrediente:"></asp:Label>

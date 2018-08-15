@@ -31,6 +31,15 @@ namespace Restaurante {
         protected global::System.Web.UI.WebControls.DropDownList lstMenu;
         
         /// <summary>
+        /// Control btnCargarMenu.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCargarMenu;
+        
+        /// <summary>
         /// Control GrillaModificar.
         /// </summary>
         /// <remarks>
@@ -49,13 +58,13 @@ namespace Restaurante {
         protected global::System.Web.UI.WebControls.GridView GrillaIngredientes;
         
         /// <summary>
-        /// Control AltaIngrediente.
+        /// Control PanelAltaIngrediente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel AltaIngrediente;
+        protected global::System.Web.UI.WebControls.Panel PanelAltaIngrediente;
         
         /// <summary>
         /// Control lbl1.

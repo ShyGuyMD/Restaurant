@@ -17,20 +17,30 @@ namespace Restaurante
             var master = Master as Maestra;
             if (master != null)
             {
-                master.VerificarUsuario("ADMINISTRADOR");
+                if (!master.VerificarUsuario("ADMINISTRADOR"))
+                    master.LogOut();
             }
-
-            lstIngredientes.DataTextField = "Descripcion";
-            lstIngredientes.DataValueField = "Codigo";
-            lstIngredientes.DataSource = Fachada.Get.ListadoMenuesConPrecio();
-            lstIngredientes.DataBind();
+            if (!IsPostBack)
+            {
+                Cargar();
+            }
+            
         }
 
         protected void btnIngrediente_Click(object sender, EventArgs e)
         {
+
             GrillaIngredientes.DataSource = Fachada.Get.ListadoMenuesConIngrediente(lstIngredientes.SelectedValue);
             GrillaIngredientes.DataBind();
 
+        }
+
+        protected void Cargar()
+        {
+            lstIngredientes.DataTextField = "Descripcion";
+            lstIngredientes.DataValueField = "Codigo";
+            lstIngredientes.DataSource = Fachada.Get.ListadoIngredientes();
+            lstIngredientes.DataBind();
         }
     }
 }

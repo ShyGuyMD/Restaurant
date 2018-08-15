@@ -17,7 +17,7 @@
     </asp:Panel>
 
     <asp:Panel ID="PanelGrilla" runat="server">
-        <asp:GridView ID="GrillaReservas" runat="server" AutoGenerateColumns="false" DataKeyNames="Id">
+        <asp:GridView ID="GrillaReservas" runat="server" AutoGenerateColumns="false" DataKeyNames="CodigoReserva">
             <Columns>
                 <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                 <asp:BoundField DataField="FechaReserva" HeaderText="Fecha" />

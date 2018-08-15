@@ -11,6 +11,8 @@ namespace Dominio.Clases
     {
         public Ingrediente Ingrediente { get; set; }
         public int Cantidad { get; set; }
+        public string IngredienteDescripcion { get { return Ingrediente.Descripcion; } }
+        public string IngredienteCodigo { get { return Ingrediente.Codigo; } }
 
         public IngredientesPorMenu() { }
 

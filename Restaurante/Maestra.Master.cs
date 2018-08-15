@@ -18,19 +18,25 @@ namespace Restaurante
                 case "ADMINISTRADOR":
                     MenuAdmin.Visible = true;
                     MenuChef.Visible = false;
+                    MenuLogin.Visible = false;
+                    MenuLogout.Visible = true;
                     break;
 
                 case "CHEF":
                     MenuChef.Visible = true;
                     MenuAdmin.Visible = false;
+                    MenuLogin.Visible = false;
+                    MenuLogout.Visible = true;
                     break;
 
                 default:
                     MenuChef.Visible = false;
                     MenuAdmin.Visible = false;
+                    MenuLogin.Visible = true;
+                    MenuLogout.Visible = false;
                     break;
             }
-            
+
 
         }
 

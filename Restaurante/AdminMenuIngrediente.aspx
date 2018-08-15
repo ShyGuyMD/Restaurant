@@ -13,7 +13,7 @@
         <asp:GridView ID="GrillaIngredientes" runat="server">
             <Columns>
                 <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />
-                <asp:BoundField DataField="Costo" HeaderText="Costo" />
+                <asp:BoundField DataField="PrecioVenta" HeaderText="Costo" />
             </Columns>
         </asp:GridView>
     </asp:Panel>

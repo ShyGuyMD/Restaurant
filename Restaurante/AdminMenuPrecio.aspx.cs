@@ -16,8 +16,8 @@ namespace Restaurante
             var master = Master as Maestra;
             if (master != null)
             {
-                master.VerificarUsuario("ADMINISTRADOR");
-
+                if (!master.VerificarUsuario("ADMINISTRADOR"))
+                    master.LogOut();
             }
 
             if (!IsPostBack)
@@ -36,7 +36,6 @@ namespace Restaurante
 }
 
 
-            
-           
 
-        
+
+

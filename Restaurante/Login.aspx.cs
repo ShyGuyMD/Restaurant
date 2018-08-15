@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Aplicacion;
 using Helpers;
+using static Helpers.Utils;
 
 namespace Restaurante
 {
@@ -23,12 +24,15 @@ namespace Restaurante
             Session["Rol"] = null;
 
             Encryption enc = new Encryption();
-            
-            if (Fachada.Get.Login(LoginRestaurant.UserName, enc.EncryptToString(LoginRestaurant.Password)) != Utils.ExitCode.OK)
+            ExitCode salida = Fachada.Get.Login(LoginRestaurant.UserName, enc.EncryptToString(LoginRestaurant.Password));
+
+
+            if ( salida == Utils.ExitCode.OK)
             {
                 Session["Usuario"] = LoginRestaurant.UserName;
                 Session["Rol"] = Fachada.Get.RolPorUsuario((string)Session["Usuario"]);
                 e.Authenticated = true;
+                Response.Redirect("Inicio.aspx");
 
             }
             else
@@ -36,7 +40,7 @@ namespace Restaurante
                 Session["Usuario"] = null;
                 Session["Rol"] = null;
                 e.Authenticated = false;
-                Response.Write("Datos Incorrectos");
+                Response.Write(Maestra.MensajeError((int)salida, "Login"));
             }
         }
     }

@@ -27,8 +27,7 @@
             </asp:Menu>
             <asp:Menu ID="MenuChef" runat="server" Visible ="false">
                 <Items>
-                    <asp:MenuItem NavigateUrl="~/ChefMail.aspx" Text="Página Principal" Value="Principal"></asp:MenuItem>
-                    <asp:MenuItem NavigateUrl="~/ChefIngredientes.aspx" Text="Ingredientes" Value="Ingredientes"></asp:MenuItem>
+                    <asp:MenuItem NavigateUrl="~/ChefIngredientes.aspx" Text="Modificar Ingredientes de mis Menúes" Value="Ingredientes"></asp:MenuItem>
                 </Items>
             </asp:Menu>
             <div>

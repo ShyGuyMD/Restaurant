@@ -21,12 +21,13 @@ namespace Restaurante
                     master.LogOut();
                 }
 
+
             }
 
             if (!IsPostBack)
             {
                 ListarMenus();
-                
+                Reset();
             }
 
         }
@@ -34,38 +35,33 @@ namespace Restaurante
         protected void GrillaIngredientes_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int fila = int.Parse(e.CommandArgument + "");
-            int id = (int)GrillaIngredientes.DataKeys[fila].Value;
+            string id = (string)GrillaIngredientes.DataKeys[fila].Value;
 
             if(e.CommandName == "eliminar")
             {
-                Fachada.Get.ModificarIngredientesDeMenu(int.Parse(lstMenu.SelectedValue), id + "", 0);
+                Fachada.Get.ModificarIngredientesDeMenu((int)Session["idMenu"], id + "", 0);
             }
             ListarMenus();
-            ListarIngredientes(int.Parse(lstMenu.SelectedValue));
+            ListarIngredientes((int)Session["idMenu"]);
         }
 
         protected void ListarMenus()
         {
-
+            lstMenu.DataTextField = "Descripcion";
+            lstMenu.DataValueField = "Id";
             lstMenu.DataSource = Fachada.Get.ListadoMenuesPorChef((string)Session["Usuario"]);
             lstMenu.DataBind();
         }
 
         protected void ListarIngredientes(int pIdMenu)
         {
+            GrillaIngredientes.DataSource = Fachada.Get.ListadoIngredientesPorMenu(pIdMenu);
+            GrillaIngredientes.DataBind();
+
             lstIngredientes.DataTextField = "Descripcion";
-            lstIngredientes.DataValueField= "Ingrediente.Codigo";
+            lstIngredientes.DataValueField= "Codigo";
             lstIngredientes.DataSource = Fachada.Get.ListadoIngredientes();
             lstIngredientes.DataBind();
-            
-            lstIngredientes.DataSource = Fachada.Get.ListadoIngredientesPorMenu(pIdMenu);
-            lstIngredientes.DataBind();
-        }
-
-        protected void lstMenu_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int idMenu = int.Parse(lstMenu.SelectedItem.Value);
-            ListarIngredientes(idMenu);
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)
@@ -77,12 +73,31 @@ namespace Restaurante
             if (Validar(cantidad))
             {
                 Response.Write(Maestra.MensajeError((int)Fachada.Get.ModificarIngredientesDeMenu(idMenu, idIngrediente, cantidad), "Modificar Ingredientes"));
+                ListarIngredientes((int)Session["idMenu"]);
+            }
+            else
+            {
+                Response.Write("No se puede ingresar esa cantidad. Para eliminar un ingrediente, hágalo con el botón de la grilla");
             }
         }
 
         protected bool Validar(int pInput)
         {
             return pInput > 0;
+        }
+
+        protected void btnCargarMenu_Click(object sender, EventArgs e)
+        {
+            int idMenu = int.Parse(lstMenu.SelectedValue);
+            Session["idMenu"] = idMenu;
+            PanelAltaIngrediente.Visible = true;
+            ListarIngredientes(idMenu);
+        }
+
+        protected void Reset()
+        {
+            Session["idMenu"] = "";
+            PanelAltaIngrediente.Visible = false;
         }
     }
 }

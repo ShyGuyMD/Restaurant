@@ -168,6 +168,11 @@ namespace Aplicacion
             return CUsuario.Get.Login(pUsername, pPassword);
         }
 
+        public Menu BuscarMenu (int pIdMenu)
+        {
+            return CMenu.Get.Buscar(pIdMenu);
+        }
+
         #endregion
 
         #region Reserva

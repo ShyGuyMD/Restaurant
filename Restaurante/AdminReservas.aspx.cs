@@ -16,8 +16,8 @@ namespace Restaurante
             var master = Master as Maestra;
             if (master != null)
             {
-                master.VerificarUsuario("ADMINISTRADOR");
-
+                if (!master.VerificarUsuario("ADMINISTRADOR"))
+                    master.LogOut();
             }
         }
 
@@ -33,6 +33,9 @@ namespace Restaurante
             }
             else
             {
+                GrillaReservas.DataSource = null;
+                GrillaReservas.DataBind();
+                
                 Response.Write("No se encontraron reservas en la fecha seleccionada.");
             }
            

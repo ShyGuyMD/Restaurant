@@ -12,13 +12,15 @@ namespace Restaurante
 {
     public partial class CancelarReserva : System.Web.UI.Page
     {
-        string mCodigo = "";
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 Reset();
             }
+
+            
         }
 
         protected void GrillaReserva_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -40,7 +42,7 @@ namespace Restaurante
             if (Fachada.Get.BuscarReservaPorCodigo(codigo) != null)
             {
                 CargarReserva(codigo);
-                mCodigo = codigo;
+                Session["Codigo"] = codigo;
             }
             else
             {
@@ -50,7 +52,7 @@ namespace Restaurante
 
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
-            Response.Write(Maestra.MensajeError((int)Fachada.Get.BajaReserva(mCodigo), "Cancelar Reserva"));
+            Response.Write(Maestra.MensajeError((int)Fachada.Get.BajaReserva((string)Session["Codigo"]), "Cancelar Reserva"));
             Reset();
         }
 
@@ -63,10 +65,17 @@ namespace Restaurante
         {
             PanelConfirmar.Visible = false;
             PanelMostrarReserva.Visible = false;
+
+            GrillaReserva.DataSource = null;
+            GrillaReserva.DataBind();
+            Session["Codigo"] = "";
         }
         protected void CargarReserva(string pCodigo)
         {
-            GrillaReserva.DataSource = Fachada.Get.BuscarReservaPorCodigo(pCodigo);
+            List<Reserva> lResProxy = new List<Reserva>();
+            lResProxy.Add(Fachada.Get.BuscarReservaPorCodigo(pCodigo));
+
+            GrillaReserva.DataSource = lResProxy;
             GrillaReserva.DataBind();
             PanelMostrarReserva.Visible = true;
         }
