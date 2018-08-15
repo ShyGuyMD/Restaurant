@@ -73,6 +73,8 @@
     <Content Include="bin\Aplicacion.dll" />
     <Content Include="CancelarReserva.aspx" />
     <Content Include="ChefIngredientes.aspx" />
+    <Content Include="config\ingredientes.txt" />
+    <Content Include="config\parametros.txt" />
     <Content Include="Inicio.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="obj\Debug\Restaurante.csproj.FileListAbsolute.txt" />
