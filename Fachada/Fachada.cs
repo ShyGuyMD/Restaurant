@@ -330,11 +330,40 @@ namespace Aplicacion
             AltaMenuPreelaborado("Pizza Queen", 300, "Pizzeta familiar");
             AltaMenuPreelaborado("Pizza Queen", 400, "Pizzeta familiar con gustos");
             AltaMenuPreelaborado("Mc Dudels", 85, "Papas fritas");
-            
-            // Los Ingredientes de Código A01 hasta A10 se cargan desde el archivo de texto ingredientes.txt
+
+            // Los Ingredientes de Código A01 hasta A43 se cargan desde el archivo de texto ingredientes.txt
             //AltaMenuPropio(string pChefDoc, string pChefTipoDoc, List<string> pIngredientes, List<int> pCantidades, decimal pGanancia, string pDesc)
-            
-            
+            AltaMenuPropio("1.111.111-1", "Cedula", new List<string> { "A42", "A33" }, new List<int> { 6, 2 }, 15, "Welfare Particle Prosper");
+            AltaMenuPropio("1.111.111-1", "Cedula", new List<string> { "A17", "A41", "A18" }, new List<int> { 4, 2, 8 }, 15, "Sharp Offer Jacket");
+            AltaMenuPropio("2.222.222-2", "Pasaporte", new List<string> { "A17" }, new List<int> { 3 }, 20, "Parallel Overall Laboratory");
+            AltaMenuPropio("2.222.222-2", "Pasaporte", new List<string> { "A43" }, new List<int> { 9 }, 20, "Domination Reduction Think");
+            AltaMenuPropio("3.333.333-3", "Otro", new List<string> { "A02", "A10" }, new List<int> { 1, 8 }, 10, "Fog Garbage Pension");
+            AltaMenuPropio("3.333.333-3", "Otro", new List<string> { "A25", "A04", "A33", "A11", "A42" }, new List<int> { 6, 1, 6, 3, 4 }, 10, "Single Delay Arrogant");
+            AltaMenuPropio("4.444.444-4", "Cedula", new List<string> { "A02", "A13" }, new List<int> { 10, 5 }, 15, "Parameter Sheep Unaware");
+            AltaMenuPropio("4.444.444-4", "Cedula", new List<string> { "A28", "A07", "A15", "A39", "A30" }, new List<int> { 6, 5, 9, 10, 1 }, 15, "Salon Read Voter");
+            AltaMenuPropio("5.555.555-5", "Pasaporte", new List<string> { "A24", "A07", "A10", "A16" }, new List<int> { 9, 4, 5, 10 }, 30, "Nonsense Disappear Speech");
+            AltaMenuPropio("5.555.555-5", "Pasaporte", new List<string> { "A23" }, new List<int> { 5 }, 30, "Powder Way Bronze");
+            AltaMenuPropio("6.666.666-6", "Otro", new List<string> { "A18", "A39", "A41", "A20", "A11" }, new List<int> { 4, 7, 2, 3, 8 }, 17.5m, "Rocket Battery Utter");
+            AltaMenuPropio("6.666.666-6", "Otro", new List<string> { "A04" }, new List<int> { 5 }, 17.5m, "Traffic Elapse Offensive");
+            AltaMenuPropio("7.777.777-7", "Cedula", new List<string> { "A15", "A36" }, new List<int> { 10, 1 }, 5, "Consumer Failure Counter");
+            AltaMenuPropio("7.777.777-7", "Cedula", new List<string> { "A03" }, new List<int> { 1 }, 5, "Nerve Sit Clarify");
+            AltaMenuPropio("8.888.888-8", "Pasaporte", new List<string> { "A21", "A23", "A36" }, new List<int> { 8, 7, 3 }, 22.5m, "Report Outline Shout");
+            AltaMenuPropio("8.888.888-8", "Pasaporte", new List<string> { "A25", "A30", "A08", "A04" }, new List<int> { 10, 8, 6, 3 }, 22.5m, "Even Liberty Ceiling");
+            AltaMenuPropio("9.999.999-9", "Otro", new List<string> { "A22", "A28", "A06" }, new List<int> { 2, 5, 4 }, 50, "Bait Barrier Black");
+            AltaMenuPropio("9.999.999-9", "Otro", new List<string> { "A01", "A19", "A41", "A08" }, new List<int> { 10, 6, 6, 3 }, 50, "Slide Suntan Old Age");
+
+            //public string AltaReserva(string pNombrePersona, int pCantPersonas, DateTime pFechaReserva, List<int> pIdMenues, int pNumeroMesa)
+            AltaReserva("Anthony Stark", 6, new DateTime(2018, 10, 25), new List<int> { 16, 17, 9, 1, 10, 11 }, 3);
+            AltaReserva("Peter Parker", 2, new DateTime(2018, 12, 24), null, 10);
+            AltaReserva("Ash Ketchum", 3, new DateTime(2019, 01, 01), new List<int> { 12, 10 }, 8);
+            AltaReserva("Bruce Wayne", 1, DateTime.Today.AddDays(1), null, 6);
+            AltaReserva("Edward Cobblepot", 5, DateTime.Today.AddDays(1), new List<int> { 16, 17, 9 }, 5);
+            AltaReserva("Percival Frederikstein Von Mussel Klossowski De Rolo III", 12, DateTime.Today.AddDays(1), new List<int> { 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18 }, 6);
+            AltaReserva("Guybrush Threepwood", 5, DateTime.Today.AddDays(1), new List<int> { 18 }, 11);
+            AltaReserva("Daniel Rabinovich", 7, DateTime.Today.AddDays(1), new List<int> { 9, 1, 10, 11, 6 }, 3);
+            AltaReserva("Esther Píscore", 3, DateTime.Today.AddDays(1), null, 8);
+            AltaReserva("Don Rodrigo Diaz de Carreras", 2, DateTime.Today.AddDays(1), new List<int> { 9, 18 }, 10);
+
         }
         public bool HayDatos()
         {

@@ -15,7 +15,8 @@ namespace Test
         static void Main(string[] args)
         {
             Console.WriteLine("Cargando Ingredientes...");
-            Fachada.Get.CargarIngredientesDeArchivo("C:\\Users\\alumnoFI\\Desktop\\Nueva carpeta\\Restaurant\\Test\\config\\ingredientes.txt");
+            //Fachada.Get.CargarIngredientesDeArchivo("C:\\Users\\alumnoFI\\Desktop\\Nueva carpeta\\Restaurant\\Test\\config\\ingredientes.txt");
+            Fachada.Get.CargarIngredientesDeArchivo("C:\\Dev\\Restaurant\\Test\\config\\ingredientes.txt");
             Console.WriteLine();
             Console.ReadKey();
             foreach(Ingrediente i in CIngrediente.Get._Ingredientes)
@@ -28,7 +29,8 @@ namespace Test
             Console.WriteLine("Cargando Ganancia Pre-Elaborados...");
             Console.WriteLine();
             Console.ReadKey();
-            Fachada.Get.CargarParametros("C:\\Users\\alumnoFI\\Desktop\\Nueva carpeta\\Restaurant\\Test\\config\\parametros.txt");
+            //Fachada.Get.CargarParametros("C:\\Users\\alumnoFI\\Desktop\\Nueva carpeta\\Restaurant\\Test\\config\\parametros.txt");
+            Fachada.Get.CargarParametros("C:\\Dev\\Restaurant\\Test\\config\\ingredientes.txt");
             Console.WriteLine("Ganancia: " + PreElaborado.Ganancia);
 
 
