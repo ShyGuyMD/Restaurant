@@ -28,7 +28,7 @@ namespace Aplicacion
             this.cReserva = CReserva.Get;
             this.cUsuario = CUsuario.Get;
         }
-        public void Serializable()
+        public void Serialize()
         {
             FileStream fs = new FileStream(rutaArchivo, FileMode.Create);
             BinaryFormatter bf = new BinaryFormatter();
@@ -36,8 +36,7 @@ namespace Aplicacion
             fs.Close();
         }
 
-
-        public void Deserializable()
+        public void Deserialize()
         {
             FileStream fs = new FileStream(rutaArchivo, FileMode.Open);
             BinaryFormatter bf = new BinaryFormatter();

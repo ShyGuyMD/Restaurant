@@ -43,7 +43,7 @@ namespace Dominio.Controladoras
             if (ValidarData(pNumero, pCapacidad, pUbicacion))
             {
                 Mesa m = Buscar(pNumero);
-                if (m != null)
+                if (m == null)
                 {
                     m = new Mesa()
                     {

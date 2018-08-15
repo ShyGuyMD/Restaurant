@@ -168,16 +168,19 @@ namespace Aplicacion
             string ret = "";
             int contador = 0;
             List<Menu> listaMenues = new List<Menu>();
-            
-            while (existenTodos && contador < pIdMenues.Count)
-            {
-                Menu m = CMenu.Get.Buscar(pIdMenues[contador]);
-                if (m != null)
-                    listaMenues.Add(m);
-                else
-                    existenTodos = false;
 
-                contador++;
+            if (pIdMenues != null)
+            {
+                while (existenTodos && contador < pIdMenues.Count)
+                {
+                    Menu m = CMenu.Get.Buscar(pIdMenues[contador]);
+                    if (m != null)
+                        listaMenues.Add(m);
+                    else
+                        existenTodos = false;
+
+                    contador++;
+                }
             }
             Mesa mesa = CMesa.Get.Buscar(pNumeroMesa);
 
@@ -302,13 +305,13 @@ namespace Aplicacion
             //AltaChef(string pUsername, string pPassword, string pRol, string pNumDoc, string pTipoDoc, string pNombre, string pApellido, decimal pSueldo)
             AltaChef("angel@mail.com", e.EncryptToString("angel"), "Chef", "1.111.111-1", "Cedula", "Warren", "Worthington", 30000);
             AltaChef("beast@mail.com", e.EncryptToString("beast"), "Chef", "2.222.222-2", "Pasaporte", "Hank", "McCoy", 25000);
-            AltaChef("cyclops@mail.com", e.EncryptToString("cyclops"), "Chef", "3.333.333-3", "Otro", "Scott", "Summers", 10000);
+            AltaChef("cyclops@mail.com", e.EncryptToString("cyclops"), "Chef", "3.333.333-3", "Otros", "Scott", "Summers", 10000);
             AltaChef("iceman@mail.com", e.EncryptToString("iceman"), "Chef", "4.444.444-4", "Cedula", "Bobby", "Drake", 40000);
             AltaChef("marvelgirl@mail.com", e.EncryptToString("marvelgirl"), "Chef", "5.555.555-5", "Pasaporte", "Jean", "Grey", 50000);
-            AltaChef("professorx@mail.com", e.EncryptToString("professorx"), "Chef", "6.666.666-6", "Otro", "Charles", "Xavier", 35000);
+            AltaChef("professorx@mail.com", e.EncryptToString("professorx"), "Chef", "6.666.666-6", "Otros", "Charles", "Xavier", 35000);
             AltaChef("magneto@mail.com", e.EncryptToString("magneto"), "Chef", "7.777.777-7", "Cedula", "Max", "Eisenhardt", 15000);
             AltaChef("storm@mail.com", e.EncryptToString("storm"), "Chef", "8.888.888-8", "Pasaporte", "Ororo", "Munroe", 35000);
-            AltaChef("colossus@mail.com", e.EncryptToString("colossus"), "Chef", "9.999.999-9", "Otro", "Piotr", "Rasputin", 45000);
+            AltaChef("colossus@mail.com", e.EncryptToString("colossus"), "Chef", "9.999.999-9", "Otros", "Piotr", "Rasputin", 45000);
             
             //AltaMesa(int pNumero, int pCapacidad, string pUbicacion)
             AltaMesa(1, 2, "Pareja - Ala Norte");
@@ -337,20 +340,20 @@ namespace Aplicacion
             AltaMenuPropio("1.111.111-1", "Cedula", new List<string> { "A17", "A41", "A18" }, new List<int> { 4, 2, 8 }, 15, "Sharp Offer Jacket");
             AltaMenuPropio("2.222.222-2", "Pasaporte", new List<string> { "A17" }, new List<int> { 3 }, 20, "Parallel Overall Laboratory");
             AltaMenuPropio("2.222.222-2", "Pasaporte", new List<string> { "A43" }, new List<int> { 9 }, 20, "Domination Reduction Think");
-            AltaMenuPropio("3.333.333-3", "Otro", new List<string> { "A02", "A10" }, new List<int> { 1, 8 }, 10, "Fog Garbage Pension");
-            AltaMenuPropio("3.333.333-3", "Otro", new List<string> { "A25", "A04", "A33", "A11", "A42" }, new List<int> { 6, 1, 6, 3, 4 }, 10, "Single Delay Arrogant");
+            AltaMenuPropio("3.333.333-3", "Otros", new List<string> { "A02", "A10" }, new List<int> { 1, 8 }, 10, "Fog Garbage Pension");
+            AltaMenuPropio("3.333.333-3", "Otros", new List<string> { "A25", "A04", "A33", "A11", "A42" }, new List<int> { 6, 1, 6, 3, 4 }, 10, "Single Delay Arrogant");
             AltaMenuPropio("4.444.444-4", "Cedula", new List<string> { "A02", "A13" }, new List<int> { 10, 5 }, 15, "Parameter Sheep Unaware");
             AltaMenuPropio("4.444.444-4", "Cedula", new List<string> { "A28", "A07", "A15", "A39", "A30" }, new List<int> { 6, 5, 9, 10, 1 }, 15, "Salon Read Voter");
             AltaMenuPropio("5.555.555-5", "Pasaporte", new List<string> { "A24", "A07", "A10", "A16" }, new List<int> { 9, 4, 5, 10 }, 30, "Nonsense Disappear Speech");
             AltaMenuPropio("5.555.555-5", "Pasaporte", new List<string> { "A23" }, new List<int> { 5 }, 30, "Powder Way Bronze");
-            AltaMenuPropio("6.666.666-6", "Otro", new List<string> { "A18", "A39", "A41", "A20", "A11" }, new List<int> { 4, 7, 2, 3, 8 }, 17.5m, "Rocket Battery Utter");
-            AltaMenuPropio("6.666.666-6", "Otro", new List<string> { "A04" }, new List<int> { 5 }, 17.5m, "Traffic Elapse Offensive");
+            AltaMenuPropio("6.666.666-6", "Otros", new List<string> { "A18", "A39", "A41", "A20", "A11" }, new List<int> { 4, 7, 2, 3, 8 }, 17.5m, "Rocket Battery Utter");
+            AltaMenuPropio("6.666.666-6", "Otros", new List<string> { "A04" }, new List<int> { 5 }, 17.5m, "Traffic Elapse Offensive");
             AltaMenuPropio("7.777.777-7", "Cedula", new List<string> { "A15", "A36" }, new List<int> { 10, 1 }, 5, "Consumer Failure Counter");
             AltaMenuPropio("7.777.777-7", "Cedula", new List<string> { "A03" }, new List<int> { 1 }, 5, "Nerve Sit Clarify");
             AltaMenuPropio("8.888.888-8", "Pasaporte", new List<string> { "A21", "A23", "A36" }, new List<int> { 8, 7, 3 }, 22.5m, "Report Outline Shout");
             AltaMenuPropio("8.888.888-8", "Pasaporte", new List<string> { "A25", "A30", "A08", "A04" }, new List<int> { 10, 8, 6, 3 }, 22.5m, "Even Liberty Ceiling");
-            AltaMenuPropio("9.999.999-9", "Otro", new List<string> { "A22", "A28", "A06" }, new List<int> { 2, 5, 4 }, 50, "Bait Barrier Black");
-            AltaMenuPropio("9.999.999-9", "Otro", new List<string> { "A01", "A19", "A41", "A08" }, new List<int> { 10, 6, 6, 3 }, 50, "Slide Suntan Old Age");
+            AltaMenuPropio("9.999.999-9", "Otros", new List<string> { "A22", "A28", "A06" }, new List<int> { 2, 5, 4 }, 50, "Bait Barrier Black");
+            AltaMenuPropio("9.999.999-9", "Otros", new List<string> { "A01", "A19", "A41", "A08" }, new List<int> { 10, 6, 6, 3 }, 50, "Slide Suntan Old Age");
 
             //public string AltaReserva(string pNombrePersona, int pCantPersonas, DateTime pFechaReserva, List<int> pIdMenues, int pNumeroMesa)
             AltaReserva("Anthony Stark", 6, new DateTime(2018, 10, 25), new List<int> { 16, 17, 9, 1, 10, 11 }, 3);
@@ -363,13 +366,14 @@ namespace Aplicacion
             AltaReserva("Daniel Rabinovich", 7, DateTime.Today.AddDays(1), new List<int> { 9, 1, 10, 11, 6 }, 3);
             AltaReserva("Esther Píscore", 3, DateTime.Today.AddDays(1), null, 8);
             AltaReserva("Don Rodrigo Diaz de Carreras", 2, DateTime.Today.AddDays(1), new List<int> { 9, 18 }, 10);
-
         }
+
         public bool HayDatos()
         {
             return CMenu.Get._Menues.Count > 0 ||
                    CIngrediente.Get._Ingredientes.Count > 0 ||
-                   CReserva.Get._Reservas.Count > 0;
+                   CReserva.Get._Reservas.Count > 0 ||
+                   CMesa.Get._Mesas.Count > 0;
         }
         #endregion
     }

@@ -14,6 +14,30 @@ namespace Test
     {
         static void Main(string[] args)
         {
+
+            Console.WriteLine("Holis\n###################\n");
+
+            Repositorio r = new Repositorio("C:\\Dev\\Restaurant\\Test\\config\\serialized.bin");
+            r.Deserialize();
+
+            if (!Fachada.Get.HayDatos())
+            {
+                Fachada.Get.CargarIngredientesDeArchivo("C:\\Dev\\Restaurant\\Test\\config\\ingredientes.txt");
+                //Fachada.Get.CargarDatosDePrueba();
+            }
+            Console.ReadKey();
+
+            Console.WriteLine("Ingredientes: " + CIngrediente.Get._Ingredientes.Count);
+            Console.WriteLine("Mesas: " + CMesa.Get._Mesas.Count);
+            Console.WriteLine("Menues: " + CMenu.Get._Menues.Count);
+            Console.WriteLine("Reservas: " + CReserva.Get._Reservas.Count);
+
+            //Console.ReadKey();
+
+            //r.Serialize();
+
+
+            /*
             Console.WriteLine("Cargando Ingredientes...");
             //Fachada.Get.CargarIngredientesDeArchivo("C:\\Users\\alumnoFI\\Desktop\\Nueva carpeta\\Restaurant\\Test\\config\\ingredientes.txt");
             Fachada.Get.CargarIngredientesDeArchivo("C:\\Dev\\Restaurant\\Test\\config\\ingredientes.txt");
@@ -32,7 +56,7 @@ namespace Test
             //Fachada.Get.CargarParametros("C:\\Users\\alumnoFI\\Desktop\\Nueva carpeta\\Restaurant\\Test\\config\\parametros.txt");
             Fachada.Get.CargarParametros("C:\\Dev\\Restaurant\\Test\\config\\ingredientes.txt");
             Console.WriteLine("Ganancia: " + PreElaborado.Ganancia);
-
+            */
 
             /*
             Fachada.Get.AltaChef("chef1", new Encryption().EncryptToString("chef"), "Chef", "111111", "Cedula", "Master", "Chef", 10000);

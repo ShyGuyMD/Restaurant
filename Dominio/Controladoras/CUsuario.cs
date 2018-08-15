@@ -160,7 +160,6 @@ namespace Dominio.Controladoras
         {
             return (pUsername != "" &&
                         pPassword != "" &&
-                            pRol != null &&
                                 pDocumento != null &&
                                     pNombre != "" &&
                                         pApellido != "" &&
@@ -191,7 +190,6 @@ namespace Dominio.Controladoras
         public CUsuario(SerializationInfo info, StreamingContext context)
         {
             this._Usuarios = info.GetValue("listaUsuarios", typeof(List<Usuario>)) as List<Usuario>;
-            CUsuario._instancia = this;
             this._Chef = info.GetValue("listaChef", typeof(List<Chef>)) as List<Chef>;
             CUsuario._instancia = this;
         }

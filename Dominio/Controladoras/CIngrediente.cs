@@ -132,7 +132,7 @@ namespace Dominio.Controladoras
 
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue("listaingredientes", this._Ingredientes, typeof(List<CIngrediente>));
+            info.AddValue("listaIngredientes", this._Ingredientes, typeof(List<CIngrediente>));
         }
 
         public CIngrediente(SerializationInfo info, StreamingContext context)
