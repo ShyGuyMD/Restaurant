@@ -10,14 +10,15 @@ namespace Restaurante
 {
     public partial class RealizarReserva : System.Web.UI.Page
     {
+
+        private List<int> idMenues = new List<int>();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 CargarDatos();
             }
-            List<int> lMenuProxy = new List<int>();
-            Session["menues"] = lMenuProxy;
         }
 
         protected void btnReservar_Click(object sender, EventArgs e)
@@ -27,17 +28,17 @@ namespace Restaurante
             DateTime fecha = calFecha.SelectedDate;
             fecha.AddHours(double.Parse(txtHoras.Text));
             fecha.AddHours(double.Parse(txtHoras.Text));
-            int mesa = int.Parse(lstMesa.SelectedValue);
-            List<int> menues = Session["menues"] as List<int>;
+            int mesa = int.Parse(lblMesaData.Text);
 
 
             if (ValidarDatos(nombre, personas, fecha, mesa))
             {
-                string resultado = Fachada.Get.AltaReserva(nombre, personas, fecha, menues, mesa);
+                string resultado = Fachada.Get.AltaReserva(nombre, personas, fecha, idMenues, mesa);
 
                 if (resultado != "")
                 {
                     Response.Write("Reserva realizada con éxito. Su código es: " + resultado);
+                    idMenues.Clear();
                 }
                 else
                 {
@@ -48,10 +49,6 @@ namespace Restaurante
 
         protected void CargarDatos()
         {
-            lstMesa.DataTextField = "Datos";
-            lstMesa.DataValueField = "Id";
-            lstMesa.DataSource = Fachada.Get.ListadoMesas();
-            lstMesa.DataBind();
 
             lstMenu.DataTextField = "Datos";
             lstMenu.DataValueField = "Id";

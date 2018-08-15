@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Aplicacion;
+using Dominio.Clases;
+using static Helpers.Utils;
 
 namespace Restaurante
 {
@@ -47,8 +49,7 @@ namespace Restaurante
         {
             string codigo = txtCodReserva.Text;
             codigo = codigo.ToUpper();
-            Fachada.Get.BajaReserva(codigo);
-            Response.Write("Reserva cancelada con éxito.");
+            Response.Write(Maestra.MensajeError((int)Fachada.Get.BajaReserva(codigo), "Cancelar Reserva"));
             Reset();
         }
 

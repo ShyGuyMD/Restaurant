@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio.Clases;
@@ -8,7 +9,8 @@ using static Helpers.Utils;
 
 namespace Dominio.Controladoras
 {
-    public sealed class CMenu
+    [Serializable]
+    public sealed class CMenu : ISerializable
     {
         #region Singleton
         private static CMenu _instancia = null;
@@ -117,14 +119,29 @@ namespace Dominio.Controladoras
             return ret;
         }
 
-        public ExitCode ModificarIngredientesDeMenu(int pIdMenu, List<IngredientesPorMenu> pIngredientes)
+        public List<Menu> ListadoMenuesPorChef(Chef pChef)
+        {
+            List<Menu> ret = new List<Menu>();
+            foreach (Menu m in ListarMenuesActivos())
+                if (m is Propio && ((Propio)m).Chef.Equals(pChef))
+                    ret.Add(m);
+
+            return ret;
+        }
+
+        public ExitCode ModificarIngredientesDeMenu(int pIdMenu, IngredientesPorMenu pIngrediente)
         {
             var exit = ExitCode.NO_MENU_ERROR;
             Menu m = BuscarActivo(pIdMenu);
 
             if (m != null && m is Propio)
             {
-                ((Propio)m).Ingredientes = pIngredientes;
+                if (((Propio)m).TieneIngrediente(pIngrediente.Ingrediente))
+                    ((Propio)m).ActualizarIngrediente(pIngrediente.Ingrediente, pIngrediente.Cantidad);
+                else
+                    ((Propio)m).Ingredientes.Add(pIngrediente);
+
+                m.PrecioVenta = m.CalcularPrecioVenta();
                 exit = ExitCode.OK;
             }
 
@@ -169,6 +186,17 @@ namespace Dominio.Controladoras
                             pIngredientes.Count > 0 && 
                                 pGanancia > 0 && 
                                     pDesc != "");
+        }
+
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("listaMenues", this._Menues, typeof (List<Menu>));
+        }
+
+        public CMenu (SerializationInfo info, StreamingContext context)
+        {
+            this._Menues = info.GetValue("listaMenues", typeof(List<Menu>)) as List<Menu>;
+            CMenu._instancia = this;
         }
     }
 }

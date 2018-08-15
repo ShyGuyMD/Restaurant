@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio.Clases
 {
+    [Serializable]
     public class Ingrediente
     {
         public string Codigo { get; set; }

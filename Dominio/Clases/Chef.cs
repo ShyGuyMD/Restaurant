@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio.Clases
 {
+    [Serializable]
     public class Chef : Usuario
     {
         public Documento Documento { get; set; }
@@ -23,6 +24,16 @@ namespace Dominio.Clases
         {
             // Se asume que el Chef trabaja 30 días, durante 8 horas diarias.
             return (Sueldo / 240);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Documento.Equals(((Chef)obj).Documento);
+        }
+
+        public override string GetDocumentType()
+        {
+            return Documento.TipoDoc.ToString();
         }
     }
 }

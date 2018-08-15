@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio.Clases
 {
+    [Serializable]
     public class Documento
     {
         public enum TipoDocumento { Cedula = 1, Pasaporte = 2, Otros = 3 };

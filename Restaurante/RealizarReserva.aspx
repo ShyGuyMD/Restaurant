@@ -30,8 +30,7 @@
         <asp:RegularExpressionValidator ID="RegularExpressionValidator3" ControlToValidate="txtMinutos" runat="server" ErrorMessage="Ingresar minutos (12-24h)" ValidationExpression="^[0-5][0-9]$"></asp:RegularExpressionValidator>
         <br />
         <asp:Label ID="lblMesa" runat="server" Text="Mesa:"></asp:Label>
-        <asp:DropDownList ID="lstMesa" runat="server"></asp:DropDownList>
-        <asp:RequiredFieldValidator ControlToValidate="lstMesa" ID="RequiredFieldValidator5" runat="server" ForeColor="Tomato" ErrorMessage="*"></asp:RequiredFieldValidator>
+        <asp:Label ID="lblMesaData" runat="server" Text="Mesa:"></asp:Label>
         <br />
         <asp:Label ID="lblMenu" runat="server" Text="Menúes Solicitados:"></asp:Label>
         <asp:DropDownList ID="lstMenu" runat="server"></asp:DropDownList>

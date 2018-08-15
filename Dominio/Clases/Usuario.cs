@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio.Clases
 {
+    [Serializable]
     public class Usuario
     {
         public enum Rol { Administrador, Chef };
@@ -19,6 +20,10 @@ namespace Dominio.Clases
         public override string ToString()
         {
             return String.Format("Username: {0}\nPassword: {1}\nRol: {2}", Username, Password, UserRole.ToString());
+        }
+
+        public virtual string GetDocumentType() {
+            return "";
         }
     }
 }

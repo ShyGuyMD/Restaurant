@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Aplicacion;
-using Dominio;
+using Dominio.Clases;
 
 namespace Restaurante
 {
@@ -16,7 +16,7 @@ namespace Restaurante
             var master = Master as Maestra;
             if (master != null)
             {
-                master.VerificarUsuario(0);
+                master.VerificarUsuario("ADMINISTRADOR");
 
             }
         }
@@ -24,7 +24,7 @@ namespace Restaurante
         protected void btnFecha_Click(object sender, EventArgs e)
         {
             DateTime fecha = calFecha.SelectedDate;
-            List <Dominio.Clases.Reserva> res = Fachada.Get.ListadoReservasPorFecha(fecha);
+            List <Reserva> res = Fachada.Get.ListadoReservasPorFecha(fecha);
 
             if (res.Count >= 1)
             {

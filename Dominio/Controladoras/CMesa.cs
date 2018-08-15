@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio.Clases;
@@ -8,7 +9,8 @@ using static Helpers.Utils;
 
 namespace Dominio.Controladoras
 {
-    public class CMesa
+    [Serializable]
+    public class CMesa : ISerializable
     {
         #region Singleton
         private static CMesa _instancia = null;
@@ -41,7 +43,7 @@ namespace Dominio.Controladoras
             if (ValidarData(pNumero, pCapacidad, pUbicacion))
             {
                 Mesa m = Buscar(pNumero);
-                if (m != null)
+                if (m == null)
                 {
                     m = new Mesa()
                     {
@@ -58,6 +60,7 @@ namespace Dominio.Controladoras
 
             return exit;
         }
+
         public Mesa Buscar(int pNumero)
         {
             Mesa m = null;
@@ -71,6 +74,26 @@ namespace Dominio.Controladoras
             }
 
             return m;
+        }
+
+        public Mesa BuscarDisponible(int pCantPersonas, List<Mesa> pReservadas)
+        {
+            List<Mesa> aux = _Mesas.Except(pReservadas).ToList();
+            Mesa mesa = null;
+
+            foreach (Mesa m in aux)
+            {
+                if (m.Capacidad >= pCantPersonas)
+                {
+                    if (mesa == null)
+                        mesa = m;
+                    else
+                        if (mesa.Capacidad > m.Capacidad)
+                            mesa = m;
+                }
+            }
+
+            return mesa;
         }
 
         public List<Mesa> ListarDisponibles(int pCapacidad)
@@ -87,6 +110,17 @@ namespace Dominio.Controladoras
         public bool ValidarData(int pNumero, int pCapacidad, string pUbicacion)
         {
             return (pNumero > 0 && pCapacidad > 0 && pUbicacion != "");
+        }
+
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("listaMesas", this._Mesas, typeof(List<Mesa>));
+        }
+
+        public CMesa(SerializationInfo info, StreamingContext context)
+        {
+            this._Mesas = info.GetValue("listaMesas", typeof(List<Mesa>)) as List<Mesa>;
+            CMesa._instancia = this;
         }
     }
 }

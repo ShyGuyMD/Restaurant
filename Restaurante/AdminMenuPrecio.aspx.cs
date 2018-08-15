@@ -16,7 +16,7 @@ namespace Restaurante
             var master = Master as Maestra;
             if (master != null)
             {
-                master.VerificarUsuario(0);
+                master.VerificarUsuario("ADMINISTRADOR");
 
             }
 

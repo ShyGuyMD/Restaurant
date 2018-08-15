@@ -7,9 +7,8 @@
         <asp:DropDownList ID="lstMenu" runat="server" OnSelectedIndexChanged="lstMenu_SelectedIndexChanged"/>
     </asp:Panel>
     <br />
-    <asp:Button ID="btnCargarMenu" runat="server" Text="Cargar" OnClick="btnCargarMenu_Click" />
     <asp:Panel ID="GrillaModificar" runat="server">
-        <asp:GridView ID="GrillaIngredientes" runat="server" AutoGenerateColumns="false" OnRowCommand="GrillaIngredientes_RowCommand" DataKeyNames="Id">
+        <asp:GridView ID="GrillaIngredientes" runat="server" AutoGenerateColumns="false" OnRowCommand="GrillaIngredientes_RowCommand" DataKeyNames="Id" OnSelectedIndexChanged="GrillaIngredientes_SelectedIndexChanged">
             <Columns>
                 <asp:BoundField DataField="Ingrediente.Descripcion" HeaderText="Descripcion" />
                 <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
@@ -31,7 +30,7 @@
         <asp:RequiredFieldValidator ControlToValidate="txtCantidad" ID="RequiredFieldValidator4" runat="server" ForeColor="Tomato" ErrorMessage="*"></asp:RequiredFieldValidator>
         <asp:RegularExpressionValidator ID="RegularExpressionValidator6" ControlToValidate="txtCantidad" runat="server" ErrorMessage="Cantidad Inválida" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
         <br/>
-        <asp:Button ID="btnAgregar" runat="server" Text="Añadir al Menu" OnClick="btnAgregar_Click" />
+        <asp:Button ID="btnAgregar" runat="server" Text="Actualizar Menu" OnClick="btnAgregar_Click" />
     </asp:Panel>
 
 </asp:Content>

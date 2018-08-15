@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio.Clases;
@@ -8,7 +9,8 @@ using static Helpers.Utils;
 
 namespace Dominio.Controladoras
 {
-    public class CUsuario
+    [Serializable]
+    public class CUsuario : ISerializable
     {
         #region Singleton
         private static CUsuario _instancia = null;
@@ -149,6 +151,16 @@ namespace Dominio.Controladoras
             return ret;
         }
 
+        public string RolPorUsuario(string pUsuario)
+        {
+            string ret = "ERROR";
+            Usuario u = BuscarUsuario(pUsuario);
+            if (u != null)
+                ret = u.UserRole.ToString().ToUpper();
+
+            return ret;
+        }
+
         public bool ValidarData(string pUsername, string pPassword)
         {
             return (pUsername != "" && pPassword != "");
@@ -158,7 +170,6 @@ namespace Dominio.Controladoras
         {
             return (pUsername != "" &&
                         pPassword != "" &&
-                            pRol != null &&
                                 pDocumento != null &&
                                     pNombre != "" &&
                                         pApellido != "" &&
@@ -179,6 +190,18 @@ namespace Dominio.Controladoras
             }
 
             return u;
+        }
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("listaUsuarios", this._Usuarios, typeof(List<Usuario>));
+            info.AddValue("listaChef", this._Chef, typeof(List<Chef>));
+        }
+
+        public CUsuario(SerializationInfo info, StreamingContext context)
+        {
+            this._Usuarios = info.GetValue("listaUsuarios", typeof(List<Usuario>)) as List<Usuario>;
+            this._Chef = info.GetValue("listaChef", typeof(List<Chef>)) as List<Chef>;
+            CUsuario._instancia = this;
         }
     }
 }

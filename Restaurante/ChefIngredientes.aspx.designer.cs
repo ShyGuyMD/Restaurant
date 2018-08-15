@@ -31,15 +31,6 @@ namespace Restaurante {
         protected global::System.Web.UI.WebControls.DropDownList lstMenu;
         
         /// <summary>
-        /// btnCargarMenu control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCargarMenu;
-        
-        /// <summary>
         /// GrillaModificar control.
         /// </summary>
         /// <remarks>

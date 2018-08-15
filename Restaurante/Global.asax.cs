@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
+using System.IO;
 using Aplicacion;
 
 namespace Restaurante
@@ -12,20 +13,40 @@ namespace Restaurante
     {
         protected void Application_Start(object sender, EventArgs e)
         {
-            // Primero revisar si hay datos serializados.
-            //if (!Fachada.Get.HayDatos())
-            //{
-            //    Fachada.Get.CargarIngredientesDeArchivo(HttpRuntime.AppDomainAppPath + @"Ingredientes.txt");
-            //    Fachada.Get.CargarDatosDePrueba();
-            //}
+            try
+            {
+                string ingredientes = HttpRuntime.AppDomainAppPath + @"config\ingredientes.txt";
+                string parametros = HttpRuntime.AppDomainAppPath + @"config\parametros.txt";
+                string rutaSerializacion = HttpRuntime.AppDomainAppPath + @"config\serial.txt";
+
+                if (File.Exists(rutaSerializacion))
+                {
+                    Repositorio rep = new Repositorio(rutaSerializacion);
+                    rep.Deserialize();
+                }
+                else
+                {
+                    Fachada.Get.CargarIngredientesDeArchivo(ingredientes);
+                    Fachada.Get.CargarDatosDePrueba();
+                }
+
+                if (File.Exists(parametros))
+                {
+                    Fachada.Get.CargarParametros(parametros);
+                }
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         protected void Application_End(object sender, EventArgs e)
         {
             // Serializar todo
-            string rutaSerializacion = HttpRuntime.AppDomainAppPath + @"Config\serial.bin";\
+            string rutaSerializacion = HttpRuntime.AppDomainAppPath + @"Config\serial.bin";
             Repositorio rep = new Repositorio(rutaSerializacion);
-            rep.Serializable();
+            rep.Serialize();
         }
     }
 }
