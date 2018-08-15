@@ -16,7 +16,7 @@ namespace Restaurante
             var master = Master as Maestra;
             if (master != null)
             {
-                if (!master.VerificarUsuario((int)Session["Rol"]))
+                if (!master.VerificarUsuario("CHEF"))
                 {
                     master.LogOut();
                 }
@@ -38,13 +38,12 @@ namespace Restaurante
 
             if(e.CommandName == "eliminar")
             {
-                Fachada.Get.BajaIngrediente(id + "");
+                Fachada.Get.ModificarIngredientesDeMenu(id + "");
             }
-            else if(e.CommandName == "modificar"){ }
         }
 
 
-        protected void BtnCargarMenu_Click(object sender, EventArgs e)
+        protected void btnCargarMenu_Click(object sender, EventArgs e)
         {
             ListarMenus();
             int idMenu = int.Parse(lstMenu.SelectedItem.Value);
@@ -54,9 +53,7 @@ namespace Restaurante
         protected void ListarMenus()
         {
 
-            lstMenu.DataTextField = "Datos";
-            lstMenu.DataValueField= "Id";
-            //lstMenu.DataSource = Fachada.Get.ListadoMenuesPorChef(Session["Usuario"]);
+            lstMenu.DataSource = Fachada.Get.ListadoMenuesPorChef((string)Session["Usuario"]);
             lstMenu.DataBind();
         }
 
@@ -64,8 +61,8 @@ namespace Restaurante
         {
             
 
-            lstIngredientes.DataTextField = "Datos";
-            lstIngredientes.DataValueField= "Id";
+            lstIngredientes.DataTextField = "Descripcion";
+            lstIngredientes.DataValueField= "Codigo";
             lstIngredientes.DataSource = Fachada.Get.ListadoIngredientesPorMenu(pIdMenu);
             lstIngredientes.DataBind();
         }

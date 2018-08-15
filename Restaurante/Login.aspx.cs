@@ -18,21 +18,17 @@ namespace Restaurante
 
         protected void LoginRestaurant_Authenticate(object sender, AuthenticateEventArgs e)
         {
-            // Buscar en lista de usuarios.
-
-            //hacer en fachada las funciones que faltan. Deben devolver strings.
 
             Session["Usuario"] = null;
             Session["Rol"] = null;
-
-            //si el usuario existe
+            
 
             Encryption enc = new Encryption();
             
             if (Fachada.Get.Login(LoginRestaurant.UserName, enc.EncryptToString(LoginRestaurant.Password)) != Utils.ExitCode.OK)
             {
-                //Session["Usuario"] = Fachada.Get.BuscarUsuario(LoginRestaurant.UserName);
-                //Session["Rol"] = Fachada.Get.BuscarRol((int)Session["Usuario"]);
+                Session["Usuario"] = LoginRestaurant.UserName;
+                Session["Rol"] = Fachada.Get.RolPorUsuario((string)Session["Usuario"]);
                 e.Authenticated = true;
 
             }

@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Aplicacion;
-using Dominio;
+using Dominio.Clases;
 
 namespace Restaurante
 {
@@ -17,11 +17,11 @@ namespace Restaurante
             var master = Master as Maestra;
             if (master != null)
             {
-                master.VerificarUsuario(0);
+                master.VerificarUsuario("ADMINISTRADOR");
             }
 
-            lstIngredientes.DataTextField = "Datos";
-            lstIngredientes.DataValueField = "Id";
+            lstIngredientes.DataTextField = "Descripcion";
+            lstIngredientes.DataValueField = "Codigo";
             lstIngredientes.DataSource = Fachada.Get.ListadoMenuesConPrecio();
             lstIngredientes.DataBind();
         }
