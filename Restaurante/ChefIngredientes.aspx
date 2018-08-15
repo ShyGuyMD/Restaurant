@@ -26,7 +26,7 @@
         <br/>
         <asp:Label ID="Label1" runat="server" Text="Cantidad:"></asp:Label>
 
-        <asp:TextBox ID="txtCantidad" runat="server"></asp:TextBox>
+        <asp:TextBox ID="txtCantidad" runat="server" Width="63px"></asp:TextBox>
         <asp:RequiredFieldValidator ControlToValidate="txtCantidad" ID="RequiredFieldValidator4" runat="server" ForeColor="Tomato" ErrorMessage="*"></asp:RequiredFieldValidator>
         <asp:RegularExpressionValidator ID="RegularExpressionValidator6" ControlToValidate="txtCantidad" runat="server" ErrorMessage="Cantidad Inválida" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
         <br/>

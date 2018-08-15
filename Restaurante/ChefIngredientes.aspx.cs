@@ -53,10 +53,11 @@ namespace Restaurante
 
         protected void ListarIngredientes(int pIdMenu)
         {
-            
-
             lstIngredientes.DataTextField = "Descripcion";
             lstIngredientes.DataValueField= "Ingrediente.Codigo";
+            lstIngredientes.DataSource = Fachada.Get.ListadoIngredientes();
+            lstIngredientes.DataBind();
+            
             lstIngredientes.DataSource = Fachada.Get.ListadoIngredientesPorMenu(pIdMenu);
             lstIngredientes.DataBind();
         }
@@ -71,11 +72,11 @@ namespace Restaurante
         {
             int cantidad = int.Parse(txtCantidad.Text);
             int idMenu = int.Parse(lstMenu.SelectedValue);
-            int idIngrediente = int.Parse(lstIngredientes.SelectedValue);
+            string idIngrediente = lstIngredientes.SelectedValue;
 
             if (Validar(cantidad))
             {
-                //Fachada.Get.ModificarIngredientesDeMenu(idMenu, idIngrediente, cantidad);
+                Response.Write(Maestra.MensajeError((int)Fachada.Get.ModificarIngredientesDeMenu(idMenu, idIngrediente, cantidad), "Modificar Ingredientes"));
             }
         }
 

@@ -13,14 +13,14 @@ namespace Restaurante
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            switch (Session["Rol"])
+            switch ((string)Session["Rol"])
             {
-                case 0:
+                case "ADMINISTRADOR":
                     MenuAdmin.Visible = true;
                     MenuChef.Visible = false;
                     break;
 
-                case 1:
+                case "CHEF":
                     MenuChef.Visible = true;
                     MenuAdmin.Visible = false;
                     break;

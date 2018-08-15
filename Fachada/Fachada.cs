@@ -135,6 +135,11 @@ namespace Aplicacion
         {
             return CIngrediente.Get.BajaIngrediente(pCodigo);
         }
+
+        public List<Ingrediente> ListadoIngredientes()
+        {
+            return CIngrediente.Get._Ingredientes;
+        }
         #endregion
 
         #region Chef / Usuario

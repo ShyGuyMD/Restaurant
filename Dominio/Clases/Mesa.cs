@@ -18,5 +18,10 @@ namespace Dominio.Clases
         {
             Activo = true;
         }
+
+        public override string ToString()
+        {
+            return Numero + "";
+        }
     }
 }

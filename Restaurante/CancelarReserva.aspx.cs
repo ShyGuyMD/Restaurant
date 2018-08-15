@@ -12,6 +12,7 @@ namespace Restaurante
 {
     public partial class CancelarReserva : System.Web.UI.Page
     {
+        string mCodigo = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -31,13 +32,15 @@ namespace Restaurante
             }
         }
 
-        protected void BtnBuscarReserva_Click(object sender, EventArgs e)
+        protected void btnBuscarReserva_Click(object sender, EventArgs e)
         {
             string codigo = txtCodReserva.Text;
             codigo = codigo.ToUpper();
+
             if (Fachada.Get.BuscarReservaPorCodigo(codigo) != null)
             {
                 CargarReserva(codigo);
+                mCodigo = codigo;
             }
             else
             {
@@ -45,16 +48,15 @@ namespace Restaurante
             }
         }
 
-        protected void BtnAceptar_Click(object sender, EventArgs e)
+        protected void btnAceptar_Click(object sender, EventArgs e)
         {
-            string codigo = txtCodReserva.Text;
-            codigo = codigo.ToUpper();
-            Response.Write(Maestra.MensajeError((int)Fachada.Get.BajaReserva(codigo), "Cancelar Reserva"));
+            Response.Write(Maestra.MensajeError((int)Fachada.Get.BajaReserva(mCodigo), "Cancelar Reserva"));
             Reset();
         }
 
-        protected void BtnVolver_Click(object sender, EventArgs e)
+        protected void btnVolver_Click(object sender, EventArgs e)
         {
+            Reset();
             Response.Redirect("~/CancelarReserva.aspx");
         }
         protected void Reset()

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Aplicacion;
+using Dominio.Clases;
 
 namespace Restaurante
 {
@@ -18,6 +19,7 @@ namespace Restaurante
             if (!IsPostBack)
             {
                 CargarDatos();
+                PanelConfirmar.Visible = false;
             }
         }
 
@@ -37,7 +39,7 @@ namespace Restaurante
 
                 if (resultado != "")
                 {
-                    Response.Write("Reserva realizada con éxito. Su código es: " + resultado);
+                    Response.Write("Reserva realizada con éxito. Su código es: " + resultado + " para la mesa " + mesa);
                     idMenues.Clear();
                 }
                 else
@@ -64,18 +66,29 @@ namespace Restaurante
 
             if (e.CommandName == "eliminar")
             {
-
+                idMenues.Remove(id);
             }
         }
 
         protected void BtnAgregarMenu_Click(object sender, EventArgs e)
         {
-            ((List<int>)Session["menues"]).Add(int.Parse(lstMenu.SelectedValue));
+            idMenues.Add(int.Parse(lstMenu.SelectedValue));
         }
 
         protected bool ValidarDatos(string pNombre, int pPersonas, DateTime pFecha, int pIdMesa)
         {
             return (pNombre != "" && pPersonas > 0 && pPersonas > 0 && pFecha > DateTime.Now && pIdMesa > 0);
+        }
+
+        protected void btnMesa_Click(object sender, EventArgs e)
+        {
+            string mesa = (Fachada.Get.BuscarMesaDisponible(int.Parse(txtPersonas.Text), calFecha.SelectedDate)).ToString();
+            PanelConfirmar.Visible = true;
+        }
+
+        protected void Reset()
+        {
+            PanelConfirmar.Visible = false;
         }
     }
 

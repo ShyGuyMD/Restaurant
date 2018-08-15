@@ -9,7 +9,7 @@
         <asp:RequiredFieldValidator ControlToValidate="txtCodReserva" ID="RequiredFieldValidator4" runat="server" ForeColor="Tomato" ErrorMessage="*"></asp:RequiredFieldValidator>
         <asp:RegularExpressionValidator ID="RegularExpressionValidator6" ControlToValidate="txtCodReserva" runat="server" ErrorMessage="Código Inválido" ValidationExpression="^[a-zA-Z0-9_.-]*$"></asp:RegularExpressionValidator>
         <br/>
-        <asp:Button ID="btnBuscarReserva" runat="server" Text="Buscar" OnClick="BtnBuscarReserva_Click" />
+        <asp:Button ID="btnBuscarReserva" runat="server" Text="Buscar" OnClick="btnBuscarReserva_Click" />
     </asp:Panel>
     <br />
     <asp:Panel ID="PanelMostrarReserva" runat="server" Visible="false">
@@ -25,8 +25,8 @@
     </asp:Panel>
     <asp:Panel ID="PanelConfirmar" runat="server" Visible="false" BackColor="#ffffef">
         <br />
-        <asp:Label ID="lblConfirmar" runat="server" Text="Confirmar Cancelación?"></asp:Label>
-        <asp:Button ID="btnAceptar" runat="server" Text="Confirmar" OnClick="BtnAceptar_Click"/>        
-            <asp:Button ID="btnVolver" runat="server" Text="Volver" OnClick="BtnVolver_Click"/>
+        <asp:Label ID="lblConfirmar" runat="server" Text="Seguro que desea cancelar?"></asp:Label>
+        <asp:Button ID="btnAceptar" runat="server" Text="Sí" OnClick="btnAceptar_Click"/>        
+            <asp:Button ID="btnVolver" runat="server" Text="No" OnClick="btnVolver_Click"/>
     </asp:Panel>
 </asp:Content>

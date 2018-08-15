@@ -20,18 +20,21 @@
         <asp:Label ID="lblFecha" runat="server" Text="Fecha:"></asp:Label>
         <asp:Calendar ID="calFecha" runat="server"></asp:Calendar>
         <br />
-        <asp:Label ID="lblHora" runat="server" Text="Hora:"></asp:Label>
-        <asp:TextBox ID="txtHoras" runat="server"></asp:TextBox>
+        <asp:Label ID="lblHora" runat="server" Text="Hora:  "></asp:Label>
+        <asp:TextBox ID="txtHoras" runat="server" Width="26px"></asp:TextBox>
+        <asp:Label ID="lblSeparador" runat="server" Text=" : "></asp:Label>
+        <asp:TextBox ID="txtMinutos" runat="server" Width="31px"></asp:TextBox>
         <asp:RequiredFieldValidator ControlToValidate="txtHoras" ID="RequiredFieldValidator2" runat="server" ForeColor="Tomato" ErrorMessage="*"></asp:RequiredFieldValidator>
         <asp:RegularExpressionValidator ID="RegularExpressionValidator2" ControlToValidate="txtHoras" runat="server" ErrorMessage="Ingresar hora (12-24h)" ValidationExpression="^([0-9]|0[0-9]|1[0-9]|2[0-3])$"></asp:RegularExpressionValidator>
-        <asp:Label ID="lblSeparador" runat="server" Text=" : "></asp:Label>
-        <asp:TextBox ID="txtMinutos" runat="server"></asp:TextBox>
         <asp:RequiredFieldValidator ControlToValidate="txtMinutos" ID="RequiredFieldValidator3" runat="server" ForeColor="Tomato" ErrorMessage="*"></asp:RequiredFieldValidator>
         <asp:RegularExpressionValidator ID="RegularExpressionValidator3" ControlToValidate="txtMinutos" runat="server" ErrorMessage="Ingresar minutos (12-24h)" ValidationExpression="^[0-5][0-9]$"></asp:RegularExpressionValidator>
         <br />
         <asp:Label ID="lblMesa" runat="server" Text="Mesa:"></asp:Label>
-        <asp:Label ID="lblMesaData" runat="server" Text="Mesa:"></asp:Label>
+        <asp:Label ID="lblMesaData" runat="server" Text=""></asp:Label>
+        <asp:Button ID="btnMesa" runat="server" Text="Encontrar Mesa" OnClick="btnMesa_Click"/>
         <br />
+    </asp:Panel>
+    <asp:Panel  ID="PanelConfirmar" runat="server" Visible="false">
         <asp:Label ID="lblMenu" runat="server" Text="Menúes Solicitados:"></asp:Label>
         <asp:DropDownList ID="lstMenu" runat="server"></asp:DropDownList>
         <asp:Button ID="BtnAgregarMenu" runat="server" Text="Agregar" OnClick="BtnAgregarMenu_Click" />
@@ -40,10 +43,11 @@
             <Columns>
                 <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />
                 <asp:BoundField DataField="Precio" HeaderText="Precio" />
-                <asp:ButtonField ButtonType="Button" CommandName="eliminar" />
+                <asp:ButtonField ButtonType="Button" CommandName="eliminar" Text="Eliminar"/>
             </Columns>
         </asp:GridView>
 
         <asp:Button ID="btnReservar" runat="server" Text="Reservar" OnClick="btnReservar_Click" />
     </asp:Panel>
+        
 </asp:Content>
