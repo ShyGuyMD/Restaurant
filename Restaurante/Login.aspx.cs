@@ -21,7 +21,6 @@ namespace Restaurante
 
             Session["Usuario"] = null;
             Session["Rol"] = null;
-            
 
             Encryption enc = new Encryption();
             
@@ -35,6 +34,7 @@ namespace Restaurante
             else
             {
                 Session["Usuario"] = null;
+                Session["Rol"] = null;
                 e.Authenticated = false;
                 Response.Write("Datos Incorrectos");
             }

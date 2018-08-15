@@ -38,16 +38,10 @@ namespace Restaurante
 
             if(e.CommandName == "eliminar")
             {
-                Fachada.Get.ModificarIngredientesDeMenu(id + "");
+                Fachada.Get.ModificarIngredientesDeMenu(int.Parse(lstMenu.SelectedValue), id + "", 0);
             }
-        }
-
-
-        protected void btnCargarMenu_Click(object sender, EventArgs e)
-        {
             ListarMenus();
-            int idMenu = int.Parse(lstMenu.SelectedItem.Value);
-            ListarIngredientes(idMenu);
+            ListarIngredientes(int.Parse(lstMenu.SelectedValue));
         }
 
         protected void ListarMenus()
@@ -62,7 +56,7 @@ namespace Restaurante
             
 
             lstIngredientes.DataTextField = "Descripcion";
-            lstIngredientes.DataValueField= "Codigo";
+            lstIngredientes.DataValueField= "Ingrediente.Codigo";
             lstIngredientes.DataSource = Fachada.Get.ListadoIngredientesPorMenu(pIdMenu);
             lstIngredientes.DataBind();
         }
