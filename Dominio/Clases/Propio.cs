@@ -19,6 +19,21 @@ namespace Dominio.Clases
             Activo = true;
         }
 
+        public void ActualizarIngrediente(Ingrediente i, int cantidad)
+        {
+            bool encontrado = false;
+            int contador = 0;
+            while (contador < Ingredientes.Count && !encontrado)
+            {
+                if (Ingredientes[contador].Ingrediente == i)
+                {
+                    Ingredientes[contador].Cantidad = cantidad;
+                    encontrado = true;
+                }
+                contador++;
+            }
+        }
+
         public bool TieneIngrediente(Ingrediente i)
         {
             bool encontrado = false;

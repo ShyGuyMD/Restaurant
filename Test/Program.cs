@@ -7,6 +7,7 @@ using Helpers;
 using Aplicacion;
 using Dominio.Controladoras;
 using Dominio.Clases;
+using static Helpers.Utils;
 
 namespace Test
 {
@@ -15,6 +16,13 @@ namespace Test
         static void Main(string[] args)
         {
 
+            if ((int)ExitCode.NO_MENU_ERROR == 4)
+                Console.Write("ANDA");
+            else
+                Console.Write("NEGATIVO");
+
+
+            /*
             Console.WriteLine("Holis\n###################\n");
 
             Repositorio r = new Repositorio("C:\\Dev\\Restaurant\\Test\\config\\serialized.bin");
@@ -31,7 +39,7 @@ namespace Test
             Console.WriteLine("Mesas: " + CMesa.Get._Mesas.Count);
             Console.WriteLine("Menues: " + CMenu.Get._Menues.Count);
             Console.WriteLine("Reservas: " + CReserva.Get._Reservas.Count);
-
+            */
             //Console.ReadKey();
 
             //r.Serialize();

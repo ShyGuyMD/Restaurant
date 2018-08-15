@@ -151,6 +151,16 @@ namespace Dominio.Controladoras
             return ret;
         }
 
+        public string RolPorUsuario(string pUsuario)
+        {
+            string ret = "ERROR";
+            Usuario u = BuscarUsuario(pUsuario);
+            if (u != null)
+                ret = u.UserRole.ToString().ToUpper();
+
+            return ret;
+        }
+
         public bool ValidarData(string pUsername, string pPassword)
         {
             return (pUsername != "" && pPassword != "");

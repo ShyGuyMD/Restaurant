@@ -18,8 +18,8 @@ namespace Helpers
             NO_RESERVATION_ERROR            = 5,
             EXISTING_TABLE_ERROR            = 6,
             EXISTING_USER_ERROR             = 7,
-            EXISTING_INGREDIENT_ERROR       = 9,
-            WRONG_USERNAME_PASSWORD_ERROR   = 8,
+            EXISTING_INGREDIENT_ERROR       = 8,
+            WRONG_USERNAME_PASSWORD_ERROR   = 9,
             PLACEHOLDER                     = 99
         };
 

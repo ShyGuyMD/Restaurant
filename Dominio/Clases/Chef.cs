@@ -25,5 +25,10 @@ namespace Dominio.Clases
             // Se asume que el Chef trabaja 30 días, durante 8 horas diarias.
             return (Sueldo / 240);
         }
+
+        public override bool Equals(object obj)
+        {
+            return Documento.Equals(((Chef)obj).Documento);
+        }
     }
 }

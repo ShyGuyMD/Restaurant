@@ -85,30 +85,27 @@ namespace Aplicacion
         {
             return CMenu.Get.ListarMenuesActivos();
         }
+
+        public List<Menu> ListadoMenuesPorChef(string pChefDoc, string pChefTipoDoc)
+        {
+            Documento d = CDocumento.Get.ArmarDocumento(pChefDoc, pChefTipoDoc);
+            Chef c = CUsuario.Get.BuscarChef(d);
+
+            return CMenu.Get.ListadoMenuesPorChef(c);
+        }
         
-        public ExitCode ModificarIngredientesDeMenu(int pIdMenu, List<string> pIngredientes, List<int> pCantidades)
+        public ExitCode ModificarIngredientesDeMenu(int pIdMenu, string pCodIngrediente, int pCantIngrediente)
         {
             var exit = ExitCode.PLACEHOLDER;
-
-            List<IngredientesPorMenu> ingredientes = new List<IngredientesPorMenu>();
-            int contador = 0;
-            while (contador < pIngredientes.Count)
-            {
-                Ingrediente i = CIngrediente.Get.BuscarActivo(pIngredientes[contador]);
-
-                if (i != null)
-                {
-                    IngredientesPorMenu ing = CIngrediente.Get.ArmarObjetoIngrediente(i, pCantidades[contador]);
-                    ingredientes.Add(ing);
-                }
-                else
-                    exit = ExitCode.NO_INGREDIENT_ERROR;
-
-                contador++;
-            }
+            Ingrediente ingrediente = CIngrediente.Get.BuscarActivo(pCodIngrediente);
+            IngredientesPorMenu ipm = null;
+            if (ingrediente != null)
+                ipm = CIngrediente.Get.ArmarObjetoIngrediente(ingrediente, pCantIngrediente);
+            else
+                exit = ExitCode.NO_INGREDIENT_ERROR;
 
             if (exit != ExitCode.NO_INGREDIENT_ERROR)
-                exit = CMenu.Get.ModificarIngredientesDeMenu(pIdMenu, ingredientes);
+                exit = CMenu.Get.ModificarIngredientesDeMenu(pIdMenu, ipm);
 
             return exit;
         }
@@ -148,6 +145,7 @@ namespace Aplicacion
 
             return CUsuario.Get.AltaAdmin(pUsername, pPassword, rolAsociado);
         }
+
         public ExitCode AltaChef(string pUsername, string pPassword, string pRol, string pNumDoc, string pTipoDoc, string pNombre, string pApellido, decimal pSueldo)
         {
             Documento documento = CDocumento.Get.ArmarDocumento(pNumDoc, pTipoDoc);
@@ -155,10 +153,17 @@ namespace Aplicacion
             
             return CUsuario.Get.AltaChef(pUsername, pPassword, rolAsociado, documento, pNombre, pApellido, pSueldo);
         }
+
+        public string RolPorUsuario(string pUsername)
+        {
+            return CUsuario.Get.RolPorUsuario(pUsername);
+        }
+
         public ExitCode Login(string pUsername, string pPassword)
         {
             return CUsuario.Get.Login(pUsername, pPassword);
         }
+
         #endregion
 
         #region Reserva
