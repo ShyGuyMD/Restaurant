@@ -39,7 +39,7 @@
             <asp:Panel ID="MenuLogout" runat="server" Visible ="false">
                 <asp:Label ID="lblBienvenido" runat="server" Text="Bienvenido, "></asp:Label>
                 <asp:Label ID="lblUsername" runat="server" Text=""></asp:Label>
-                <asp:Button ID="btnLogout" runat="server" Text="Salir" OnClick="btnLogout_Click"/>
+                <asp:Button ID="btnLogout" runat="server" Text="Salir" OnClick="btnLogout_Click" CausesValidation="false"/>
             </asp:Panel>
         </div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
